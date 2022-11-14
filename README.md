@@ -1,92 +1,992 @@
-# Thanos
+# thanos
 
+![Version: 11.5.8](https://img.shields.io/badge/Version-11.5.8-informational?style=flat-square) ![AppVersion: 0.28.1](https://img.shields.io/badge/AppVersion-0.28.1-informational?style=flat-square)
 
+Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
-## Getting started
+## Upstream References
+* <https://github.com/bitnami/charts/tree/main/bitnami/thanos>
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+* <https://github.com/bitnami/containers/tree/main/bitnami/thanos>
+* <https://thanos.io>
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## Learn More
+* [Application Overview](docs/overview.md)
+* [Other Documentation](docs/)
 
-## Add your files
+## Pre-Requisites
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+* Kubernetes Cluster deployed
+* Kubernetes config installed in `~/.kube/config`
+* Helm installed
 
+Install Helm
+
+https://helm.sh/docs/intro/install/
+
+## Deployment
+
+* Clone down the repository
+* cd into directory
+```bash
+helm install thanos chart/
 ```
-cd existing_repo
-git remote add origin https://repo1.dso.mil/platform-one/big-bang/apps/sandbox/thanos.git
-git branch -M main
-git push -uf origin main
-```
 
-## Integrate with your tools
+## Values
 
-- [ ] [Set up project integrations](https://repo1.dso.mil/platform-one/big-bang/apps/sandbox/thanos/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| global.imageRegistry | string | `""` |  |
+| global.imagePullSecrets | list | `[]` |  |
+| global.storageClass | string | `""` |  |
+| kubeVersion | string | `""` |  |
+| nameOverride | string | `""` |  |
+| fullnameOverride | string | `""` |  |
+| commonLabels | object | `{}` |  |
+| commonAnnotations | object | `{}` |  |
+| clusterDomain | string | `"cluster.local"` |  |
+| extraDeploy | list | `[]` |  |
+| image.registry | string | `"registry1.dso.mil"` |  |
+| image.repository | string | `"ironbank/opensource/thanos/thanos"` |  |
+| image.tag | string | `"v0.29.0"` |  |
+| image.digest | string | `""` |  |
+| image.pullPolicy | string | `"IfNotPresent"` |  |
+| image.pullSecrets[0] | string | `"private-registry"` |  |
+| objstoreConfig | string | `""` |  |
+| indexCacheConfig | string | `""` |  |
+| bucketCacheConfig | string | `""` |  |
+| existingObjstoreSecret | string | `""` |  |
+| existingObjstoreSecretItems | list | `[]` |  |
+| httpConfig | string | `""` |  |
+| existingHttpConfigSecret | string | `""` |  |
+| https.enabled | bool | `false` |  |
+| https.autoGenerated | bool | `false` |  |
+| https.existingSecret | string | `""` |  |
+| https.certFilename | string | `"tls.crt"` |  |
+| https.keyFilename | string | `"tls.key"` |  |
+| https.caFilename | string | `"ca.crt"` |  |
+| https.key | string | `""` |  |
+| https.cert | string | `""` |  |
+| https.ca | string | `""` |  |
+| https.clientAuthType | string | `""` |  |
+| auth.basicAuthUsers | object | `{}` |  |
+| serviceAccount.create | bool | `false` |  |
+| serviceAccount.name | string | `""` |  |
+| serviceAccount.automountServiceAccountToken | bool | `true` |  |
+| serviceAccount.annotations | object | `{}` |  |
+| query.enabled | bool | `true` |  |
+| query.logLevel | string | `"info"` |  |
+| query.logFormat | string | `"logfmt"` |  |
+| query.replicaLabel[0] | string | `"replica"` |  |
+| query.dnsDiscovery.enabled | bool | `true` |  |
+| query.dnsDiscovery.sidecarsService | string | `""` |  |
+| query.dnsDiscovery.sidecarsNamespace | string | `""` |  |
+| query.stores | list | `[]` |  |
+| query.sdConfig | string | `""` |  |
+| query.existingSDConfigmap | string | `""` |  |
+| query.extraEnvVars | list | `[]` |  |
+| query.extraEnvVarsCM | string | `""` |  |
+| query.extraEnvVarsSecret | string | `""` |  |
+| query.extraFlags | list | `[]` |  |
+| query.command | list | `[]` |  |
+| query.args | list | `[]` |  |
+| query.replicaCount | int | `1` |  |
+| query.updateStrategy.type | string | `"RollingUpdate"` |  |
+| query.podSecurityContext.enabled | bool | `true` |  |
+| query.podSecurityContext.fsGroup | int | `1001` |  |
+| query.containerSecurityContext.enabled | bool | `true` |  |
+| query.containerSecurityContext.runAsUser | int | `1001` |  |
+| query.containerSecurityContext.runAsNonRoot | bool | `true` |  |
+| query.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| query.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| query.resources.limits | object | `{}` |  |
+| query.resources.requests | object | `{}` |  |
+| query.livenessProbe.enabled | bool | `true` |  |
+| query.livenessProbe.initialDelaySeconds | int | `30` |  |
+| query.livenessProbe.timeoutSeconds | int | `30` |  |
+| query.livenessProbe.periodSeconds | int | `10` |  |
+| query.livenessProbe.successThreshold | int | `1` |  |
+| query.livenessProbe.failureThreshold | int | `6` |  |
+| query.readinessProbe.enabled | bool | `true` |  |
+| query.readinessProbe.initialDelaySeconds | int | `30` |  |
+| query.readinessProbe.timeoutSeconds | int | `30` |  |
+| query.readinessProbe.periodSeconds | int | `10` |  |
+| query.readinessProbe.successThreshold | int | `1` |  |
+| query.readinessProbe.failureThreshold | int | `6` |  |
+| query.startupProbe.enabled | bool | `false` |  |
+| query.startupProbe.initialDelaySeconds | int | `5` |  |
+| query.startupProbe.periodSeconds | int | `5` |  |
+| query.startupProbe.timeoutSeconds | int | `1` |  |
+| query.startupProbe.failureThreshold | int | `15` |  |
+| query.startupProbe.successThreshold | int | `1` |  |
+| query.customLivenessProbe | object | `{}` |  |
+| query.customReadinessProbe | object | `{}` |  |
+| query.customStartupProbe | object | `{}` |  |
+| query.initContainers | list | `[]` |  |
+| query.sidecars | list | `[]` |  |
+| query.extraVolumes | list | `[]` |  |
+| query.extraVolumeMounts | list | `[]` |  |
+| query.podAffinityPreset | string | `""` |  |
+| query.podAntiAffinityPreset | string | `"soft"` |  |
+| query.nodeAffinityPreset.type | string | `""` |  |
+| query.nodeAffinityPreset.key | string | `""` |  |
+| query.nodeAffinityPreset.values | list | `[]` |  |
+| query.affinity | object | `{}` |  |
+| query.nodeSelector | object | `{}` |  |
+| query.tolerations | list | `[]` |  |
+| query.podLabels | object | `{}` |  |
+| query.podAnnotations | object | `{}` |  |
+| query.hostAliases | list | `[]` |  |
+| query.lifecycleHooks | object | `{}` |  |
+| query.priorityClassName | string | `""` |  |
+| query.schedulerName | string | `""` |  |
+| query.topologySpreadConstraints | list | `[]` |  |
+| query.grpc.server.tls.enabled | bool | `false` |  |
+| query.grpc.server.tls.autoGenerated | bool | `false` |  |
+| query.grpc.server.tls.cert | string | `""` |  |
+| query.grpc.server.tls.key | string | `""` |  |
+| query.grpc.server.tls.ca | string | `""` |  |
+| query.grpc.server.tls.existingSecret | object | `{}` |  |
+| query.grpc.client.serverName | string | `""` |  |
+| query.grpc.client.tls.enabled | bool | `false` |  |
+| query.grpc.client.tls.autoGenerated | bool | `false` |  |
+| query.grpc.client.tls.cert | string | `""` |  |
+| query.grpc.client.tls.key | string | `""` |  |
+| query.grpc.client.tls.ca | string | `""` |  |
+| query.grpc.client.tls.existingSecret | object | `{}` |  |
+| query.service.type | string | `"ClusterIP"` |  |
+| query.service.ports.http | int | `9090` |  |
+| query.service.nodePorts.http | string | `""` |  |
+| query.service.clusterIP | string | `""` |  |
+| query.service.loadBalancerIP | string | `""` |  |
+| query.service.loadBalancerSourceRanges | list | `[]` |  |
+| query.service.externalTrafficPolicy | string | `"Cluster"` |  |
+| query.service.annotations | object | `{}` |  |
+| query.service.extraPorts | list | `[]` |  |
+| query.service.labelSelectorsOverride | object | `{}` |  |
+| query.service.additionalHeadless | bool | `false` |  |
+| query.serviceGrpc.type | string | `"ClusterIP"` |  |
+| query.serviceGrpc.ports.grpc | int | `10901` |  |
+| query.serviceGrpc.nodePorts.grpc | string | `""` |  |
+| query.serviceGrpc.clusterIP | string | `""` |  |
+| query.serviceGrpc.loadBalancerIP | string | `""` |  |
+| query.serviceGrpc.loadBalancerSourceRanges | list | `[]` |  |
+| query.serviceGrpc.externalTrafficPolicy | string | `"Cluster"` |  |
+| query.serviceGrpc.annotations | object | `{}` |  |
+| query.serviceGrpc.extraPorts | list | `[]` |  |
+| query.serviceGrpc.labelSelectorsOverride | object | `{}` |  |
+| query.serviceGrpc.additionalHeadless | bool | `false` |  |
+| query.automountServiceAccountToken | bool | `true` |  |
+| query.serviceAccount.create | bool | `true` |  |
+| query.serviceAccount.name | string | `""` |  |
+| query.serviceAccount.annotations | object | `{}` |  |
+| query.serviceAccount.automountServiceAccountToken | bool | `true` |  |
+| query.rbac.create | bool | `false` |  |
+| query.rbac.rules | list | `[]` |  |
+| query.pspEnabled | bool | `false` |  |
+| query.autoscaling.enabled | bool | `false` |  |
+| query.autoscaling.minReplicas | string | `""` |  |
+| query.autoscaling.maxReplicas | string | `""` |  |
+| query.autoscaling.targetCPU | string | `""` |  |
+| query.autoscaling.targetMemory | string | `""` |  |
+| query.pdb.create | bool | `false` |  |
+| query.pdb.minAvailable | int | `1` |  |
+| query.pdb.maxUnavailable | string | `""` |  |
+| query.ingress.enabled | bool | `false` |  |
+| query.ingress.hostname | string | `"thanos.local"` |  |
+| query.ingress.ingressClassName | string | `""` |  |
+| query.ingress.annotations | object | `{}` |  |
+| query.ingress.extraHosts | list | `[]` |  |
+| query.ingress.extraTls | list | `[]` |  |
+| query.ingress.secrets | list | `[]` |  |
+| query.ingress.extraRules | list | `[]` |  |
+| query.ingress.tls | bool | `false` |  |
+| query.ingress.selfSigned | bool | `false` |  |
+| query.ingress.apiVersion | string | `""` |  |
+| query.ingress.path | string | `"/"` |  |
+| query.ingress.pathType | string | `"ImplementationSpecific"` |  |
+| query.ingress.grpc.enabled | bool | `false` |  |
+| query.ingress.grpc.hostname | string | `"thanos-grpc.local"` |  |
+| query.ingress.grpc.ingressClassName | string | `""` |  |
+| query.ingress.grpc.annotations | object | `{}` |  |
+| query.ingress.grpc.extraHosts | list | `[]` |  |
+| query.ingress.grpc.extraTls | list | `[]` |  |
+| query.ingress.grpc.secrets | list | `[]` |  |
+| query.ingress.grpc.extraRules | list | `[]` |  |
+| query.ingress.grpc.tls | bool | `false` |  |
+| query.ingress.grpc.selfSigned | bool | `false` |  |
+| query.ingress.grpc.apiVersion | string | `""` |  |
+| query.ingress.grpc.path | string | `"/"` |  |
+| query.ingress.grpc.pathType | string | `"ImplementationSpecific"` |  |
+| queryFrontend.enabled | bool | `true` |  |
+| queryFrontend.logLevel | string | `"info"` |  |
+| queryFrontend.logFormat | string | `"logfmt"` |  |
+| queryFrontend.config | string | `""` |  |
+| queryFrontend.existingConfigmap | string | `""` |  |
+| queryFrontend.extraEnvVars | list | `[]` |  |
+| queryFrontend.extraEnvVarsCM | string | `""` |  |
+| queryFrontend.extraEnvVarsSecret | string | `""` |  |
+| queryFrontend.extraFlags | list | `[]` |  |
+| queryFrontend.command | list | `[]` |  |
+| queryFrontend.args | list | `[]` |  |
+| queryFrontend.replicaCount | int | `1` |  |
+| queryFrontend.updateStrategy.type | string | `"RollingUpdate"` |  |
+| queryFrontend.podSecurityContext.enabled | bool | `true` |  |
+| queryFrontend.podSecurityContext.fsGroup | int | `1001` |  |
+| queryFrontend.containerSecurityContext.enabled | bool | `true` |  |
+| queryFrontend.containerSecurityContext.runAsUser | int | `1001` |  |
+| queryFrontend.containerSecurityContext.runAsNonRoot | bool | `true` |  |
+| queryFrontend.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| queryFrontend.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| queryFrontend.resources.limits | object | `{}` |  |
+| queryFrontend.resources.requests | object | `{}` |  |
+| queryFrontend.livenessProbe.enabled | bool | `true` |  |
+| queryFrontend.livenessProbe.initialDelaySeconds | int | `30` |  |
+| queryFrontend.livenessProbe.timeoutSeconds | int | `30` |  |
+| queryFrontend.livenessProbe.periodSeconds | int | `10` |  |
+| queryFrontend.livenessProbe.successThreshold | int | `1` |  |
+| queryFrontend.livenessProbe.failureThreshold | int | `6` |  |
+| queryFrontend.readinessProbe.enabled | bool | `true` |  |
+| queryFrontend.readinessProbe.initialDelaySeconds | int | `30` |  |
+| queryFrontend.readinessProbe.timeoutSeconds | int | `30` |  |
+| queryFrontend.readinessProbe.periodSeconds | int | `10` |  |
+| queryFrontend.readinessProbe.successThreshold | int | `1` |  |
+| queryFrontend.readinessProbe.failureThreshold | int | `6` |  |
+| queryFrontend.startupProbe.enabled | bool | `false` |  |
+| queryFrontend.startupProbe.initialDelaySeconds | int | `5` |  |
+| queryFrontend.startupProbe.periodSeconds | int | `5` |  |
+| queryFrontend.startupProbe.timeoutSeconds | int | `1` |  |
+| queryFrontend.startupProbe.failureThreshold | int | `15` |  |
+| queryFrontend.startupProbe.successThreshold | int | `1` |  |
+| queryFrontend.customLivenessProbe | object | `{}` |  |
+| queryFrontend.customReadinessProbe | object | `{}` |  |
+| queryFrontend.customStartupProbe | object | `{}` |  |
+| queryFrontend.initContainers | list | `[]` |  |
+| queryFrontend.sidecars | list | `[]` |  |
+| queryFrontend.extraVolumes | list | `[]` |  |
+| queryFrontend.extraVolumeMounts | list | `[]` |  |
+| queryFrontend.podAffinityPreset | string | `""` |  |
+| queryFrontend.podAntiAffinityPreset | string | `"soft"` |  |
+| queryFrontend.nodeAffinityPreset.type | string | `""` |  |
+| queryFrontend.nodeAffinityPreset.key | string | `""` |  |
+| queryFrontend.nodeAffinityPreset.values | list | `[]` |  |
+| queryFrontend.affinity | object | `{}` |  |
+| queryFrontend.nodeSelector | object | `{}` |  |
+| queryFrontend.tolerations | list | `[]` |  |
+| queryFrontend.podLabels | object | `{}` |  |
+| queryFrontend.podAnnotations | object | `{}` |  |
+| queryFrontend.hostAliases | list | `[]` |  |
+| queryFrontend.lifecycleHooks | object | `{}` |  |
+| queryFrontend.priorityClassName | string | `""` |  |
+| queryFrontend.schedulerName | string | `""` |  |
+| queryFrontend.topologySpreadConstraints | list | `[]` |  |
+| queryFrontend.service.type | string | `"ClusterIP"` |  |
+| queryFrontend.service.ports.http | int | `9090` |  |
+| queryFrontend.service.nodePorts.http | string | `""` |  |
+| queryFrontend.service.clusterIP | string | `""` |  |
+| queryFrontend.service.loadBalancerIP | string | `""` |  |
+| queryFrontend.service.loadBalancerSourceRanges | list | `[]` |  |
+| queryFrontend.service.externalTrafficPolicy | string | `"Cluster"` |  |
+| queryFrontend.service.annotations | object | `{}` |  |
+| queryFrontend.service.labels | object | `{}` |  |
+| queryFrontend.service.extraPorts | list | `[]` |  |
+| queryFrontend.service.labelSelectorsOverride | object | `{}` |  |
+| queryFrontend.automountServiceAccountToken | bool | `true` |  |
+| queryFrontend.serviceAccount.create | bool | `true` |  |
+| queryFrontend.serviceAccount.name | string | `""` |  |
+| queryFrontend.serviceAccount.annotations | object | `{}` |  |
+| queryFrontend.serviceAccount.automountServiceAccountToken | bool | `true` |  |
+| queryFrontend.rbac.create | bool | `false` |  |
+| queryFrontend.rbac.rules | list | `[]` |  |
+| queryFrontend.pspEnabled | bool | `false` |  |
+| queryFrontend.autoscaling.enabled | bool | `false` |  |
+| queryFrontend.autoscaling.minReplicas | string | `""` |  |
+| queryFrontend.autoscaling.maxReplicas | string | `""` |  |
+| queryFrontend.autoscaling.targetCPU | string | `""` |  |
+| queryFrontend.autoscaling.targetMemory | string | `""` |  |
+| queryFrontend.pdb.create | bool | `false` |  |
+| queryFrontend.pdb.minAvailable | int | `1` |  |
+| queryFrontend.pdb.maxUnavailable | string | `""` |  |
+| queryFrontend.ingress.enabled | bool | `false` |  |
+| queryFrontend.ingress.hostname | string | `"thanos.local"` |  |
+| queryFrontend.ingress.ingressClassName | string | `""` |  |
+| queryFrontend.ingress.annotations | object | `{}` |  |
+| queryFrontend.ingress.extraHosts | list | `[]` |  |
+| queryFrontend.ingress.extraTls | list | `[]` |  |
+| queryFrontend.ingress.secrets | list | `[]` |  |
+| queryFrontend.ingress.extraRules | list | `[]` |  |
+| queryFrontend.ingress.tls | bool | `false` |  |
+| queryFrontend.ingress.selfSigned | bool | `false` |  |
+| queryFrontend.ingress.apiVersion | string | `""` |  |
+| queryFrontend.ingress.path | string | `"/"` |  |
+| queryFrontend.ingress.pathType | string | `"ImplementationSpecific"` |  |
+| bucketweb.enabled | bool | `false` |  |
+| bucketweb.logLevel | string | `"info"` |  |
+| bucketweb.logFormat | string | `"logfmt"` |  |
+| bucketweb.refresh | string | `"30m"` |  |
+| bucketweb.timeout | string | `"5m"` |  |
+| bucketweb.extraEnvVars | list | `[]` |  |
+| bucketweb.extraEnvVarsCM | string | `""` |  |
+| bucketweb.extraEnvVarsSecret | string | `""` |  |
+| bucketweb.extraFlags | list | `[]` |  |
+| bucketweb.command | list | `[]` |  |
+| bucketweb.args | list | `[]` |  |
+| bucketweb.replicaCount | int | `1` |  |
+| bucketweb.updateStrategy.type | string | `"RollingUpdate"` |  |
+| bucketweb.podSecurityContext.enabled | bool | `true` |  |
+| bucketweb.podSecurityContext.fsGroup | int | `1001` |  |
+| bucketweb.containerSecurityContext.enabled | bool | `true` |  |
+| bucketweb.containerSecurityContext.runAsUser | int | `1001` |  |
+| bucketweb.containerSecurityContext.runAsNonRoot | bool | `true` |  |
+| bucketweb.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| bucketweb.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| bucketweb.resources.limits | object | `{}` |  |
+| bucketweb.resources.requests | object | `{}` |  |
+| bucketweb.livenessProbe.enabled | bool | `true` |  |
+| bucketweb.livenessProbe.initialDelaySeconds | int | `30` |  |
+| bucketweb.livenessProbe.timeoutSeconds | int | `30` |  |
+| bucketweb.livenessProbe.periodSeconds | int | `10` |  |
+| bucketweb.livenessProbe.successThreshold | int | `1` |  |
+| bucketweb.livenessProbe.failureThreshold | int | `6` |  |
+| bucketweb.readinessProbe.enabled | bool | `true` |  |
+| bucketweb.readinessProbe.initialDelaySeconds | int | `30` |  |
+| bucketweb.readinessProbe.timeoutSeconds | int | `30` |  |
+| bucketweb.readinessProbe.periodSeconds | int | `10` |  |
+| bucketweb.readinessProbe.successThreshold | int | `1` |  |
+| bucketweb.readinessProbe.failureThreshold | int | `6` |  |
+| bucketweb.startupProbe.enabled | bool | `false` |  |
+| bucketweb.startupProbe.initialDelaySeconds | int | `5` |  |
+| bucketweb.startupProbe.periodSeconds | int | `5` |  |
+| bucketweb.startupProbe.timeoutSeconds | int | `1` |  |
+| bucketweb.startupProbe.failureThreshold | int | `15` |  |
+| bucketweb.startupProbe.successThreshold | int | `1` |  |
+| bucketweb.customLivenessProbe | object | `{}` |  |
+| bucketweb.customReadinessProbe | object | `{}` |  |
+| bucketweb.customStartupProbe | object | `{}` |  |
+| bucketweb.initContainers | list | `[]` |  |
+| bucketweb.sidecars | list | `[]` |  |
+| bucketweb.extraVolumes | list | `[]` |  |
+| bucketweb.extraVolumeMounts | list | `[]` |  |
+| bucketweb.podAffinityPreset | string | `""` |  |
+| bucketweb.podAntiAffinityPreset | string | `"soft"` |  |
+| bucketweb.nodeAffinityPreset.type | string | `""` |  |
+| bucketweb.nodeAffinityPreset.key | string | `""` |  |
+| bucketweb.nodeAffinityPreset.values | list | `[]` |  |
+| bucketweb.affinity | object | `{}` |  |
+| bucketweb.nodeSelector | object | `{}` |  |
+| bucketweb.tolerations | list | `[]` |  |
+| bucketweb.podLabels | object | `{}` |  |
+| bucketweb.podAnnotations | object | `{}` |  |
+| bucketweb.hostAliases | list | `[]` |  |
+| bucketweb.lifecycleHooks | object | `{}` |  |
+| bucketweb.priorityClassName | string | `""` |  |
+| bucketweb.schedulerName | string | `""` |  |
+| bucketweb.topologySpreadConstraints | list | `[]` |  |
+| bucketweb.service.type | string | `"ClusterIP"` |  |
+| bucketweb.service.ports.http | int | `8080` |  |
+| bucketweb.service.nodePorts.http | string | `""` |  |
+| bucketweb.service.clusterIP | string | `""` |  |
+| bucketweb.service.loadBalancerIP | string | `""` |  |
+| bucketweb.service.loadBalancerSourceRanges | list | `[]` |  |
+| bucketweb.service.externalTrafficPolicy | string | `"Cluster"` |  |
+| bucketweb.service.annotations | object | `{}` |  |
+| bucketweb.service.extraPorts | list | `[]` |  |
+| bucketweb.service.labelSelectorsOverride | object | `{}` |  |
+| bucketweb.automountServiceAccountToken | bool | `true` |  |
+| bucketweb.serviceAccount.create | bool | `true` |  |
+| bucketweb.serviceAccount.name | string | `""` |  |
+| bucketweb.serviceAccount.annotations | object | `{}` |  |
+| bucketweb.serviceAccount.automountServiceAccountToken | bool | `true` |  |
+| bucketweb.autoscaling.enabled | bool | `false` |  |
+| bucketweb.autoscaling.minReplicas | string | `""` |  |
+| bucketweb.autoscaling.maxReplicas | string | `""` |  |
+| bucketweb.autoscaling.targetCPU | string | `""` |  |
+| bucketweb.autoscaling.targetMemory | string | `""` |  |
+| bucketweb.pdb.create | bool | `false` |  |
+| bucketweb.pdb.minAvailable | int | `1` |  |
+| bucketweb.pdb.maxUnavailable | string | `""` |  |
+| bucketweb.ingress.enabled | bool | `false` |  |
+| bucketweb.ingress.hostname | string | `"thanos-bucketweb.local"` |  |
+| bucketweb.ingress.ingressClassName | string | `""` |  |
+| bucketweb.ingress.annotations | object | `{}` |  |
+| bucketweb.ingress.extraHosts | list | `[]` |  |
+| bucketweb.ingress.extraTls | list | `[]` |  |
+| bucketweb.ingress.secrets | list | `[]` |  |
+| bucketweb.ingress.extraRules | list | `[]` |  |
+| bucketweb.ingress.tls | bool | `false` |  |
+| bucketweb.ingress.selfSigned | bool | `false` |  |
+| bucketweb.ingress.apiVersion | string | `""` |  |
+| bucketweb.ingress.path | string | `"/"` |  |
+| bucketweb.ingress.pathType | string | `"ImplementationSpecific"` |  |
+| compactor.enabled | bool | `false` |  |
+| compactor.logLevel | string | `"info"` |  |
+| compactor.logFormat | string | `"logfmt"` |  |
+| compactor.retentionResolutionRaw | string | `"30d"` |  |
+| compactor.retentionResolution5m | string | `"30d"` |  |
+| compactor.retentionResolution1h | string | `"10y"` |  |
+| compactor.consistencyDelay | string | `"30m"` |  |
+| compactor.extraEnvVars | list | `[]` |  |
+| compactor.extraEnvVarsCM | string | `""` |  |
+| compactor.extraEnvVarsSecret | string | `""` |  |
+| compactor.extraFlags | list | `[]` |  |
+| compactor.command | list | `[]` |  |
+| compactor.args | list | `[]` |  |
+| compactor.updateStrategy.type | string | `"Recreate"` |  |
+| compactor.podSecurityContext.enabled | bool | `true` |  |
+| compactor.podSecurityContext.fsGroup | int | `1001` |  |
+| compactor.containerSecurityContext.enabled | bool | `true` |  |
+| compactor.containerSecurityContext.runAsUser | int | `1001` |  |
+| compactor.containerSecurityContext.runAsNonRoot | bool | `true` |  |
+| compactor.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| compactor.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| compactor.resources.limits | object | `{}` |  |
+| compactor.resources.requests | object | `{}` |  |
+| compactor.livenessProbe.enabled | bool | `true` |  |
+| compactor.livenessProbe.initialDelaySeconds | int | `30` |  |
+| compactor.livenessProbe.timeoutSeconds | int | `30` |  |
+| compactor.livenessProbe.periodSeconds | int | `10` |  |
+| compactor.livenessProbe.successThreshold | int | `1` |  |
+| compactor.livenessProbe.failureThreshold | int | `6` |  |
+| compactor.readinessProbe.enabled | bool | `true` |  |
+| compactor.readinessProbe.initialDelaySeconds | int | `30` |  |
+| compactor.readinessProbe.timeoutSeconds | int | `30` |  |
+| compactor.readinessProbe.periodSeconds | int | `10` |  |
+| compactor.readinessProbe.successThreshold | int | `1` |  |
+| compactor.readinessProbe.failureThreshold | int | `6` |  |
+| compactor.startupProbe.enabled | bool | `false` |  |
+| compactor.startupProbe.initialDelaySeconds | int | `5` |  |
+| compactor.startupProbe.periodSeconds | int | `5` |  |
+| compactor.startupProbe.timeoutSeconds | int | `1` |  |
+| compactor.startupProbe.failureThreshold | int | `15` |  |
+| compactor.startupProbe.successThreshold | int | `1` |  |
+| compactor.customLivenessProbe | object | `{}` |  |
+| compactor.customReadinessProbe | object | `{}` |  |
+| compactor.customStartupProbe | object | `{}` |  |
+| compactor.initContainers | list | `[]` |  |
+| compactor.sidecars | list | `[]` |  |
+| compactor.extraVolumes | list | `[]` |  |
+| compactor.extraVolumeMounts | list | `[]` |  |
+| compactor.podAffinityPreset | string | `""` |  |
+| compactor.podAntiAffinityPreset | string | `"soft"` |  |
+| compactor.nodeAffinityPreset.type | string | `""` |  |
+| compactor.nodeAffinityPreset.key | string | `""` |  |
+| compactor.nodeAffinityPreset.values | list | `[]` |  |
+| compactor.affinity | object | `{}` |  |
+| compactor.nodeSelector | object | `{}` |  |
+| compactor.tolerations | list | `[]` |  |
+| compactor.podLabels | object | `{}` |  |
+| compactor.podAnnotations | object | `{}` |  |
+| compactor.hostAliases | list | `[]` |  |
+| compactor.lifecycleHooks | object | `{}` |  |
+| compactor.priorityClassName | string | `""` |  |
+| compactor.schedulerName | string | `""` |  |
+| compactor.topologySpreadConstraints | list | `[]` |  |
+| compactor.service.type | string | `"ClusterIP"` |  |
+| compactor.service.ports.http | int | `9090` |  |
+| compactor.service.nodePorts.http | string | `""` |  |
+| compactor.service.clusterIP | string | `""` |  |
+| compactor.service.loadBalancerIP | string | `""` |  |
+| compactor.service.loadBalancerSourceRanges | list | `[]` |  |
+| compactor.service.externalTrafficPolicy | string | `"Cluster"` |  |
+| compactor.service.annotations | object | `{}` |  |
+| compactor.service.extraPorts | list | `[]` |  |
+| compactor.service.labelSelectorsOverride | object | `{}` |  |
+| compactor.automountServiceAccountToken | bool | `true` |  |
+| compactor.serviceAccount.create | bool | `true` |  |
+| compactor.serviceAccount.name | string | `""` |  |
+| compactor.serviceAccount.annotations | object | `{}` |  |
+| compactor.serviceAccount.automountServiceAccountToken | bool | `true` |  |
+| compactor.ingress.enabled | bool | `false` |  |
+| compactor.ingress.hostname | string | `"thanos-compactor.local"` |  |
+| compactor.ingress.ingressClassName | string | `""` |  |
+| compactor.ingress.annotations | object | `{}` |  |
+| compactor.ingress.extraHosts | list | `[]` |  |
+| compactor.ingress.extraTls | list | `[]` |  |
+| compactor.ingress.secrets | list | `[]` |  |
+| compactor.ingress.extraRules | list | `[]` |  |
+| compactor.ingress.tls | bool | `false` |  |
+| compactor.ingress.selfSigned | bool | `false` |  |
+| compactor.ingress.apiVersion | string | `""` |  |
+| compactor.ingress.path | string | `"/"` |  |
+| compactor.ingress.pathType | string | `"ImplementationSpecific"` |  |
+| compactor.persistence.enabled | bool | `true` |  |
+| compactor.persistence.storageClass | string | `""` |  |
+| compactor.persistence.accessModes[0] | string | `"ReadWriteOnce"` |  |
+| compactor.persistence.size | string | `"8Gi"` |  |
+| compactor.persistence.annotations | object | `{}` |  |
+| compactor.persistence.existingClaim | string | `""` |  |
+| storegateway.enabled | bool | `false` |  |
+| storegateway.logLevel | string | `"info"` |  |
+| storegateway.logFormat | string | `"logfmt"` |  |
+| storegateway.config | string | `""` |  |
+| storegateway.existingConfigmap | string | `""` |  |
+| storegateway.grpc.server.tls.enabled | bool | `false` |  |
+| storegateway.grpc.server.tls.autoGenerated | bool | `false` |  |
+| storegateway.grpc.server.tls.cert | string | `""` |  |
+| storegateway.grpc.server.tls.key | string | `""` |  |
+| storegateway.grpc.server.tls.ca | string | `""` |  |
+| storegateway.grpc.server.tls.existingSecret | object | `{}` |  |
+| storegateway.extraEnvVars | list | `[]` |  |
+| storegateway.extraEnvVarsCM | string | `""` |  |
+| storegateway.extraEnvVarsSecret | string | `""` |  |
+| storegateway.extraFlags | list | `[]` |  |
+| storegateway.command | list | `[]` |  |
+| storegateway.args | list | `[]` |  |
+| storegateway.replicaCount | int | `1` |  |
+| storegateway.updateStrategy.type | string | `"RollingUpdate"` |  |
+| storegateway.podManagementPolicy | string | `"OrderedReady"` |  |
+| storegateway.podSecurityContext.enabled | bool | `true` |  |
+| storegateway.podSecurityContext.fsGroup | int | `1001` |  |
+| storegateway.containerSecurityContext.enabled | bool | `true` |  |
+| storegateway.containerSecurityContext.runAsUser | int | `1001` |  |
+| storegateway.containerSecurityContext.runAsNonRoot | bool | `true` |  |
+| storegateway.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| storegateway.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| storegateway.resources.limits | object | `{}` |  |
+| storegateway.resources.requests | object | `{}` |  |
+| storegateway.livenessProbe.enabled | bool | `true` |  |
+| storegateway.livenessProbe.initialDelaySeconds | int | `30` |  |
+| storegateway.livenessProbe.timeoutSeconds | int | `30` |  |
+| storegateway.livenessProbe.periodSeconds | int | `10` |  |
+| storegateway.livenessProbe.successThreshold | int | `1` |  |
+| storegateway.livenessProbe.failureThreshold | int | `6` |  |
+| storegateway.readinessProbe.enabled | bool | `true` |  |
+| storegateway.readinessProbe.initialDelaySeconds | int | `30` |  |
+| storegateway.readinessProbe.timeoutSeconds | int | `30` |  |
+| storegateway.readinessProbe.periodSeconds | int | `10` |  |
+| storegateway.readinessProbe.successThreshold | int | `1` |  |
+| storegateway.readinessProbe.failureThreshold | int | `6` |  |
+| storegateway.startupProbe.enabled | bool | `false` |  |
+| storegateway.startupProbe.initialDelaySeconds | int | `5` |  |
+| storegateway.startupProbe.periodSeconds | int | `5` |  |
+| storegateway.startupProbe.timeoutSeconds | int | `1` |  |
+| storegateway.startupProbe.failureThreshold | int | `15` |  |
+| storegateway.startupProbe.successThreshold | int | `1` |  |
+| storegateway.customLivenessProbe | object | `{}` |  |
+| storegateway.customReadinessProbe | object | `{}` |  |
+| storegateway.customStartupProbe | object | `{}` |  |
+| storegateway.initContainers | list | `[]` |  |
+| storegateway.sidecars | list | `[]` |  |
+| storegateway.extraVolumes | list | `[]` |  |
+| storegateway.extraVolumeMounts | list | `[]` |  |
+| storegateway.podAffinityPreset | string | `""` |  |
+| storegateway.podAntiAffinityPreset | string | `"soft"` |  |
+| storegateway.nodeAffinityPreset.type | string | `""` |  |
+| storegateway.nodeAffinityPreset.key | string | `""` |  |
+| storegateway.nodeAffinityPreset.values | list | `[]` |  |
+| storegateway.affinity | object | `{}` |  |
+| storegateway.nodeSelector | object | `{}` |  |
+| storegateway.tolerations | list | `[]` |  |
+| storegateway.podLabels | object | `{}` |  |
+| storegateway.podAnnotations | object | `{}` |  |
+| storegateway.hostAliases | list | `[]` |  |
+| storegateway.lifecycleHooks | object | `{}` |  |
+| storegateway.priorityClassName | string | `""` |  |
+| storegateway.topologySpreadConstraints | list | `[]` |  |
+| storegateway.schedulerName | string | `""` |  |
+| storegateway.service.type | string | `"ClusterIP"` |  |
+| storegateway.service.ports.http | int | `9090` |  |
+| storegateway.service.ports.grpc | int | `10901` |  |
+| storegateway.service.nodePorts.http | string | `""` |  |
+| storegateway.service.nodePorts.grpc | string | `""` |  |
+| storegateway.service.clusterIP | string | `""` |  |
+| storegateway.service.loadBalancerIP | string | `""` |  |
+| storegateway.service.loadBalancerSourceRanges | list | `[]` |  |
+| storegateway.service.externalTrafficPolicy | string | `"Cluster"` |  |
+| storegateway.service.annotations | object | `{}` |  |
+| storegateway.service.extraPorts | list | `[]` |  |
+| storegateway.service.labelSelectorsOverride | object | `{}` |  |
+| storegateway.service.additionalHeadless | bool | `false` |  |
+| storegateway.persistence.enabled | bool | `true` |  |
+| storegateway.persistence.storageClass | string | `""` |  |
+| storegateway.persistence.accessModes[0] | string | `"ReadWriteOnce"` |  |
+| storegateway.persistence.size | string | `"8Gi"` |  |
+| storegateway.persistence.labels | object | `{}` |  |
+| storegateway.persistence.annotations | object | `{}` |  |
+| storegateway.persistence.existingClaim | string | `""` |  |
+| storegateway.automountServiceAccountToken | bool | `true` |  |
+| storegateway.serviceAccount.create | bool | `true` |  |
+| storegateway.serviceAccount.name | string | `""` |  |
+| storegateway.serviceAccount.annotations | object | `{}` |  |
+| storegateway.serviceAccount.automountServiceAccountToken | bool | `true` |  |
+| storegateway.autoscaling.enabled | bool | `false` |  |
+| storegateway.autoscaling.minReplicas | string | `""` |  |
+| storegateway.autoscaling.maxReplicas | string | `""` |  |
+| storegateway.autoscaling.targetCPU | string | `""` |  |
+| storegateway.autoscaling.targetMemory | string | `""` |  |
+| storegateway.pdb.create | bool | `false` |  |
+| storegateway.pdb.minAvailable | int | `1` |  |
+| storegateway.pdb.maxUnavailable | string | `""` |  |
+| storegateway.ingress.enabled | bool | `false` |  |
+| storegateway.ingress.hostname | string | `"thanos-storegateway.local"` |  |
+| storegateway.ingress.ingressClassName | string | `""` |  |
+| storegateway.ingress.annotations | object | `{}` |  |
+| storegateway.ingress.extraHosts | list | `[]` |  |
+| storegateway.ingress.extraTls | list | `[]` |  |
+| storegateway.ingress.secrets | list | `[]` |  |
+| storegateway.ingress.extraRules | list | `[]` |  |
+| storegateway.ingress.tls | bool | `false` |  |
+| storegateway.ingress.selfSigned | bool | `false` |  |
+| storegateway.ingress.apiVersion | string | `""` |  |
+| storegateway.ingress.path | string | `"/"` |  |
+| storegateway.ingress.pathType | string | `"ImplementationSpecific"` |  |
+| storegateway.ingress.grpc.enabled | bool | `false` |  |
+| storegateway.ingress.grpc.hostname | string | `"thanos-grpc.local"` |  |
+| storegateway.ingress.grpc.ingressClassName | string | `""` |  |
+| storegateway.ingress.grpc.annotations | object | `{}` |  |
+| storegateway.ingress.grpc.extraHosts | list | `[]` |  |
+| storegateway.ingress.grpc.extraTls | list | `[]` |  |
+| storegateway.ingress.grpc.secrets | list | `[]` |  |
+| storegateway.ingress.grpc.extraRules | list | `[]` |  |
+| storegateway.ingress.grpc.tls | bool | `false` |  |
+| storegateway.ingress.grpc.selfSigned | bool | `false` |  |
+| storegateway.ingress.grpc.apiVersion | string | `""` |  |
+| storegateway.ingress.grpc.path | string | `"/"` |  |
+| storegateway.ingress.grpc.pathType | string | `"ImplementationSpecific"` |  |
+| storegateway.sharded.enabled | bool | `false` |  |
+| storegateway.sharded.hashPartitioning.shards | string | `""` |  |
+| storegateway.sharded.timePartitioning[0].min | string | `""` |  |
+| storegateway.sharded.timePartitioning[0].max | string | `""` |  |
+| storegateway.sharded.service.clusterIPs | list | `[]` |  |
+| storegateway.sharded.service.loadBalancerIPs | list | `[]` |  |
+| storegateway.sharded.service.http.nodePorts | list | `[]` |  |
+| storegateway.sharded.service.grpc.nodePorts | list | `[]` |  |
+| ruler.enabled | bool | `false` |  |
+| ruler.logLevel | string | `"info"` |  |
+| ruler.logFormat | string | `"logfmt"` |  |
+| ruler.replicaLabel | string | `"replica"` |  |
+| ruler.dnsDiscovery.enabled | bool | `true` |  |
+| ruler.alertmanagers | list | `[]` |  |
+| ruler.alertmanagersConfig | string | `""` |  |
+| ruler.evalInterval | string | `"1m"` |  |
+| ruler.clusterName | string | `""` |  |
+| ruler.config | string | `""` |  |
+| ruler.existingConfigmap | string | `""` |  |
+| ruler.extraEnvVars | list | `[]` |  |
+| ruler.extraEnvVarsCM | string | `""` |  |
+| ruler.extraEnvVarsSecret | string | `""` |  |
+| ruler.extraFlags | list | `[]` |  |
+| ruler.command | list | `[]` |  |
+| ruler.args | list | `[]` |  |
+| ruler.replicaCount | int | `1` |  |
+| ruler.updateStrategy.type | string | `"RollingUpdate"` |  |
+| ruler.podManagementPolicy | string | `"OrderedReady"` |  |
+| ruler.podSecurityContext.enabled | bool | `true` |  |
+| ruler.podSecurityContext.fsGroup | int | `1001` |  |
+| ruler.containerSecurityContext.enabled | bool | `true` |  |
+| ruler.containerSecurityContext.runAsUser | int | `1001` |  |
+| ruler.containerSecurityContext.runAsNonRoot | bool | `true` |  |
+| ruler.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| ruler.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| ruler.resources.limits | object | `{}` |  |
+| ruler.resources.requests | object | `{}` |  |
+| ruler.livenessProbe.enabled | bool | `true` |  |
+| ruler.livenessProbe.initialDelaySeconds | int | `30` |  |
+| ruler.livenessProbe.timeoutSeconds | int | `30` |  |
+| ruler.livenessProbe.periodSeconds | int | `10` |  |
+| ruler.livenessProbe.successThreshold | int | `1` |  |
+| ruler.livenessProbe.failureThreshold | int | `6` |  |
+| ruler.readinessProbe.enabled | bool | `true` |  |
+| ruler.readinessProbe.initialDelaySeconds | int | `30` |  |
+| ruler.readinessProbe.timeoutSeconds | int | `30` |  |
+| ruler.readinessProbe.periodSeconds | int | `10` |  |
+| ruler.readinessProbe.successThreshold | int | `1` |  |
+| ruler.readinessProbe.failureThreshold | int | `6` |  |
+| ruler.startupProbe.enabled | bool | `false` |  |
+| ruler.startupProbe.initialDelaySeconds | int | `5` |  |
+| ruler.startupProbe.periodSeconds | int | `5` |  |
+| ruler.startupProbe.timeoutSeconds | int | `1` |  |
+| ruler.startupProbe.failureThreshold | int | `15` |  |
+| ruler.startupProbe.successThreshold | int | `1` |  |
+| ruler.customLivenessProbe | object | `{}` |  |
+| ruler.customReadinessProbe | object | `{}` |  |
+| ruler.customStartupProbe | object | `{}` |  |
+| ruler.initContainers | list | `[]` |  |
+| ruler.sidecars | list | `[]` |  |
+| ruler.extraVolumes | list | `[]` |  |
+| ruler.extraVolumeMounts | list | `[]` |  |
+| ruler.podAffinityPreset | string | `""` |  |
+| ruler.podAntiAffinityPreset | string | `"soft"` |  |
+| ruler.nodeAffinityPreset.type | string | `""` |  |
+| ruler.nodeAffinityPreset.key | string | `""` |  |
+| ruler.nodeAffinityPreset.values | list | `[]` |  |
+| ruler.affinity | object | `{}` |  |
+| ruler.nodeSelector | object | `{}` |  |
+| ruler.tolerations | list | `[]` |  |
+| ruler.podLabels | object | `{}` |  |
+| ruler.podAnnotations | object | `{}` |  |
+| ruler.hostAliases | list | `[]` |  |
+| ruler.lifecycleHooks | object | `{}` |  |
+| ruler.priorityClassName | string | `""` |  |
+| ruler.schedulerName | string | `""` |  |
+| ruler.topologySpreadConstraints | list | `[]` |  |
+| ruler.service.type | string | `"ClusterIP"` |  |
+| ruler.service.ports.http | int | `9090` |  |
+| ruler.service.ports.grpc | int | `10901` |  |
+| ruler.service.nodePorts.http | string | `""` |  |
+| ruler.service.nodePorts.grpc | string | `""` |  |
+| ruler.service.clusterIP | string | `""` |  |
+| ruler.service.loadBalancerIP | string | `""` |  |
+| ruler.service.loadBalancerSourceRanges | list | `[]` |  |
+| ruler.service.externalTrafficPolicy | string | `"Cluster"` |  |
+| ruler.service.annotations | object | `{}` |  |
+| ruler.service.extraPorts | list | `[]` |  |
+| ruler.service.labelSelectorsOverride | object | `{}` |  |
+| ruler.service.additionalHeadless | bool | `false` |  |
+| ruler.persistence.enabled | bool | `true` |  |
+| ruler.persistence.storageClass | string | `""` |  |
+| ruler.persistence.accessModes[0] | string | `"ReadWriteOnce"` |  |
+| ruler.persistence.size | string | `"8Gi"` |  |
+| ruler.persistence.annotations | object | `{}` |  |
+| ruler.persistence.existingClaim | string | `""` |  |
+| ruler.automountServiceAccountToken | bool | `true` |  |
+| ruler.serviceAccount.create | bool | `true` |  |
+| ruler.serviceAccount.name | string | `""` |  |
+| ruler.serviceAccount.annotations | object | `{}` |  |
+| ruler.serviceAccount.automountServiceAccountToken | bool | `true` |  |
+| ruler.autoscaling.enabled | bool | `false` |  |
+| ruler.autoscaling.minReplicas | string | `""` |  |
+| ruler.autoscaling.maxReplicas | string | `""` |  |
+| ruler.autoscaling.targetCPU | string | `""` |  |
+| ruler.autoscaling.targetMemory | string | `""` |  |
+| ruler.pdb.create | bool | `false` |  |
+| ruler.pdb.minAvailable | int | `1` |  |
+| ruler.pdb.maxUnavailable | string | `""` |  |
+| ruler.ingress.enabled | bool | `false` |  |
+| ruler.ingress.hostname | string | `"thanos-ruler.local"` |  |
+| ruler.ingress.ingressClassName | string | `""` |  |
+| ruler.ingress.annotations | object | `{}` |  |
+| ruler.ingress.extraHosts | list | `[]` |  |
+| ruler.ingress.extraTls | list | `[]` |  |
+| ruler.ingress.secrets | list | `[]` |  |
+| ruler.ingress.extraRules | list | `[]` |  |
+| ruler.ingress.apiVersion | string | `""` |  |
+| ruler.ingress.path | string | `"/"` |  |
+| ruler.ingress.pathType | string | `"ImplementationSpecific"` |  |
+| receive.enabled | bool | `false` |  |
+| receive.mode | string | `"standalone"` |  |
+| receive.logLevel | string | `"info"` |  |
+| receive.logFormat | string | `"logfmt"` |  |
+| receive.tsdbRetention | string | `"15d"` |  |
+| receive.replicationFactor | int | `1` |  |
+| receive.config | list | `[]` |  |
+| receive.existingConfigmap | string | `""` |  |
+| receive.replicaLabel | string | `"replica"` |  |
+| receive.grpc.server.tls.enabled | bool | `false` |  |
+| receive.grpc.server.tls.autoGenerated | bool | `false` |  |
+| receive.grpc.server.tls.cert | string | `""` |  |
+| receive.grpc.server.tls.key | string | `""` |  |
+| receive.grpc.server.tls.ca | string | `""` |  |
+| receive.grpc.server.tls.existingSecret | object | `{}` |  |
+| receive.extraEnvVars | list | `[]` |  |
+| receive.extraEnvVarsCM | string | `""` |  |
+| receive.extraEnvVarsSecret | string | `""` |  |
+| receive.extraFlags | list | `[]` |  |
+| receive.command | list | `[]` |  |
+| receive.args | list | `[]` |  |
+| receive.replicaCount | int | `1` |  |
+| receive.updateStrategy.type | string | `"RollingUpdate"` |  |
+| receive.podManagementPolicy | string | `"OrderedReady"` |  |
+| receive.podSecurityContext.enabled | bool | `true` |  |
+| receive.podSecurityContext.fsGroup | int | `1001` |  |
+| receive.containerSecurityContext.enabled | bool | `true` |  |
+| receive.containerSecurityContext.runAsUser | int | `1001` |  |
+| receive.containerSecurityContext.runAsNonRoot | bool | `true` |  |
+| receive.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| receive.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| receive.resources.limits | object | `{}` |  |
+| receive.resources.requests | object | `{}` |  |
+| receive.livenessProbe.enabled | bool | `true` |  |
+| receive.livenessProbe.initialDelaySeconds | int | `30` |  |
+| receive.livenessProbe.timeoutSeconds | int | `30` |  |
+| receive.livenessProbe.periodSeconds | int | `10` |  |
+| receive.livenessProbe.successThreshold | int | `1` |  |
+| receive.livenessProbe.failureThreshold | int | `6` |  |
+| receive.readinessProbe.enabled | bool | `true` |  |
+| receive.readinessProbe.initialDelaySeconds | int | `30` |  |
+| receive.readinessProbe.timeoutSeconds | int | `30` |  |
+| receive.readinessProbe.periodSeconds | int | `10` |  |
+| receive.readinessProbe.successThreshold | int | `1` |  |
+| receive.readinessProbe.failureThreshold | int | `6` |  |
+| receive.startupProbe.enabled | bool | `false` |  |
+| receive.startupProbe.initialDelaySeconds | int | `5` |  |
+| receive.startupProbe.periodSeconds | int | `5` |  |
+| receive.startupProbe.timeoutSeconds | int | `1` |  |
+| receive.startupProbe.failureThreshold | int | `15` |  |
+| receive.startupProbe.successThreshold | int | `1` |  |
+| receive.customLivenessProbe | object | `{}` |  |
+| receive.customReadinessProbe | object | `{}` |  |
+| receive.customStartupProbe | object | `{}` |  |
+| receive.initContainers | list | `[]` |  |
+| receive.sidecars | list | `[]` |  |
+| receive.extraVolumes | list | `[]` |  |
+| receive.extraVolumeMounts | list | `[]` |  |
+| receive.podAffinityPreset | string | `""` |  |
+| receive.podAntiAffinityPreset | string | `"soft"` |  |
+| receive.nodeAffinityPreset.type | string | `""` |  |
+| receive.nodeAffinityPreset.key | string | `""` |  |
+| receive.nodeAffinityPreset.values | list | `[]` |  |
+| receive.affinity | object | `{}` |  |
+| receive.nodeSelector | object | `{}` |  |
+| receive.tolerations | list | `[]` |  |
+| receive.podLabels | object | `{}` |  |
+| receive.podAnnotations | object | `{}` |  |
+| receive.hostAliases | list | `[]` |  |
+| receive.lifecycleHooks | object | `{}` |  |
+| receive.priorityClassName | string | `""` |  |
+| receive.schedulerName | string | `""` |  |
+| receive.topologySpreadConstraints | list | `[]` |  |
+| receive.service.type | string | `"ClusterIP"` |  |
+| receive.service.ports.http | int | `10902` |  |
+| receive.service.ports.grpc | int | `10901` |  |
+| receive.service.ports.remote | int | `19291` |  |
+| receive.service.nodePorts.http | string | `""` |  |
+| receive.service.nodePorts.grpc | string | `""` |  |
+| receive.service.nodePorts.remote | string | `""` |  |
+| receive.service.clusterIP | string | `""` |  |
+| receive.service.loadBalancerIP | string | `""` |  |
+| receive.service.loadBalancerSourceRanges | list | `[]` |  |
+| receive.service.externalTrafficPolicy | string | `"Cluster"` |  |
+| receive.service.annotations | object | `{}` |  |
+| receive.service.extraPorts | list | `[]` |  |
+| receive.service.labelSelectorsOverride | object | `{}` |  |
+| receive.service.additionalHeadless | bool | `false` |  |
+| receive.automountServiceAccountToken | bool | `true` |  |
+| receive.serviceAccount.create | bool | `true` |  |
+| receive.serviceAccount.name | string | `""` |  |
+| receive.serviceAccount.annotations | object | `{}` |  |
+| receive.serviceAccount.automountServiceAccountToken | bool | `true` |  |
+| receive.autoscaling.enabled | bool | `false` |  |
+| receive.autoscaling.minReplicas | string | `""` |  |
+| receive.autoscaling.maxReplicas | string | `""` |  |
+| receive.autoscaling.targetCPU | string | `""` |  |
+| receive.autoscaling.targetMemory | string | `""` |  |
+| receive.pdb.create | bool | `false` |  |
+| receive.pdb.minAvailable | int | `1` |  |
+| receive.pdb.maxUnavailable | string | `""` |  |
+| receive.persistence.enabled | bool | `true` |  |
+| receive.persistence.storageClass | string | `""` |  |
+| receive.persistence.accessModes[0] | string | `"ReadWriteOnce"` |  |
+| receive.persistence.size | string | `"8Gi"` |  |
+| receive.persistence.annotations | object | `{}` |  |
+| receive.persistence.existingClaim | string | `""` |  |
+| receive.ingress.enabled | bool | `false` |  |
+| receive.ingress.hostname | string | `"thanos-receive.local"` |  |
+| receive.ingress.ingressClassName | string | `""` |  |
+| receive.ingress.annotations | object | `{}` |  |
+| receive.ingress.extraHosts | list | `[]` |  |
+| receive.ingress.extraTls | list | `[]` |  |
+| receive.ingress.secrets | list | `[]` |  |
+| receive.ingress.extraRules | list | `[]` |  |
+| receive.ingress.tls | bool | `false` |  |
+| receive.ingress.selfSigned | bool | `false` |  |
+| receive.ingress.apiVersion | string | `""` |  |
+| receive.ingress.path | string | `"/"` |  |
+| receive.ingress.pathType | string | `"ImplementationSpecific"` |  |
+| receiveDistributor.enabled | bool | `false` |  |
+| receiveDistributor.logLevel | string | `"info"` |  |
+| receiveDistributor.logFormat | string | `"logfmt"` |  |
+| receiveDistributor.replicaLabel | string | `"replica"` |  |
+| receiveDistributor.replicationFactor | int | `1` |  |
+| receiveDistributor.extraEnvVars | list | `[]` |  |
+| receiveDistributor.extraEnvVarsCM | string | `""` |  |
+| receiveDistributor.extraEnvVarsSecret | string | `""` |  |
+| receiveDistributor.extraFlags | list | `[]` |  |
+| receiveDistributor.command | list | `[]` |  |
+| receiveDistributor.args | list | `[]` |  |
+| receiveDistributor.replicaCount | int | `1` |  |
+| receiveDistributor.updateStrategy.type | string | `"RollingUpdate"` |  |
+| receiveDistributor.podSecurityContext.enabled | bool | `true` |  |
+| receiveDistributor.podSecurityContext.fsGroup | int | `1001` |  |
+| receiveDistributor.containerSecurityContext.enabled | bool | `true` |  |
+| receiveDistributor.containerSecurityContext.runAsUser | int | `1001` |  |
+| receiveDistributor.containerSecurityContext.runAsNonRoot | bool | `true` |  |
+| receiveDistributor.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| receiveDistributor.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| receiveDistributor.resources.limits | object | `{}` |  |
+| receiveDistributor.resources.requests | object | `{}` |  |
+| receiveDistributor.livenessProbe.enabled | bool | `true` |  |
+| receiveDistributor.livenessProbe.initialDelaySeconds | int | `30` |  |
+| receiveDistributor.livenessProbe.timeoutSeconds | int | `30` |  |
+| receiveDistributor.livenessProbe.periodSeconds | int | `10` |  |
+| receiveDistributor.livenessProbe.successThreshold | int | `1` |  |
+| receiveDistributor.livenessProbe.failureThreshold | int | `6` |  |
+| receiveDistributor.readinessProbe.enabled | bool | `true` |  |
+| receiveDistributor.readinessProbe.initialDelaySeconds | int | `30` |  |
+| receiveDistributor.readinessProbe.timeoutSeconds | int | `30` |  |
+| receiveDistributor.readinessProbe.periodSeconds | int | `10` |  |
+| receiveDistributor.readinessProbe.successThreshold | int | `1` |  |
+| receiveDistributor.readinessProbe.failureThreshold | int | `6` |  |
+| receiveDistributor.startupProbe.enabled | bool | `false` |  |
+| receiveDistributor.startupProbe.initialDelaySeconds | int | `5` |  |
+| receiveDistributor.startupProbe.periodSeconds | int | `5` |  |
+| receiveDistributor.startupProbe.timeoutSeconds | int | `1` |  |
+| receiveDistributor.startupProbe.failureThreshold | int | `15` |  |
+| receiveDistributor.startupProbe.successThreshold | int | `1` |  |
+| receiveDistributor.customLivenessProbe | object | `{}` |  |
+| receiveDistributor.customReadinessProbe | object | `{}` |  |
+| receiveDistributor.customStartupProbe | object | `{}` |  |
+| receiveDistributor.initContainers | list | `[]` |  |
+| receiveDistributor.sidecars | list | `[]` |  |
+| receiveDistributor.extraVolumes | list | `[]` |  |
+| receiveDistributor.extraVolumeMounts | list | `[]` |  |
+| receiveDistributor.podAffinityPreset | string | `""` |  |
+| receiveDistributor.podAntiAffinityPreset | string | `"soft"` |  |
+| receiveDistributor.nodeAffinityPreset.type | string | `""` |  |
+| receiveDistributor.nodeAffinityPreset.key | string | `""` |  |
+| receiveDistributor.nodeAffinityPreset.values | list | `[]` |  |
+| receiveDistributor.affinity | object | `{}` |  |
+| receiveDistributor.nodeSelector | object | `{}` |  |
+| receiveDistributor.tolerations | list | `[]` |  |
+| receiveDistributor.podLabels | object | `{}` |  |
+| receiveDistributor.podAnnotations | object | `{}` |  |
+| receiveDistributor.hostAliases | list | `[]` |  |
+| receiveDistributor.lifecycleHooks | object | `{}` |  |
+| receiveDistributor.priorityClassName | string | `""` |  |
+| receiveDistributor.schedulerName | string | `""` |  |
+| receiveDistributor.topologySpreadConstraints | list | `[]` |  |
+| receiveDistributor.automountServiceAccountToken | bool | `true` |  |
+| receiveDistributor.serviceAccount.create | bool | `true` |  |
+| receiveDistributor.serviceAccount.name | string | `""` |  |
+| receiveDistributor.serviceAccount.annotations | object | `{}` |  |
+| receiveDistributor.serviceAccount.automountServiceAccountToken | bool | `true` |  |
+| receiveDistributor.autoscaling.enabled | bool | `false` |  |
+| receiveDistributor.autoscaling.minReplicas | string | `""` |  |
+| receiveDistributor.autoscaling.maxReplicas | string | `""` |  |
+| receiveDistributor.autoscaling.targetCPU | string | `""` |  |
+| receiveDistributor.autoscaling.targetMemory | string | `""` |  |
+| receiveDistributor.pdb.create | bool | `false` |  |
+| receiveDistributor.pdb.minAvailable | int | `1` |  |
+| receiveDistributor.pdb.maxUnavailable | string | `""` |  |
+| metrics.enabled | bool | `false` |  |
+| metrics.serviceMonitor.enabled | bool | `false` |  |
+| metrics.serviceMonitor.namespace | string | `""` |  |
+| metrics.serviceMonitor.labels | object | `{}` |  |
+| metrics.serviceMonitor.jobLabel | string | `""` |  |
+| metrics.serviceMonitor.interval | string | `""` |  |
+| metrics.serviceMonitor.scrapeTimeout | string | `""` |  |
+| metrics.serviceMonitor.metricRelabelings | list | `[]` |  |
+| metrics.serviceMonitor.relabelings | list | `[]` |  |
+| metrics.serviceMonitor.selector | object | `{}` |  |
+| metrics.prometheusRule.enabled | bool | `false` |  |
+| metrics.prometheusRule.namespace | string | `""` |  |
+| metrics.prometheusRule.additionalLabels | object | `{}` |  |
+| metrics.prometheusRule.groups | list | `[]` |  |
+| volumePermissions.enabled | bool | `false` |  |
+| volumePermissions.image.registry | string | `"docker.io"` |  |
+| volumePermissions.image.repository | string | `"bitnami/bitnami-shell"` |  |
+| volumePermissions.image.tag | string | `"11-debian-11-r39"` |  |
+| volumePermissions.image.digest | string | `""` |  |
+| volumePermissions.image.pullPolicy | string | `"IfNotPresent"` |  |
+| volumePermissions.image.pullSecrets | list | `[]` |  |
+| minio.enabled | bool | `false` |  |
+| minio.auth.rootUser | string | `"admin"` |  |
+| minio.auth.rootPassword | string | `""` |  |
+| minio.defaultBuckets | string | `"thanos"` |  |
+| networkPolicy.enabled | bool | `false` |  |
+| networkPolicy.allowExternal | bool | `true` |  |
+| networkPolicy.explicitNamespacesSelector | object | `{}` |  |
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Please see the [contributing guide](./CONTRIBUTING.md) if you are interested in contributing.
