@@ -73,6 +73,15 @@ image:
 ## Specify content for objstore.yml
 ##
 objstoreConfig: ""
+#objstoreConfig: |-
+  #type: s3
+  #config:
+  #  bucket: "thanos"
+  #  endpoint: minio.monitoring.svc.cluster.local
+  #  access_key: "minio"
+  #  secret_key: "minio123"
+  #  insecure: true
+
 ## @param indexCacheConfig The [index cache configuration](https://thanos.io/tip/components/store.md/)
 ## Specify content for index-cache.yml
 ##
@@ -173,11 +182,12 @@ query:
   ##
   dnsDiscovery:
     enabled: true
-    sidecarsService: ""
-    sidecarsNamespace: ""
+    sidecarsService: kube-prometheus-prometheus-thanos
+    sidecarsNamespace: monitoring
   ## @param query.stores Statically configure store APIs to connect with Thanos Query
   ##
-  stores: []
+  stores:
+    - dnssrv+_grpc._tcp.prometheus-operated.monitoring.svc.cluster.local
   ## @param query.sdConfig Query Service Discovery Configuration
   ## Specify content for servicediscovery.yml
   ##
@@ -3979,21 +3989,41 @@ volumePermissions:
 
 minio:
   ## @param minio.enabled Enable/disable MinIO&reg; chart installation
-  ## to be used as an objstore for Thanos
-  ##
+  ## to be used as an objstore for Thanos, must have minio-operator installed
   enabled: false
-  ## MinIO&reg; authentication parameters
-  ##
-  auth:
-    ## @param minio.auth.rootUser MinIO&reg; root username
-    ##
-    rootUser: admin
-    ## @param minio.auth.rootPassword Password for MinIO&reg; root user
-    ##
-    rootPassword: ""
-  ## @param minio.defaultBuckets Comma, semi-colon or space separated list of MinIO&reg; buckets to create
-  ##
-  defaultBuckets: 'thanos'
+  # Override the minio service name for easier connection setup
+  service:
+    nameOverride: "minio.monitoring.svc.cluster.local"
+  # -- Minio root credentials
+  secrets:
+    name: "thanos-objstore-creds"
+    accessKey: "minio"
+    secretKey: "minio123" # default key, change this!
+  tenant:
+    # -- Buckets to be provisioned to for tenant
+    buckets:
+      - name: thanos
+    # -- Users to to be provisioned to for tenant
+    users:
+      - name: minio-user
+    # -- User credentials to create for above user. Otherwise password is randomly generated.
+    # This auth is not required to be set or reclaimed for minio use with Loki
+    defaultUserCredentials:
+      username: "minio-user"
+      password: ""
+    ## Specification for MinIO Pool(s) in this Tenant.
+    pools:
+      - servers: 1
+        volumesPerServer: 4
+        size: 750Mi
+        securityContext:
+          runAsUser: 1001
+          runAsGroup: 1001
+          fsGroup: 1001
+    metrics:
+      enabled: false
+      port: 9000
+      memory: 128M
 
 ## @section NetWorkPolicy parameters
 

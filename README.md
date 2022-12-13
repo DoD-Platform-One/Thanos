@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 11.5.8](https://img.shields.io/badge/Version-11.5.8-informational?style=flat-square) ![AppVersion: 0.28.1](https://img.shields.io/badge/AppVersion-0.28.1-informational?style=flat-square)
+![Version: 11.5.8-bb.1](https://img.shields.io/badge/Version-11.5.8--bb.1-informational?style=flat-square) ![AppVersion: 0.29.0](https://img.shields.io/badge/AppVersion-0.29.0-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -52,7 +52,7 @@ helm install thanos chart/
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
-| objstoreConfig | string | `""` |  |
+| objstoreConfig | string | `"type: s3\nconfig:\n  bucket: \"thanos\"\n  endpoint: minio.monitoring.svc.cluster.local\n  access_key: \"minio\"\n  secret_key: \"minio123\"\n  insecure: true"` |  |
 | indexCacheConfig | string | `""` |  |
 | bucketCacheConfig | string | `""` |  |
 | existingObjstoreSecret | string | `""` |  |
@@ -79,9 +79,9 @@ helm install thanos chart/
 | query.logFormat | string | `"logfmt"` |  |
 | query.replicaLabel[0] | string | `"replica"` |  |
 | query.dnsDiscovery.enabled | bool | `true` |  |
-| query.dnsDiscovery.sidecarsService | string | `""` |  |
-| query.dnsDiscovery.sidecarsNamespace | string | `""` |  |
-| query.stores | list | `[]` |  |
+| query.dnsDiscovery.sidecarsService | string | `"kube-prometheus-prometheus-thanos"` |  |
+| query.dnsDiscovery.sidecarsNamespace | string | `"monitoring"` |  |
+| query.stores[0] | string | `"dnssrv+_grpc._tcp.prometheus-operated.monitoring.svc.cluster.local"` |  |
 | query.sdConfig | string | `""` |  |
 | query.existingSDConfigmap | string | `""` |  |
 | query.extraEnvVars | list | `[]` |  |
@@ -980,9 +980,20 @@ helm install thanos chart/
 | volumePermissions.image.pullPolicy | string | `"IfNotPresent"` |  |
 | volumePermissions.image.pullSecrets | list | `[]` |  |
 | minio.enabled | bool | `false` |  |
-| minio.auth.rootUser | string | `"admin"` |  |
-| minio.auth.rootPassword | string | `""` |  |
-| minio.defaultBuckets | string | `"thanos"` |  |
+| minio.service.nameOverride | string | `"minio.monitoring.svc.cluster.local"` |  |
+| minio.secrets | object | `{"accessKey":"minio","name":"thanos-objstore-creds","secretKey":"minio123"}` | Minio root credentials |
+| minio.tenant.buckets | list | `[{"name":"thanos"}]` | Buckets to be provisioned to for tenant |
+| minio.tenant.users | list | `[{"name":"minio-user"}]` | Users to to be provisioned to for tenant |
+| minio.tenant.defaultUserCredentials | object | `{"password":"","username":"minio-user"}` | User credentials to create for above user. Otherwise password is randomly generated. This auth is not required to be set or reclaimed for minio use with Loki |
+| minio.tenant.pools[0].servers | int | `1` |  |
+| minio.tenant.pools[0].volumesPerServer | int | `4` |  |
+| minio.tenant.pools[0].size | string | `"750Mi"` |  |
+| minio.tenant.pools[0].securityContext.runAsUser | int | `1001` |  |
+| minio.tenant.pools[0].securityContext.runAsGroup | int | `1001` |  |
+| minio.tenant.pools[0].securityContext.fsGroup | int | `1001` |  |
+| minio.tenant.metrics.enabled | bool | `false` |  |
+| minio.tenant.metrics.port | int | `9000` |  |
+| minio.tenant.metrics.memory | string | `"128M"` |  |
 | networkPolicy.enabled | bool | `false` |  |
 | networkPolicy.allowExternal | bool | `true` |  |
 | networkPolicy.explicitNamespacesSelector | object | `{}` |  |

@@ -1,9 +1,9 @@
 dependencies:
-- name: minio
-  repository: https://charts.bitnami.com/bitnami
-  version: 11.10.13
+- name: minio-instance
+  repository: oci://registry1.dso.mil/bigbang
+  version: 4.5.4-bb.2
 - name: common
   repository: https://charts.bitnami.com/bitnami
-  version: 2.1.2
-digest: sha256:55e906e9b45c7d069a6eb19d98f12a5f4d01e1adda7ee0282936c8933489eeef
-generated: "2022-11-09T11:59:25.072709-06:00"
+  version: 2.2.1
+digest: sha256:451a2b42d42c22ea04c486d5f0f5b95b16613e382798a7fe99c3a5c0f8caf404
+generated: "2022-12-09T09:00:26.618901-06:00"

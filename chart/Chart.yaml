@@ -3,10 +3,11 @@ annotations:
 apiVersion: v2
 appVersion: 0.29.0
 dependencies:
-  - condition: minio.enabled
-    name: minio
-    repository: https://charts.bitnami.com/bitnami
-    version: 11.x.x
+  - name: minio-instance
+    alias: minio
+    version: 4.5.4-bb.2
+    repository: oci://registry1.dso.mil/bigbang
+    condition: minio.enabled
   - name: common
     repository: https://charts.bitnami.com/bitnami
     tags:
@@ -28,4 +29,4 @@ name: thanos
 sources:
   - https://github.com/bitnami/containers/tree/main/bitnami/thanos
   - https://thanos.io
-version: 11.5.8-bb.0
+version: 11.5.8-bb.1
