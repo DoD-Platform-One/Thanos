@@ -1,3 +1,6 @@
+## [11.5.8-bb.2] - 2023-08-10
+- added support for istio mtls and virtual service
+
 ## [11.5.8-bb.1] - 2022-12-07
 - added minio sub-chart
 

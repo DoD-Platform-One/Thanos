@@ -1,0 +1,4 @@
+istiooperator:
+  namespace: minio-operator
+  git:
+    repo: https://repo1.dso.mil/big-bang/product/packages/minio-operator.git

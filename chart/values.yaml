@@ -4052,3 +4052,21 @@ networkPolicy:
   ##    - {key: role, operator: In, values: [frontend]}
   ##
   explicitNamespacesSelector: {}
+
+# -- Domain to service Thanos virtualService
+domain: bigbang.dev
+
+istio:
+  enabled: false
+  mtls:
+    # STRICT = Allow only mutual TLS traffic
+    # PERMISSIVE = Allow both plain text and mutual TLS traffic
+    mode: STRICT
+  thanos:
+    enabled: true
+    labels: {}
+    annotations: {}
+    gateways:
+      - istio-system/main
+    hosts:
+      - thanos.{{ .Values.domain }}

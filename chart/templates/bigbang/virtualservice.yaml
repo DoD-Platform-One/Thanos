@@ -1,0 +1,38 @@
+{{- if .Values.istio.enabled -}}
+{{- $query := (include "thanos.query.values" . | fromYaml) -}}
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: thanos
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: {{ template "thanos.name" . }}
+    helm.sh/chart: {{ template "thanos.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/part-of: thanos
+    app.kubernetes.io/component: networking
+  {{- if .Values.istio.thanos.labels }}
+{{ toYaml .Values.istio.thanos.labels | indent 4 }}
+  {{- end }}
+  {{- if .Values.istio.thanos.annotations }}
+  annotations:
+{{ toYaml .Values.istio.thanos.annotations | indent 4 }}
+  {{- end }}
+spec:
+  gateways:
+  {{- range .Values.istio.thanos.gateways }}
+    - {{ . }}
+  {{- end }}
+  hosts:
+  {{- range .Values.istio.thanos.hosts }}
+    - {{ tpl . $}}
+  {{- end }}
+  http:
+  - match:
+    route:
+    - destination:
+        port:
+          number: {{ $query.service.ports.http }}
+        host: {{ include "common.names.fullname" . }}-query.{{ .Release.Namespace }}.svc.cluster.local
+{{- end }}
