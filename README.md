@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 11.5.8-bb.1](https://img.shields.io/badge/Version-11.5.8--bb.1-informational?style=flat-square) ![AppVersion: 0.29.0](https://img.shields.io/badge/AppVersion-0.29.0-informational?style=flat-square)
+![Version: 11.5.8-bb.2](https://img.shields.io/badge/Version-11.5.8--bb.2-informational?style=flat-square) ![AppVersion: 0.29.0](https://img.shields.io/badge/AppVersion-0.29.0-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -52,7 +52,7 @@ helm install thanos chart/
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
-| objstoreConfig | string | `"type: s3\nconfig:\n  bucket: \"thanos\"\n  endpoint: minio.monitoring.svc.cluster.local\n  access_key: \"minio\"\n  secret_key: \"minio123\"\n  insecure: true"` |  |
+| objstoreConfig | string | `""` |  |
 | indexCacheConfig | string | `""` |  |
 | bucketCacheConfig | string | `""` |  |
 | existingObjstoreSecret | string | `""` |  |
@@ -997,6 +997,14 @@ helm install thanos chart/
 | networkPolicy.enabled | bool | `false` |  |
 | networkPolicy.allowExternal | bool | `true` |  |
 | networkPolicy.explicitNamespacesSelector | object | `{}` |  |
+| domain | string | `"bigbang.dev"` | Domain to service Thanos virtualService |
+| istio.enabled | bool | `true` |  |
+| istio.mtls.mode | string | `"STRICT"` |  |
+| istio.thanos.enabled | bool | `true` |  |
+| istio.thanos.labels | object | `{}` |  |
+| istio.thanos.annotations | object | `{}` |  |
+| istio.thanos.gateways[0] | string | `"istio-system/main"` |  |
+| istio.thanos.hosts[0] | string | `"thanos.{{ .Values.domain }}"` |  |
 
 ## Contributing
 
