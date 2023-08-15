@@ -4070,3 +4070,5 @@ istio:
       - istio-system/main
     hosts:
       - thanos.{{ .Values.domain }}
+networkPolicies:
+  enabled: false   

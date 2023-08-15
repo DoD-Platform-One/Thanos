@@ -1,3 +1,6 @@
+## [11.5.8-bb.3] - 2023-08-14
+- added network policies
+
 ## [11.5.8-bb.2] - 2023-08-10
 - added support for istio mtls and virtual service
 
