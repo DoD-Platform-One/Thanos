@@ -1,3 +1,6 @@
+## [12.11.0-bb.2] - 2023-8-16
+- restore _common.tpl
+
 ## [12.11.0-bb.1] - 2023-8-16
 - add initial resource limits for pods
 
