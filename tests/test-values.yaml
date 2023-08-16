@@ -6,8 +6,19 @@ objstoreConfig: |-
     access_key: "minio"
     secret_key: "minio123"
     insecure: true
+
 minio:
   enabled: true
+  
+query:
+  resources:
+      limits:
+        cpu: 300m
+        memory: 1Gi
+      requests:
+        cpu: 300m
+        memory: 1Gi  
+
 networkPolicies:
   enabled: true
   controlPlaneCidr: 172.16.0.0/12
