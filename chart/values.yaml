@@ -256,8 +256,12 @@ query:
   ## @param query.resources.requests The requested resources for the Thanos Query container
   ##
   resources:
-    limits: {}
-    requests: {}
+      limits:
+        cpu: 300m
+        memory: 5Gi
+      requests:
+        cpu: 300m
+        memory: 5Gi
   ## Configure extra options for Thanos Query containers' liveness and readiness probes
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
   ## @param query.livenessProbe.enabled Enable livenessProbe on Thanos Query containers
@@ -925,8 +929,12 @@ queryFrontend:
   ## @param queryFrontend.resources.requests The requested resources for the Thanos Query Frontend container
   ##
   resources:
-    limits: {}
-    requests: {}
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
   ## Configure extra options for Thanos Query Frontend containers' liveness and readiness probes
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
   ## @param queryFrontend.livenessProbe.enabled Enable livenessProbe on Thanos Query Frontend containers
@@ -1368,8 +1376,12 @@ bucketweb:
   ## @param bucketweb.resources.requests The requested resources for the Thanos Bucket Web container
   ##
   resources:
-    limits: {}
-    requests: {}
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
   ## Configure extra options for Thanos Bucket Web containers' liveness and readiness probes
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
   ## @param bucketweb.livenessProbe.enabled Enable livenessProbe on Thanos Bucket Web containers
@@ -1815,8 +1827,12 @@ compactor:
   ## @param compactor.resources.requests The requested resources for the Thanos Compactor container
   ##
   resources:
-    limits: {}
-    requests: {}
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
   ## Configure extra options for Thanos Compactor containers' liveness and readiness probes
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
   ## @param compactor.livenessProbe.enabled Enable livenessProbe on Thanos Compactor containers
@@ -2277,8 +2293,12 @@ storegateway:
   ## @param storegateway.resources.requests The requested resources for the Thanos Store Gateway container
   ##
   resources:
-    limits: {}
-    requests: {}
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
   ## Configure extra options for Thanos Store Gateway containers' liveness and readiness probes
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
   ## @param storegateway.livenessProbe.enabled Enable livenessProbe on Thanos Store Gateway containers
@@ -2920,8 +2940,12 @@ ruler:
   ## @param ruler.resources.requests The requested resources for the Thanos Ruler container
   ##
   resources:
-    limits: {}
-    requests: {}
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
   ## Configure extra options for Thanos Ruler containers' liveness and readiness probes
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
   ## @param ruler.livenessProbe.enabled Enable livenessProbe on Thanos Ruler containers
@@ -3424,8 +3448,12 @@ receive:
   ## @param receive.resources.requests The requested resources for the Thanos Receive container
   ##
   resources:
-    limits: {}
-    requests: {}
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
   ## Configure extra options for Thanos Receive containers' liveness and readiness probes
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
   ## @param receive.livenessProbe.enabled Enable livenessProbe on Thanos Receive containers
@@ -3893,8 +3921,12 @@ receiveDistributor:
   ## @param receiveDistributor.resources.requests The requested resources for the Thanos Receive container
   ##
   resources:
-    limits: {}
-    requests: {}
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
   ## Configure extra options for Thanos Receive Distributor containers' liveness and readiness probes
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
   ## @param receiveDistributor.livenessProbe.enabled Enable livenessProbe on Thanos Receive Distributor containers

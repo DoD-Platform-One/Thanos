@@ -1,3 +1,6 @@
+## [12.11.0-bb.1] - 2023-8-16
+- add initial resource limits for pods
+
 ## [12.11.0-bb.0] - 2023-8-10
 - updated helm repo to latest version
 
