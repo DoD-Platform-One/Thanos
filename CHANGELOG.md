@@ -1,3 +1,6 @@
+## [12.11.0-bb.0] - 2023-8-10
+- updated helm repo to latest version
+
 ## [11.5.8-bb.3] - 2023-08-14
 - added network policies
 

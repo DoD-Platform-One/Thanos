@@ -1,3 +1,8 @@
+{{- /*
+Copyright VMware, Inc.
+SPDX-License-Identifier: APACHE-2.0
+*/}}
+
 {{- $query := (include "thanos.query.values" . | fromYaml) -}}
 {{- if .Values.ruler.enabled }}
 apiVersion: {{ include "common.capabilities.statefulset.apiVersion" . }}
@@ -43,7 +48,7 @@ spec:
         {{- end }}
     spec:
       {{- include "thanos.imagePullSecrets" . | nindent 6 }}
-      serviceAccount: {{ include "thanos.serviceAccountName" (dict "component" "ruler" "context" $) }}
+      serviceAccountName: {{ include "thanos.serviceAccountName" (dict "component" "ruler" "context" $) }}
       automountServiceAccountToken: {{ .Values.ruler.automountServiceAccountToken }}
       {{- if .Values.ruler.hostAliases }}
       hostAliases: {{- include "common.tplvalues.render" (dict "value" .Values.ruler.hostAliases "context" $) | nindent 8 }}
@@ -55,6 +60,12 @@ spec:
         podAffinity: {{- include "common.affinities.pods" (dict "type" .Values.ruler.podAffinityPreset "component" "ruler" "context" $) | nindent 10 }}
         podAntiAffinity: {{- include "common.affinities.pods" (dict "type" .Values.ruler.podAntiAffinityPreset "component" "ruler" "context" $) | nindent 10 }}
         nodeAffinity: {{- include "common.affinities.nodes" (dict "type" .Values.ruler.nodeAffinityPreset.type "key" .Values.ruler.nodeAffinityPreset.key "values" .Values.ruler.nodeAffinityPreset.values) | nindent 10 }}
+      {{- end }}
+      {{- if .Values.ruler.dnsConfig }}
+      dnsConfig: {{- include "common.tplvalues.render" (dict "value" .Values.ruler.dnsConfig "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.ruler.dnsPolicy }}
+      dnsPolicy: {{ .Values.ruler.dnsPolicy | quote }}
       {{- end }}
       {{- if .Values.ruler.nodeSelector }}
       nodeSelector: {{- include "common.tplvalues.render" (dict "value" .Values.ruler.nodeSelector "context" $) | nindent 8 }}
@@ -132,6 +143,7 @@ spec:
             {{- if and $query.enabled .Values.ruler.dnsDiscovery.enabled }}
             - --query=dnssrv+_http._tcp.{{ include "common.names.fullname" . }}-query.{{ .Release.Namespace }}.svc.{{ .Values.clusterDomain }}
             {{- end }}
+            - --alert.query-url={{- template "thanos.ruler.queryURL" .}}
             - --label={{ .Values.ruler.replicaLabel }}="$(POD_NAME)"
             - --label=ruler_cluster="{{ .Values.ruler.clusterName }}"
             - --alert.label-drop={{ .Values.ruler.replicaLabel }}
@@ -141,7 +153,7 @@ spec:
             - --query={{ . }}
             {{- end }}
             {{- if .Values.ruler.extraFlags }}
-            {{- .Values.ruler.extraFlags | toYaml | nindent 12 }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.ruler.extraFlags "context" $) | nindent 12 }}
             {{- end }}
             {{- end }}
           env:
