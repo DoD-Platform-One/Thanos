@@ -1,3 +1,8 @@
+{{/*
+Copyright VMware, Inc.
+SPDX-License-Identifier: APACHE-2.0
+*/}}
+
 {{/* vim: set filetype=mustache: */}}
 
 {{/*
@@ -146,6 +151,18 @@ Return the Thanos Ruler configuration configmap.
     {{- printf "%s" (tpl .Values.ruler.existingConfigmap $) -}}
 {{- else -}}
     {{- printf "%s-ruler-configmap" (include "common.names.fullname" .) -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the queryURL used by Thanos Ruler.
+*/}}
+{{- define "thanos.ruler.queryURL" -}}
+{{- $query := (include "thanos.query.values" . | fromYaml) -}}
+{{- if .Values.ruler.queryURL -}}
+    {{- printf "%s" (tpl .Values.ruler.queryURL $) -}}
+{{- else -}}
+    {{- printf "http://%s-query.%s.svc.%s:%d" (include "common.names.fullname" . ) .Release.Namespace .Values.clusterDomain (int  $query.service.ports.http) -}}
 {{- end -}}
 {{- end -}}
 
@@ -435,5 +452,24 @@ Usage:
 {{- else -}}
 {{- .Values.receive.config | toPrettyJson -}}
 {{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Labels to use on serviceMonitor.spec.selector and svc.metadata.labels
+*/}}
+{{- define "thanos.servicemonitor.matchLabels" -}}
+{{- if and .Values.metrics.enabled .Values.metrics.serviceMonitor.enabled -}}
+prometheus-operator/monitor: 'true'
+{{- end }}
+{{- end }}
+
+{{/*
+Labels to use on serviceMonitor.spec.selector
+*/}}
+{{- define "thanos.servicemonitor.selector" -}}
+{{- include "thanos.servicemonitor.matchLabels" $ }}
+{{- if .Values.metrics.serviceMonitor.selector -}}
+{{- include "common.tplvalues.render" (dict "value" .Values.metrics.serviceMonitor.selector "context" $)}}
 {{- end -}}
 {{- end -}}
