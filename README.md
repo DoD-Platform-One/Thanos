@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 12.11.0-bb.2](https://img.shields.io/badge/Version-12.11.0--bb.2-informational?style=flat-square) ![AppVersion: 0.29.0](https://img.shields.io/badge/AppVersion-0.29.0-informational?style=flat-square)
+![Version: 12.11.0-bb.3](https://img.shields.io/badge/Version-12.11.0--bb.3-informational?style=flat-square) ![AppVersion: 0.29.0](https://img.shields.io/badge/AppVersion-0.29.0-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -1034,9 +1034,9 @@ helm install thanos chart/
 | metrics.prometheusRule.additionalLabels | object | `{}` |  |
 | metrics.prometheusRule.groups | list | `[]` |  |
 | volumePermissions.enabled | bool | `false` |  |
-| volumePermissions.image.registry | string | `"docker.io"` |  |
-| volumePermissions.image.repository | string | `"bitnami/os-shell"` |  |
-| volumePermissions.image.tag | string | `"11-debian-11-r16"` |  |
+| volumePermissions.image.registry | string | `"registry1.dso.mil"` |  |
+| volumePermissions.image.repository | string | `"ironbank/big-bang/base"` |  |
+| volumePermissions.image.tag | string | `"2.0.0"` |  |
 | volumePermissions.image.digest | string | `""` |  |
 | volumePermissions.image.pullPolicy | string | `"IfNotPresent"` |  |
 | volumePermissions.image.pullSecrets | list | `[]` |  |
