@@ -1,3 +1,7 @@
+## [12.11.0-bb.4] - 2023-08-18
+### Added
+- Allow ingress from istio gateway network policy added
+
 ## [12.11.0-bb.3] - 2023-08-16
 ### Changed
 - Changed CHANGELOG.md to conform with syntax 
