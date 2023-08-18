@@ -4396,5 +4396,9 @@ istio:
       - istio-system/main
     hosts:
       - thanos.{{ .Values.domain }}
+
 networkPolicies:
-  enabled: false   
+  enabled: false
+  ingressLabels:
+    app: istio-ingressgateway
+    istio: ingressgateway  
