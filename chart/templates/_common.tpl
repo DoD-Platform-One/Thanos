@@ -42,85 +42,22 @@ Create Thanos app version
 Common labels
 */}}
 {{- define "thanos.labels" -}}
-helm.sh/chart: {{ include "thanos.chart" .context }}
-{{ include "thanos.selectorLabels" (dict "context" .context "component" .component "name" .name) }}
-app.kubernetes.io/managed-by: {{ .context.Release.Service }}
-app.kubernetes.io/part-of: thanos
-app.kubernetes.io/version: {{ include "thanos.defaultTag" .context }}
-{{- with .context.Values.global.additionalLabels }}
-{{ toYaml . }}
+helm.sh/chart: {{ include "thanos.chart" . }}
+{{ include "thanos.selectorLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{/*
 Selector labels
 */}}
 {{- define "thanos.selectorLabels" -}}
-{{- if .name -}}
-app.kubernetes.io/name: {{ include "thanos.name" .context }}-{{ .name }}
-{{ end -}}
-app.kubernetes.io/instance: {{ .context.Release.Name }}
-{{- if .component }}
-app.kubernetes.io/component: {{ .component }}
-{{- end }}
+app.kubernetes.io/name: {{ include "thanos.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
-{{/*
-Common affinity definition
-Pod affinity
-  - Soft prefers different nodes
-  - Hard requires different nodes and prefers different availibility zones
-Node affinity
-  - Soft prefers given user expressions
-  - Hard requires given user expressions
-*/}}
-{{- define "thanos.affinity" -}}
-{{- with .component.affinity -}}
-  {{- toYaml . -}}
-{{- else -}}
-{{- $preset := .context.Values.global.affinity -}}
-{{- if (eq $preset.podAntiAffinity "soft") }}
-podAntiAffinity:
-  preferredDuringSchedulingIgnoredDuringExecution:
-  - weight: 100
-    podAffinityTerm:
-      labelSelector:
-        matchLabels:
-          app.kubernetes.io/name: {{ include "thanos.name" .context }}-{{ .component.name }}
-      topologyKey: kubernetes.io/hostname
-{{- else if (eq $preset.podAntiAffinity "hard") }}
-podAntiAffinity:
-  preferredDuringSchedulingIgnoredDuringExecution:
-  - weight: 100
-    podAffinityTerm:
-      labelSelector:
-        matchLabels:
-          app.kubernetes.io/name: {{ include "thanos.name" .context }}-{{ .component.name }}
-      topologyKey: topology.kubernetes.io/zone
-  requiredDuringSchedulingIgnoredDuringExecution:
-  - labelSelector:
-      matchLabels:
-        app.kubernetes.io/name: {{ include "thanos.name" .context }}-{{ .component.name }}
-    topologyKey: kubernetes.io/hostname
-{{- end }}
-{{- with $preset.nodeAffinity.matchExpressions }}
-{{- if (eq $preset.nodeAffinity.type "soft") }}
-nodeAffinity:
-  preferredDuringSchedulingIgnoredDuringExecution:
-  - weight: 1
-    preference:
-      matchExpressions:
-      {{- toYaml . | nindent 6 }}
-{{- else if (eq $preset.nodeAffinity.type "hard") }}
-nodeAffinity:
-  requiredDuringSchedulingIgnoredDuringExecution:
-    nodeSelectorTerms:
-    - matchExpressions:
-      {{- toYaml . | nindent 6 }}
-{{- end }}
-{{- end -}}
-{{- end -}}
-{{- end -}}
 
 {{/*
 Common deployment strategy definition

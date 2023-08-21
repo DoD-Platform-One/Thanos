@@ -1,0 +1,7 @@
+{{- include "gluon.tests.cypress-configmap.overrides" (list . "thanos-test.cypress-configmap") }}
+{{- define "thanos-test.cypress-configmap" }}
+{{- end }}
+---
+{{- include "gluon.tests.cypress-runner.overrides" (list . "thanos-test.cypress-runner") -}}
+{{- define "thanos-test.cypress-runner" -}}
+{{- end }}

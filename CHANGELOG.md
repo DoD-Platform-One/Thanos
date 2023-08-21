@@ -1,3 +1,7 @@
+## [12.11.0-bb.6] - 2023-08-21
+### Added
+- Initial Cypress tests
+
 ## [12.11.0-bb.5] - 2023-08-18
 ### Added
 - Default ingress isio gateway labels added

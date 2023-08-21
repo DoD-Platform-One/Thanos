@@ -4402,3 +4402,10 @@ networkPolicies:
   ingressLabels:
     app: istio-ingressgateway
     istio: ingressgateway  
+
+bbtests:
+  enabled: false
+  cypress:
+    artifacts: true
+    envs:
+      cypress_thanos_url: 'http://thanos-query:9090'
