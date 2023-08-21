@@ -17,6 +17,9 @@ dependencies:
     tags:
       - bitnami-common
     version: 2.x.x
+  - name: gluon
+    version: 0.3.2
+    repository: oci://registry1.dso.mil/bigbang    
 description: Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 home: https://bitnami.com
 icon: https://bitnami.com/assets/stacks/thanos/img/thanos-stack-220x234.png
@@ -32,4 +35,4 @@ name: thanos
 sources:
   - https://github.com/bitnami/containers/tree/main/bitnami/thanos
   - https://thanos.io
-version: 12.11.0-bb.5
+version: 12.11.0-bb.6
