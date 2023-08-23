@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 12.11.0-bb.6](https://img.shields.io/badge/Version-12.11.0--bb.6-informational?style=flat-square) ![AppVersion: 0.29.0](https://img.shields.io/badge/AppVersion-0.29.0-informational?style=flat-square)
+![Version: 12.11.0-bb.7](https://img.shields.io/badge/Version-12.11.0--bb.7-informational?style=flat-square) ![AppVersion: 0.29.0](https://img.shields.io/badge/AppVersion-0.29.0-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
