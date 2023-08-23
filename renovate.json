@@ -1,0 +1,45 @@
+{
+    "baseBranches": ["main"],
+    "configWarningReuseIssue": false,
+    "dependencyDashboard": true,
+    "dependencyDashboardHeader": "- [ ] Sync upstream helm chart version with updated dependencies.",
+    "dependencyDashboardTitle": "Renovate: Upgrade Thanos Package Dependencies",
+    "draftPR": true,
+    "enabledManagers": ["helm-values","regex"],
+    "ignorePaths": ["chart/charts/**"],
+    "labels": ["thanos","renovate"],
+    "packageRules": [
+        {
+            "matchDatasources": ["docker"],
+            "groupName": "Ironbank",
+            "registryUrls": ["https://registry1.dso.mil"]
+        }
+    ],
+    "regexManagers": [
+        {
+            "fileMatch": ["^chart/values\\.yaml$"],
+            "matchStrings": [
+                "repository\\S*:\\s*(?<depName>\\S+).*\n\\s+tag:\\s*(?<currentValue>.+)"
+            ],
+            "datasourceTemplate": "docker"
+        },
+        {
+          "fileMatch": ["^chart/Chart\\.yaml$"],
+          "matchStrings": [
+            "- Thanos:\\s+(?<currentValue>.+)",
+            "appVersion:\\s+(?<currentValue>.+)"
+          ],
+          "registryUrlTemplate": "https://registry1.dso.mil",
+          "depNameTemplate": "ironbank/opensource/thanos/thanos",
+          "datasourceTemplate": "docker"
+        },
+        {
+            "fileMatch": ["^chart/Chart\\.yaml$"],
+            "matchStrings": [
+              "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
+             ],
+             "datasourceTemplate": "docker"
+        }
+    ],
+    "separateMajorMinor": false
+}
