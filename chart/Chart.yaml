@@ -5,7 +5,7 @@ annotations:
   category: Analytics
   licenses: Apache-2.0
 apiVersion: v2
-appVersion: 0.29.0
+appVersion: v0.32.0
 dependencies:
   - name: minio-instance
     alias: minio
@@ -35,4 +35,4 @@ name: thanos
 sources:
   - https://github.com/bitnami/containers/tree/main/bitnami/thanos
   - https://thanos.io
-version: 12.11.0-bb.7
+version: 12.11.0-bb.8
