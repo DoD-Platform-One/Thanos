@@ -1,3 +1,7 @@
+## [12.11.0-bb.8] - 2023-08-25
+### Changed
+- updated thanos from v0.29 to v0.32
+
 ## [12.11.0-bb.7] - 2023-08-22
 ### Added
 - added renovate functionality to chart
