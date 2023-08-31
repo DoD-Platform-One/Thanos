@@ -1,3 +1,7 @@
+## [12.11.0-bb.9] - 2023-08-31
+### Changed
+- updated thanos from v0.32.0 to v0.32.1
+
 ## [12.11.0-bb.8] - 2023-08-25
 ### Changed
 - updated thanos from v0.29 to v0.32

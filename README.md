@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 12.11.0-bb.8](https://img.shields.io/badge/Version-12.11.0--bb.8-informational?style=flat-square) ![AppVersion: 0.32.0](https://img.shields.io/badge/AppVersion-0.32.0-informational?style=flat-square)
+![Version: 12.11.0-bb.9](https://img.shields.io/badge/Version-12.11.0--bb.9-informational?style=flat-square) ![AppVersion: 0.32.1](https://img.shields.io/badge/AppVersion-0.32.1-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -48,7 +48,7 @@ helm install thanos chart/
 | extraDeploy | list | `[]` |  |
 | image.registry | string | `"registry1.dso.mil"` |  |
 | image.repository | string | `"ironbank/opensource/thanos/thanos"` |  |
-| image.tag | string | `"v0.32.0"` |  |
+| image.tag | string | `"v0.32.1"` |  |
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
