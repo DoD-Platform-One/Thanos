@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 12.11.0-bb.9](https://img.shields.io/badge/Version-12.11.0--bb.9-informational?style=flat-square) ![AppVersion: 0.32.1](https://img.shields.io/badge/AppVersion-0.32.1-informational?style=flat-square)
+![Version: 12.11.0-bb.10](https://img.shields.io/badge/Version-12.11.0--bb.10-informational?style=flat-square) ![AppVersion: v0.32.1](https://img.shields.io/badge/AppVersion-v0.32.1-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -1071,7 +1071,7 @@ helm install thanos chart/
 | networkPolicies.ingressLabels.istio | string | `"ingressgateway"` |  |
 | bbtests.enabled | bool | `false` |  |
 | bbtests.cypress.artifacts | bool | `true` |  |
-| bbtests.cypress.envs.cypress_thanos_url | string | `"http://thanos-query-frontend:9090"` |  |
+| bbtests.cypress.envs.cypress_thanos_url | string | `"http://thanos-query:9090"` |  |
 
 ## Contributing
 
