@@ -4,8 +4,13 @@
 annotations:
   category: Analytics
   licenses: Apache-2.0
+  images: |
+    - name: os-shell
+      image: docker.io/bitnami/os-shell:11-debian-11-r57
+    - name: thanos
+      image: docker.io/bitnami/thanos:0.32.2-debian-11-r2
 apiVersion: v2
-appVersion: v0.32.1
+appVersion: v0.32.2
 dependencies:
   - name: minio-instance
     alias: minio
@@ -35,4 +40,4 @@ name: thanos
 sources:
   - https://github.com/bitnami/containers/tree/main/bitnami/thanos
   - https://thanos.io
-version: 12.11.0-bb.10
+version: 12.13.3-bb.0

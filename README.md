@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 12.11.0-bb.10](https://img.shields.io/badge/Version-12.11.0--bb.10-informational?style=flat-square) ![AppVersion: v0.32.1](https://img.shields.io/badge/AppVersion-v0.32.1-informational?style=flat-square)
+![Version: 12.13.3-bb.0](https://img.shields.io/badge/Version-12.13.3--bb.0-informational?style=flat-square) ![AppVersion: v0.32.2](https://img.shields.io/badge/AppVersion-v0.32.2-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -48,7 +48,7 @@ helm install thanos chart/
 | extraDeploy | list | `[]` |  |
 | image.registry | string | `"registry1.dso.mil"` |  |
 | image.repository | string | `"ironbank/opensource/thanos/thanos"` |  |
-| image.tag | string | `"v0.32.1"` |  |
+| image.tag | string | `"v0.32.2"` |  |
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
@@ -202,6 +202,7 @@ helm install thanos chart/
 | query.pdb.maxUnavailable | string | `""` |  |
 | query.ingress.enabled | bool | `false` |  |
 | query.ingress.hostname | string | `"thanos.local"` |  |
+| query.ingress.secretName | string | `""` |  |
 | query.ingress.ingressClassName | string | `""` |  |
 | query.ingress.annotations | object | `{}` |  |
 | query.ingress.extraHosts | list | `[]` |  |
@@ -215,6 +216,7 @@ helm install thanos chart/
 | query.ingress.pathType | string | `"ImplementationSpecific"` |  |
 | query.ingress.grpc.enabled | bool | `false` |  |
 | query.ingress.grpc.hostname | string | `"thanos-grpc.local"` |  |
+| query.ingress.grpc.secretName | string | `""` |  |
 | query.ingress.grpc.ingressClassName | string | `""` |  |
 | query.ingress.grpc.annotations | object | `{}` |  |
 | query.ingress.grpc.extraHosts | list | `[]` |  |

@@ -1,3 +1,9 @@
+
+## [12.13.3-bb.0] - 2023-09-20
+### Changed
+- updated thanos from v0.32.1 to v0.32.2
+- updated helm chart version to 12.13.3
+
 ## [12.11.0-bb.10] - 2023-09-18
 ### Added
 - egress test rules
