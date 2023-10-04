@@ -1,3 +1,11 @@
+# Changelog
+
+---
+
+## [12.13.5-bb.1] - 2023-10-04
+### Fixed
+- generate readme to include values
+
 ## [12.13.5-bb.0] - 2023-10-01
 ### Changed
 - updated thanos from v0.32.2 -> v0.32.3
