@@ -5,7 +5,7 @@ metadata:
 upstream:
   type: git
   git:
-    commit: 9a0c3f91d01811b2b1b101d0e1d6e09fd401834e
+    commit: 1d30563bf53d4c0ac898cf1070af57aa28a039f1
     repo: https://github.com/bitnami/charts
     directory: /bitnami/thanos
-    ref: 9a0c3f91d01811b2b1b101d0e1d6e09fd401834e
+    ref: 1d30563bf53d4c0ac898cf1070af57aa28a039f1

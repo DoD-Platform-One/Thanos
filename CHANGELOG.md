@@ -1,6 +1,10 @@
 # Changelog
 
 ---
+## [12.13.7-bb.0] - 2023-10-05
+### Changed
+- updated thanos from v0.32.3 -> v0.32.4
+- updated helm chart version to 12.13.7
 
 ## [12.13.5-bb.1] - 2023-10-04
 ### Fixed
