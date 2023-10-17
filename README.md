@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 12.13.7-bb.0](https://img.shields.io/badge/Version-12.13.7--bb.0-informational?style=flat-square) ![AppVersion: v0.32.4](https://img.shields.io/badge/AppVersion-v0.32.4-informational?style=flat-square)
+![Version: 12.13.7-bb.1](https://img.shields.io/badge/Version-12.13.7--bb.1-informational?style=flat-square) ![AppVersion: 0.32.4](https://img.shields.io/badge/AppVersion-0.32.4-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -79,9 +79,9 @@ helm install thanos chart/
 | query.logFormat | string | `"logfmt"` |  |
 | query.replicaLabel[0] | string | `"replica"` |  |
 | query.dnsDiscovery.enabled | bool | `true` |  |
-| query.dnsDiscovery.sidecarsService | string | `"kube-prometheus-prometheus-thanos"` |  |
-| query.dnsDiscovery.sidecarsNamespace | string | `"monitoring"` |  |
-| query.stores[0] | string | `"dnssrv+_grpc._tcp.prometheus-operated.monitoring.svc.cluster.local"` |  |
+| query.dnsDiscovery.sidecarsService | string | `""` |  |
+| query.dnsDiscovery.sidecarsNamespace | string | `""` |  |
+| query.stores | list | `[]` |  |
 | query.sdConfig | string | `""` |  |
 | query.existingSDConfigmap | string | `""` |  |
 | query.extraEnvVars | list | `[]` |  |
@@ -1074,6 +1074,7 @@ helm install thanos chart/
 | bbtests.enabled | bool | `false` |  |
 | bbtests.cypress.artifacts | bool | `true` |  |
 | bbtests.cypress.envs.cypress_thanos_url | string | `"http://thanos-query:9090"` |  |
+| bbtests.cypress.envs.prometheus_integration_enabled | string | `"false"` |  |
 
 ## Contributing
 

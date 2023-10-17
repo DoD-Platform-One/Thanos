@@ -185,12 +185,11 @@ query:
   ##
   dnsDiscovery:
     enabled: true
-    sidecarsService: kube-prometheus-prometheus-thanos
-    sidecarsNamespace: monitoring
+    sidecarsService: ""
+    sidecarsNamespace: ""
   ## @param query.stores Statically configure store APIs to connect with Thanos Query
   ##
-  stores:
-    - dnssrv+_grpc._tcp.prometheus-operated.monitoring.svc.cluster.local
+  stores: []
   ## @param query.sdConfig Query Service Discovery Configuration
   ## Specify content for servicediscovery.yml
   ##
@@ -4416,3 +4415,4 @@ bbtests:
     artifacts: true
     envs:
       cypress_thanos_url: 'http://thanos-query:9090'
+      prometheus_integration_enabled: "false"
