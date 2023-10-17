@@ -18,12 +18,18 @@ describe('Basic thanos', function() {
       cy.get('div[class="cm-line"]')
         .type('kube_node_info{}')
   
-      // Run a query
+      // Run a simple query
       cy.get('button[class="execute-btn btn btn-primary"]')
         .click({waitForAnimations: false})
 
-      // Check Targets
-      cy.wait(3000)
+      // An integration test with monitoring.prometheus
+      if (Cypress.env('prometheus_integration_enabled')) {
+        // Check Targets -- these are populated from the prometheus server
+        cy.wait(1000)
+        cy.visit(`${Cypress.env('thanos_url')}/targets`)
+        cy.get('button[class="all btn btn-primary active"]').click()
+        cy.get('button[class="btn btn-primary btn-xs"]').parent().contains(/monitoring\/.+-prometheus\/0/)  
+        cy.get('button[class="btn btn-primary btn-xs"]').parent().contains(/monitoring\/.+-thanos-sidecar\/0/)
+      }  
     })
-
 })
