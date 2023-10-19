@@ -1,6 +1,11 @@
 # Changelog
 
 ---
+## [12.13.7-bb.2] - 2023-10-18
+### Changed
+- Changed cypress test to allow for retries waiting on prometheus
+- Updated chart dependencies for common and minio-instance
+
 ## [12.13.7-bb.1] - 2023-10-12
 ### Added
 - Added integration with prometheus thanos-sidecar
