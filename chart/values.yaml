@@ -47,9 +47,9 @@ extraDeploy: []
 
 ## Bitnami Thanos image
 ## ref: https://hub.docker.com/r/bitnami/thanos/tags/
-## @param image.registry Thanos image registry
-## @param image.repository Thanos image repository
-## @param image.tag Thanos image tag (immutable tags are recommended)
+## @param image.registry [default: REGISTRY_NAME] Thanos image registry
+## @param image.repository [default: REPOSITORY_NAME/thanos] Thanos image repository
+## @skip image.tag Thanos image tag (immutable tags are recommended)
 ## @param image.digest Thanos image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag
 ## @param image.pullPolicy Thanos image pull policy
 ## @param image.pullSecrets Specify docker-registry secret names as an array
@@ -57,7 +57,7 @@ extraDeploy: []
 image:
   registry: registry1.dso.mil
   repository: ironbank/opensource/thanos/thanos 
-  tag: v0.32.4
+  tag: v0.32.5
   digest: ""
   ## Specify a imagePullPolicy. Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: https://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -76,15 +76,6 @@ image:
 ## Specify content for objstore.yml
 ##
 objstoreConfig: ""
-#objstoreConfig: |-
-  #type: s3
-  #config:
-  #  bucket: "thanos"
-  #  endpoint: minio.monitoring.svc.cluster.local
-  #  access_key: "minio"
-  #  secret_key: "minio123"
-  #  insecure: true
-
 ## @param indexCacheConfig The [index cache configuration](https://thanos.io/tip/components/store.md/)
 ## Specify content for index-cache.yml
 ##
@@ -4291,9 +4282,9 @@ volumePermissions:
   ## @param volumePermissions.enabled Enable init container that changes the owner/group of the PV mount point to `runAsUser:fsGroup`
   ##
   enabled: false
-  ## @param volumePermissions.image.registry Init container volume-permissions image registry
-  ## @param volumePermissions.image.repository Init container volume-permissions image repository
-  ## @param volumePermissions.image.tag Init container volume-permissions image tag
+  ## @param volumePermissions.image.registry [default: REGISTRY_NAME] Init container volume-permissions image registry
+  ## @param volumePermissions.image.repository [default: REPOSITORY_NAME/os-shell] Init container volume-permissions image repository
+  ## @skip volumePermissions.image.tag Init container volume-permissions image tag
   ## @param volumePermissions.image.digest Init container volume-permissions image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag
   ## @param volumePermissions.image.pullPolicy Init container volume-permissions image pull policy
   ## @param volumePermissions.image.pullSecrets Specify docker-registry secret names as an array
@@ -4323,9 +4314,6 @@ minio:
   ## @param minio.enabled Enable/disable MinIO&reg; chart installation
   ## to be used as an objstore for Thanos, must have minio-operator installed
   enabled: false
-  # Override the minio service name for easier connection setup
-  service:
-    nameOverride: "minio.monitoring.svc.cluster.local"
   # -- Minio root credentials
   secrets:
     name: "thanos-objstore-creds"

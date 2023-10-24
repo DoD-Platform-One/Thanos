@@ -1,6 +1,12 @@
 # Changelog
 
 ---
+## [12.13.12-bb.0] - 2023-10-23
+### Changed
+- Changed minio dependency version
+- Updated thanos from v0.32.4 -> v0.32.5
+- Removed objstoreConfig values -- these will be set and passed through from the bigbang package
+
 ## [12.13.7-bb.2] - 2023-10-18
 ### Changed
 - Changed cypress test to allow for retries waiting on prometheus
