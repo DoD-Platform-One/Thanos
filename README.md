@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 12.13.7-bb.2](https://img.shields.io/badge/Version-12.13.7--bb.2-informational?style=flat-square) ![AppVersion: 0.32.4](https://img.shields.io/badge/AppVersion-0.32.4-informational?style=flat-square)
+![Version: 12.13.12-bb.0](https://img.shields.io/badge/Version-12.13.12--bb.0-informational?style=flat-square) ![AppVersion: 0.32.5](https://img.shields.io/badge/AppVersion-0.32.5-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -48,7 +48,7 @@ helm install thanos chart/
 | extraDeploy | list | `[]` |  |
 | image.registry | string | `"registry1.dso.mil"` |  |
 | image.repository | string | `"ironbank/opensource/thanos/thanos"` |  |
-| image.tag | string | `"v0.32.4"` |  |
+| image.tag | string | `"v0.32.5"` |  |
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
@@ -1043,7 +1043,6 @@ helm install thanos chart/
 | volumePermissions.image.pullPolicy | string | `"IfNotPresent"` |  |
 | volumePermissions.image.pullSecrets | list | `[]` |  |
 | minio.enabled | bool | `false` |  |
-| minio.service.nameOverride | string | `"minio.monitoring.svc.cluster.local"` |  |
 | minio.secrets | object | `{"accessKey":"minio","name":"thanos-objstore-creds","secretKey":"minio123"}` | Minio root credentials |
 | minio.tenant.buckets | list | `[{"name":"thanos"}]` | Buckets to be provisioned to for tenant |
 | minio.tenant.users | list | `[{"name":"minio-user"}]` | Users to to be provisioned to for tenant |
