@@ -3,5 +3,6 @@
   "_pluginsFile": "./plugins.js",
   "supportFile": false,
   "fixturesFolder": false,
-  "videoCompression": 20
+  "videoCompression": 20,
+  "experimentalSessionAndOrigin": true
 }

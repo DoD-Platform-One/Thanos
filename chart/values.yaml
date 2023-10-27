@@ -4403,4 +4403,6 @@ bbtests:
     artifacts: true
     envs:
       cypress_thanos_url: 'http://thanos-query:9090'
+      cypress_minio_url: 'http://thanos-minio-console:9090'
       prometheus_integration_enabled: "false"
+      objstorage_integration_enabled: "false"

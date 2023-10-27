@@ -1,6 +1,11 @@
 # Changelog
 
 ---
+## [12.13.12-bb.1] - 2023-10-26
+### Added
+- Network Policy to allow sidecar to connect to thanos.minio for tests
+- Cypress tests when object storage is enabled
+
 ## [12.13.12-bb.0] - 2023-10-23
 ### Changed
 - Changed minio dependency version

@@ -18,6 +18,7 @@ describe('Basic thanos', function() {
 
   // Run a simple query
   it('Simple Query', () => {
+    cy.visit(Cypress.env('thanos_url'))    
     cy.get('div[class="cm-line"]').type('kube_node_info{}')
     cy.get('button[class="execute-btn btn btn-primary"]').click({ waitForAnimations: false })
   })
@@ -43,4 +44,30 @@ describe('Basic thanos', function() {
         cy.get('button[class="btn btn-primary btn-xs"]').parent().contains(/monitoring\/.+-thanos-sidecar\/0/)
       })
   }
+
+  // An integration test with object storage enabled
+  if (Cypress.env('objstorage_integration_enabled')) {
+
+    it('Verify Thanos Bucket',
+      {
+        retries: {
+          runMode: 179,
+        },
+      },
+      () => {
+        // visit minio
+        cy.session('minioSession', () => {
+          cy.visit(`${Cypress.env('minio_url')}`)
+          cy.get('input[id="accessKey"]').type('minio')
+          cy.get('input[id="secretKey"]').type('minio123')
+          cy.contains("Login").click()
+        })
+
+        // Check there is at least one entry  
+        cy.visit(`${Cypress.env('minio_url')}/browser/thanos`)
+        cy.get('div[class="ReactVirtualized__Table__row rowLine canClick  "]').first().click()
+      })
+  }
+
+
 })
