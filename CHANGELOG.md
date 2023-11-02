@@ -1,6 +1,10 @@
 # Changelog
 
 ---
+## [12.13.12-bb.2] - 2023-11-01
+### Added
+- Network Policy to allow grafana
+
 ## [12.13.12-bb.1] - 2023-10-26
 ### Added
 - Network Policy to allow sidecar to connect to thanos.minio for tests
