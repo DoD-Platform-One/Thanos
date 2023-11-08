@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 12.13.12-bb.2](https://img.shields.io/badge/Version-12.13.12--bb.2-informational?style=flat-square) ![AppVersion: 0.32.5](https://img.shields.io/badge/AppVersion-0.32.5-informational?style=flat-square)
+![Version: 12.13.12-bb.3](https://img.shields.io/badge/Version-12.13.12--bb.3-informational?style=flat-square) ![AppVersion: 0.32.5](https://img.shields.io/badge/AppVersion-0.32.5-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -1038,7 +1038,7 @@ helm install thanos chart/
 | volumePermissions.enabled | bool | `false` |  |
 | volumePermissions.image.registry | string | `"registry1.dso.mil"` |  |
 | volumePermissions.image.repository | string | `"ironbank/big-bang/base"` |  |
-| volumePermissions.image.tag | string | `"2.0.0"` |  |
+| volumePermissions.image.tag | string | `"2.1.0"` |  |
 | volumePermissions.image.digest | string | `""` |  |
 | volumePermissions.image.pullPolicy | string | `"IfNotPresent"` |  |
 | volumePermissions.image.pullSecrets | list | `[]` |  |
