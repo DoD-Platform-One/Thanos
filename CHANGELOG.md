@@ -1,6 +1,14 @@
 # Changelog
 
 ---
+## [12.13.12-bb.3] - 2023-11-07
+### Added
+- Network Policy to egress to monitoring
+- Initial dev documentation
+
+### Changed
+- ironbank/big-bang/base 2.0.0 -> 2.1.0
+
 ## [12.13.12-bb.2] - 2023-11-01
 ### Added
 - Network Policy to allow grafana
