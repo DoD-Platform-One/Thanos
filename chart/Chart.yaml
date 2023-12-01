@@ -9,6 +9,8 @@ annotations:
       image: docker.io/bitnami/os-shell:11-debian-11-r90
     - name: thanos
       image: docker.io/bitnami/thanos:0.32.5-debian-11-r0
+  bigbang.dev/applicationVersions: |
+    - Thanos: 0.32.5      
 apiVersion: v2
 appVersion: 0.32.5
 dependencies:
