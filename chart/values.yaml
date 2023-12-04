@@ -237,6 +237,7 @@ query:
   containerSecurityContext:
     enabled: true
     runAsUser: 1001
+    runAsGroup: 1001
     runAsNonRoot: true
     allowPrivilegeEscalation: false
     readOnlyRootFilesystem: true
@@ -916,6 +917,7 @@ queryFrontend:
   containerSecurityContext:
     enabled: true
     runAsUser: 1001
+    runAsGroup: 1001
     runAsNonRoot: true
     allowPrivilegeEscalation: false
     readOnlyRootFilesystem: true
@@ -2280,6 +2282,7 @@ storegateway:
   containerSecurityContext:
     enabled: true
     runAsUser: 1001
+    runAsGroup: 1001
     runAsNonRoot: true
     allowPrivilegeEscalation: false
     readOnlyRootFilesystem: true

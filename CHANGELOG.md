@@ -1,6 +1,10 @@
 # Changelog
 
 ---
+## [12.13.12-bb.4] - 2023-12-01
+### Added
+- update securityContext for query, query-Frontend, and storageteway to fix kyverno policy violations
+
 ## [12.13.12-bb.3] - 2023-11-07
 ### Added
 - Network Policy to egress to monitoring

@@ -1,6 +1,7 @@
+
 # thanos
 
-![Version: 12.13.12-bb.3](https://img.shields.io/badge/Version-12.13.12--bb.3-informational?style=flat-square) ![AppVersion: 0.32.5](https://img.shields.io/badge/AppVersion-0.32.5-informational?style=flat-square)
+![Version: 12.13.12-bb.4](https://img.shields.io/badge/Version-12.13.12--bb.4-informational?style=flat-square) ![AppVersion: 0.32.5](https://img.shields.io/badge/AppVersion-0.32.5-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -96,6 +97,7 @@ helm install thanos chart/
 | query.podSecurityContext.fsGroup | int | `1001` |  |
 | query.containerSecurityContext.enabled | bool | `true` |  |
 | query.containerSecurityContext.runAsUser | int | `1001` |  |
+| query.containerSecurityContext.runAsGroup | int | `1001` |  |
 | query.containerSecurityContext.runAsNonRoot | bool | `true` |  |
 | query.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | query.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
@@ -245,6 +247,7 @@ helm install thanos chart/
 | queryFrontend.podSecurityContext.fsGroup | int | `1001` |  |
 | queryFrontend.containerSecurityContext.enabled | bool | `true` |  |
 | queryFrontend.containerSecurityContext.runAsUser | int | `1001` |  |
+| queryFrontend.containerSecurityContext.runAsGroup | int | `1001` |  |
 | queryFrontend.containerSecurityContext.runAsNonRoot | bool | `true` |  |
 | queryFrontend.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | queryFrontend.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
@@ -574,6 +577,7 @@ helm install thanos chart/
 | storegateway.podSecurityContext.fsGroup | int | `1001` |  |
 | storegateway.containerSecurityContext.enabled | bool | `true` |  |
 | storegateway.containerSecurityContext.runAsUser | int | `1001` |  |
+| storegateway.containerSecurityContext.runAsGroup | int | `1001` |  |
 | storegateway.containerSecurityContext.runAsNonRoot | bool | `true` |  |
 | storegateway.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
 | storegateway.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
