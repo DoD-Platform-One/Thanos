@@ -1,15 +1,13 @@
-
 # thanos
 
-![Version: 12.13.12-bb.4](https://img.shields.io/badge/Version-12.13.12--bb.4-informational?style=flat-square) ![AppVersion: 0.32.5](https://img.shields.io/badge/AppVersion-0.32.5-informational?style=flat-square)
+![Version: 12.16.1-bb.0](https://img.shields.io/badge/Version-12.16.1--bb.0-informational?style=flat-square) ![AppVersion: 0.32.5](https://img.shields.io/badge/AppVersion-0.32.5-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
 ## Upstream References
 * <https://bitnami.com>
 
-* <https://github.com/bitnami/containers/tree/main/bitnami/thanos>
-* <https://thanos.io>
+* <https://github.com/bitnami/charts/tree/main/bitnami/thanos>
 
 ## Learn More
 * [Application Overview](docs/overview.md)
@@ -99,8 +97,11 @@ helm install thanos chart/
 | query.containerSecurityContext.runAsUser | int | `1001` |  |
 | query.containerSecurityContext.runAsGroup | int | `1001` |  |
 | query.containerSecurityContext.runAsNonRoot | bool | `true` |  |
-| query.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| query.containerSecurityContext.privileged | bool | `false` |  |
 | query.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| query.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| query.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| query.containerSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | query.resources.limits.cpu | string | `"300m"` |  |
 | query.resources.limits.memory | string | `"5Gi"` |  |
 | query.resources.requests.cpu | string | `"300m"` |  |
@@ -249,8 +250,11 @@ helm install thanos chart/
 | queryFrontend.containerSecurityContext.runAsUser | int | `1001` |  |
 | queryFrontend.containerSecurityContext.runAsGroup | int | `1001` |  |
 | queryFrontend.containerSecurityContext.runAsNonRoot | bool | `true` |  |
-| queryFrontend.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| queryFrontend.containerSecurityContext.privileged | bool | `false` |  |
 | queryFrontend.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| queryFrontend.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| queryFrontend.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| queryFrontend.containerSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | queryFrontend.resources.limits.cpu | string | `"100m"` |  |
 | queryFrontend.resources.limits.memory | string | `"100Mi"` |  |
 | queryFrontend.resources.requests.cpu | string | `"100m"` |  |
@@ -326,6 +330,7 @@ helm install thanos chart/
 | queryFrontend.pdb.maxUnavailable | string | `""` |  |
 | queryFrontend.ingress.enabled | bool | `false` |  |
 | queryFrontend.ingress.hostname | string | `"thanos.local"` |  |
+| queryFrontend.ingress.overrideAlertQueryURL | bool | `true` |  |
 | queryFrontend.ingress.ingressClassName | string | `""` |  |
 | queryFrontend.ingress.annotations | object | `{}` |  |
 | queryFrontend.ingress.extraHosts | list | `[]` |  |
@@ -355,8 +360,11 @@ helm install thanos chart/
 | bucketweb.containerSecurityContext.enabled | bool | `true` |  |
 | bucketweb.containerSecurityContext.runAsUser | int | `1001` |  |
 | bucketweb.containerSecurityContext.runAsNonRoot | bool | `true` |  |
-| bucketweb.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| bucketweb.containerSecurityContext.privileged | bool | `false` |  |
 | bucketweb.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| bucketweb.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| bucketweb.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| bucketweb.containerSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | bucketweb.resources.limits.cpu | string | `"100m"` |  |
 | bucketweb.resources.limits.memory | string | `"100Mi"` |  |
 | bucketweb.resources.requests.cpu | string | `"100m"` |  |
@@ -469,8 +477,11 @@ helm install thanos chart/
 | compactor.containerSecurityContext.enabled | bool | `true` |  |
 | compactor.containerSecurityContext.runAsUser | int | `1001` |  |
 | compactor.containerSecurityContext.runAsNonRoot | bool | `true` |  |
-| compactor.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| compactor.containerSecurityContext.privileged | bool | `false` |  |
 | compactor.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| compactor.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| compactor.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| compactor.containerSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | compactor.resources.limits.cpu | string | `"100m"` |  |
 | compactor.resources.limits.memory | string | `"100Mi"` |  |
 | compactor.resources.requests.cpu | string | `"100m"` |  |
@@ -547,6 +558,7 @@ helm install thanos chart/
 | compactor.ingress.path | string | `"/"` |  |
 | compactor.ingress.pathType | string | `"ImplementationSpecific"` |  |
 | compactor.persistence.enabled | bool | `true` |  |
+| compactor.persistence.defaultEmptyDir | bool | `true` |  |
 | compactor.persistence.storageClass | string | `""` |  |
 | compactor.persistence.accessModes[0] | string | `"ReadWriteOnce"` |  |
 | compactor.persistence.size | string | `"8Gi"` |  |
@@ -579,8 +591,11 @@ helm install thanos chart/
 | storegateway.containerSecurityContext.runAsUser | int | `1001` |  |
 | storegateway.containerSecurityContext.runAsGroup | int | `1001` |  |
 | storegateway.containerSecurityContext.runAsNonRoot | bool | `true` |  |
-| storegateway.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| storegateway.containerSecurityContext.privileged | bool | `false` |  |
 | storegateway.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| storegateway.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| storegateway.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| storegateway.containerSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | storegateway.resources.limits.cpu | string | `"100m"` |  |
 | storegateway.resources.limits.memory | string | `"100Mi"` |  |
 | storegateway.resources.requests.cpu | string | `"100m"` |  |
@@ -722,8 +737,11 @@ helm install thanos chart/
 | ruler.containerSecurityContext.enabled | bool | `true` |  |
 | ruler.containerSecurityContext.runAsUser | int | `1001` |  |
 | ruler.containerSecurityContext.runAsNonRoot | bool | `true` |  |
-| ruler.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| ruler.containerSecurityContext.privileged | bool | `false` |  |
 | ruler.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| ruler.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| ruler.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| ruler.containerSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | ruler.resources.limits.cpu | string | `"100m"` |  |
 | ruler.resources.limits.memory | string | `"100Mi"` |  |
 | ruler.resources.requests.cpu | string | `"100m"` |  |
@@ -844,8 +862,11 @@ helm install thanos chart/
 | receive.containerSecurityContext.enabled | bool | `true` |  |
 | receive.containerSecurityContext.runAsUser | int | `1001` |  |
 | receive.containerSecurityContext.runAsNonRoot | bool | `true` |  |
-| receive.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| receive.containerSecurityContext.privileged | bool | `false` |  |
 | receive.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| receive.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| receive.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| receive.containerSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | receive.resources.limits.cpu | string | `"100m"` |  |
 | receive.resources.limits.memory | string | `"100Mi"` |  |
 | receive.resources.requests.cpu | string | `"100m"` |  |
@@ -960,8 +981,11 @@ helm install thanos chart/
 | receiveDistributor.containerSecurityContext.enabled | bool | `true` |  |
 | receiveDistributor.containerSecurityContext.runAsUser | int | `1001` |  |
 | receiveDistributor.containerSecurityContext.runAsNonRoot | bool | `true` |  |
-| receiveDistributor.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| receiveDistributor.containerSecurityContext.privileged | bool | `false` |  |
 | receiveDistributor.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| receiveDistributor.containerSecurityContext.allowPrivilegeEscalation | bool | `false` |  |
+| receiveDistributor.containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| receiveDistributor.containerSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | receiveDistributor.resources.limits.cpu | string | `"100m"` |  |
 | receiveDistributor.resources.limits.memory | string | `"100Mi"` |  |
 | receiveDistributor.resources.requests.cpu | string | `"100m"` |  |

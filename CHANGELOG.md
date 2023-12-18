@@ -1,6 +1,10 @@
 # Changelog
 
 ---
+## [12.16.1-bb.0] - 2023-12-06
+### Changed
+- Updated chart version to 12.16.1
+
 ## [12.13.12-bb.4] - 2023-12-01
 ### Added
 - update securityContext for query, query-Frontend, and storageteway to fix kyverno policy violations
