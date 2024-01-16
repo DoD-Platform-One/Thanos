@@ -4,6 +4,7 @@
     "dependencyDashboard": true,
     "dependencyDashboardHeader": "- [ ] Sync upstream helm chart version with updated dependencies.",
     "dependencyDashboardTitle": "Renovate: Upgrade Thanos Package Dependencies",
+    "dependencyDashboardLabels": ["kind::maintenance", "priority::2", "team::Observability", "thanos"],
     "draftPR": true,
     "enabledManagers": ["helm-values","regex"],
     "ignorePaths": ["chart/charts/**"],
