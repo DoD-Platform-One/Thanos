@@ -2,12 +2,14 @@
 
 This chart is reconciled against the [upstream chart](https://github.com/bitnami/charts/tree/main/bitnami/thanos) as declared in the [Kptfile](../chart/Kptfile).
 
-When an upgrade is required, `kpt` can be ran to pull the updates with a targeted tag.
+When an upgrade is required, `kpt` can be ran to pull the updates with a targeted tag.  In thanos's case we will need the commit hash instead due to the lack of tags on the upstream repo.
+
+To find this hash, find the [Bitnami-Minio](https://github.com/bitnami/charts/tree/main/bitnami/thanos) version that corresponds to the actual [Minio](https://github.com/minio/minio) version.  Then search the bitnami [commits](https://github.com/bitnami/charts/blame/main/bitnami/thanos/Chart.yaml#L38) till you find the version bump commit to master.  This is the hash you will want to use in your KPT pkg update.
 
 (from the repository root)
-`kpt pkg update chart@<new tag> --strategy alpha-git-patch`
+`kpt pkg update chart@<new tag / hash> --strategy alpha-git-patch`
 
-Once completed, you will need to reconcile the modifications that Big Bang makes.
+Once completed, you will need to reconcile the modifications that Big Bang makes and potentially do a `helm dependency update chart` to regenerate the chart.lock with new downloaded dependencies.
 
 # Modifications Made to the upstream chart
 
@@ -41,6 +43,8 @@ When using the bigbang install (monitoring/grafana/thanos/and passing in test-va
 
 1. Go to [https://thanos.bigbang.dev](https://thanos.bigbang.dev)
 2. Select "Stores" and verify you see the `Sidecar` and `Store` stores.  These should both be `UP`.
-3. Go to [https://grafana.bigbang.dev/connections/datasources/edit/prometheus](https://grafana.bigbang.dev/connections/datasources/edit/prometheus) and verify the grafana datasource 
+3. Verify that [https://thanos.bigbang.dev/status](https://thanos.bigbang.dev/status) shows the correct thanos version.
+4. You will need to get the admin login for grafana for the next step.  This can be found in the `monitoring-grafana` secret.
+5. Go to [https://grafana.bigbang.dev/connections/datasources/edit/prometheus](https://grafana.bigbang.dev/connections/datasources/edit/prometheus) and verify the grafana datasource 
    by clicking `Save & test`
 

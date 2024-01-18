@@ -1,6 +1,10 @@
 # Changelog
 
 ---
+## [12.21.0-bb.0] - 2024-01-17
+### Changed
+- Updated chart version to 12.21.0
+
 ## [12.16.1-bb.0] - 2023-12-06
 ### Changed
 - Updated chart version to 12.16.1
