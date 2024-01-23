@@ -1,6 +1,10 @@
 # Changelog
 
 ---
+## [12.21.0-bb.1] - 2024-01-18
+### Changed
+- Fixed Thanos installation against Gatekeeper via SELinux options
+
 ## [12.21.0-bb.0] - 2024-01-17
 ### Changed
 - Updated chart version to 12.21.0
