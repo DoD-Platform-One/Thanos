@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 12.21.0-bb.0](https://img.shields.io/badge/Version-12.21.0--bb.0-informational?style=flat-square) ![AppVersion: 0.33.0](https://img.shields.io/badge/AppVersion-0.33.0-informational?style=flat-square)
+![Version: 12.21.0-bb.1](https://img.shields.io/badge/Version-12.21.0--bb.1-informational?style=flat-square) ![AppVersion: 0.33.0](https://img.shields.io/badge/AppVersion-0.33.0-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -97,7 +97,6 @@ helm install thanos chart/
 | query.podSecurityContext.supplementalGroups | list | `[]` |  |
 | query.podSecurityContext.fsGroup | int | `1001` |  |
 | query.containerSecurityContext.enabled | bool | `true` |  |
-| query.containerSecurityContext.seLinuxOptions | object | `{}` |  |
 | query.containerSecurityContext.runAsUser | int | `1001` |  |
 | query.containerSecurityContext.runAsGroup | int | `1001` |  |
 | query.containerSecurityContext.runAsNonRoot | bool | `true` |  |
@@ -254,7 +253,6 @@ helm install thanos chart/
 | queryFrontend.podSecurityContext.supplementalGroups | list | `[]` |  |
 | queryFrontend.podSecurityContext.fsGroup | int | `1001` |  |
 | queryFrontend.containerSecurityContext.enabled | bool | `true` |  |
-| queryFrontend.containerSecurityContext.seLinuxOptions | object | `{}` |  |
 | queryFrontend.containerSecurityContext.runAsUser | int | `1001` |  |
 | queryFrontend.containerSecurityContext.runAsGroup | int | `1001` |  |
 | queryFrontend.containerSecurityContext.runAsNonRoot | bool | `true` |  |
@@ -369,7 +367,6 @@ helm install thanos chart/
 | bucketweb.podSecurityContext.supplementalGroups | list | `[]` |  |
 | bucketweb.podSecurityContext.fsGroup | int | `1001` |  |
 | bucketweb.containerSecurityContext.enabled | bool | `true` |  |
-| bucketweb.containerSecurityContext.seLinuxOptions | object | `{}` |  |
 | bucketweb.containerSecurityContext.runAsUser | int | `1001` |  |
 | bucketweb.containerSecurityContext.runAsNonRoot | bool | `true` |  |
 | bucketweb.containerSecurityContext.privileged | bool | `false` |  |
@@ -491,7 +488,6 @@ helm install thanos chart/
 | compactor.podSecurityContext.supplementalGroups | list | `[]` |  |
 | compactor.podSecurityContext.fsGroup | int | `1001` |  |
 | compactor.containerSecurityContext.enabled | bool | `true` |  |
-| compactor.containerSecurityContext.seLinuxOptions | object | `{}` |  |
 | compactor.containerSecurityContext.runAsUser | int | `1001` |  |
 | compactor.containerSecurityContext.runAsNonRoot | bool | `true` |  |
 | compactor.containerSecurityContext.privileged | bool | `false` |  |
@@ -608,7 +604,6 @@ helm install thanos chart/
 | storegateway.podSecurityContext.supplementalGroups | list | `[]` |  |
 | storegateway.podSecurityContext.fsGroup | int | `1001` |  |
 | storegateway.containerSecurityContext.enabled | bool | `true` |  |
-| storegateway.containerSecurityContext.seLinuxOptions | object | `{}` |  |
 | storegateway.containerSecurityContext.runAsUser | int | `1001` |  |
 | storegateway.containerSecurityContext.runAsGroup | int | `1001` |  |
 | storegateway.containerSecurityContext.runAsNonRoot | bool | `true` |  |
@@ -759,7 +754,6 @@ helm install thanos chart/
 | ruler.podSecurityContext.supplementalGroups | list | `[]` |  |
 | ruler.podSecurityContext.fsGroup | int | `1001` |  |
 | ruler.containerSecurityContext.enabled | bool | `true` |  |
-| ruler.containerSecurityContext.seLinuxOptions | object | `{}` |  |
 | ruler.containerSecurityContext.runAsUser | int | `1001` |  |
 | ruler.containerSecurityContext.runAsNonRoot | bool | `true` |  |
 | ruler.containerSecurityContext.privileged | bool | `false` |  |
@@ -889,7 +883,6 @@ helm install thanos chart/
 | receive.podSecurityContext.supplementalGroups | list | `[]` |  |
 | receive.podSecurityContext.fsGroup | int | `1001` |  |
 | receive.containerSecurityContext.enabled | bool | `true` |  |
-| receive.containerSecurityContext.seLinuxOptions | object | `{}` |  |
 | receive.containerSecurityContext.runAsUser | int | `1001` |  |
 | receive.containerSecurityContext.runAsNonRoot | bool | `true` |  |
 | receive.containerSecurityContext.privileged | bool | `false` |  |
@@ -1012,7 +1005,6 @@ helm install thanos chart/
 | receiveDistributor.podSecurityContext.supplementalGroups | list | `[]` |  |
 | receiveDistributor.podSecurityContext.fsGroup | int | `1001` |  |
 | receiveDistributor.containerSecurityContext.enabled | bool | `true` |  |
-| receiveDistributor.containerSecurityContext.seLinuxOptions | object | `{}` |  |
 | receiveDistributor.containerSecurityContext.runAsUser | int | `1001` |  |
 | receiveDistributor.containerSecurityContext.runAsNonRoot | bool | `true` |  |
 | receiveDistributor.containerSecurityContext.privileged | bool | `false` |  |
