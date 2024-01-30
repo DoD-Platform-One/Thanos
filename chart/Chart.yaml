@@ -8,11 +8,11 @@ annotations:
     - name: os-shell
       image: registry1.dso.mil/ironbank/big-bang/base:2.1.0
     - name: thanos
-      image: registry1.dso.mil/ironbank/thanos/thanos:v0.33.0
+      image: registry1.dso.mil/ironbank/thanos/thanos:v0.34.0
   bigbang.dev/applicationVersions: |
-    - Thanos: v0.33.0
+    - Thanos: v0.34.0
 apiVersion: v2
-appVersion: 0.33.0
+appVersion: 0.34.0
 dependencies:
   - name: minio-instance
     alias: minio
@@ -41,4 +41,4 @@ maintainers:
 name: thanos
 sources:
 - https://github.com/bitnami/charts/tree/main/bitnami/thanos
-version: 12.21.0-bb.1
+version: 12.23.0-bb.0
