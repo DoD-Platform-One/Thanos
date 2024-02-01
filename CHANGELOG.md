@@ -1,6 +1,10 @@
 # Changelog
 
 ---
+## [12.23.0-bb.1] - 2024-02-01
+### Changed
+- Re-instated seLinuxOptions in SecurityContext fields
+
 ## [12.23.0-bb.0] - 2024-01-30
 ### Changed
 - Updated chart version from 12.21.0 -> 12.23.0
