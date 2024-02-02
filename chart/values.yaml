@@ -249,7 +249,7 @@ query:
   ##
   containerSecurityContext:
     enabled: true
-    # seLinuxOptions: null
+    seLinuxOptions: null
     runAsUser: 1001
     runAsGroup: 1001
     runAsNonRoot: true
@@ -951,7 +951,7 @@ queryFrontend:
   ##
   containerSecurityContext:
     enabled: true
-    # seLinuxOptions: null
+    seLinuxOptions: null
     runAsUser: 1001
     runAsGroup: 1001
     runAsNonRoot: true
@@ -1422,7 +1422,7 @@ bucketweb:
   ##
   containerSecurityContext:
     enabled: true
-    # seLinuxOptions: null
+    seLinuxOptions: null
     runAsUser: 1001
     runAsNonRoot: true
     privileged: false
@@ -1894,7 +1894,7 @@ compactor:
   ##
   containerSecurityContext:
     enabled: true
-    # seLinuxOptions: null
+    seLinuxOptions: null
     runAsUser: 1001
     runAsNonRoot: true
     privileged: false
@@ -2385,7 +2385,7 @@ storegateway:
   ##
   containerSecurityContext:
     enabled: true
-    # seLinuxOptions: null
+    seLinuxOptions: null
     runAsUser: 1001
     runAsGroup: 1001
     runAsNonRoot: true
@@ -3052,7 +3052,7 @@ ruler:
   ##
   containerSecurityContext:
     enabled: true
-    # seLinuxOptions: null
+    seLinuxOptions: null
     runAsUser: 1001
     runAsNonRoot: true
     privileged: false
@@ -3582,7 +3582,7 @@ receive:
   ##
   containerSecurityContext:
     enabled: true
-    # seLinuxOptions: null
+    seLinuxOptions: null
     runAsUser: 1001
     runAsNonRoot: true
     privileged: false
@@ -4075,7 +4075,7 @@ receiveDistributor:
   ##
   containerSecurityContext:
     enabled: true
-    # seLinuxOptions: null
+    seLinuxOptions: null
     runAsUser: 1001
     runAsNonRoot: true
     privileged: false
