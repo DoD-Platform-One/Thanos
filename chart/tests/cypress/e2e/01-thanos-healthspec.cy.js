@@ -3,15 +3,12 @@ describe('Basic thanos', function() {
   it('Visits the Thanos home page', () => {
 
     cy.visit(Cypress.env('thanos_url'))
-    cy.task('log', 'skipping sso test...')
     cy.get('body').then(($body) => {
       if ($body.find('input[name="user"]').length != 0) {
-        cy.task('log', 'detected login page, logging in with static username and password...')
         cy.get('input[name="user"]').type('admin')
         cy.get('input[name="password"]').type('prom-operator')
         cy.contains("Log in").click()
         cy.get('.page-dashboard')
-        cy.task('log', 'app homepage has loaded successfully...')
       }
     })
   })
@@ -58,9 +55,7 @@ describe('Basic thanos', function() {
         // visit minio
         cy.session('minioSession', () => {
           cy.visit(`${Cypress.env('minio_url')}`)
-          cy.get('input[id="accessKey"]').type('minio')
-          cy.get('input[id="secretKey"]').type('minio123')
-          cy.contains("Login").click()
+          cy.performMinioLogin('minio', 'minio123')
         })
 
         // Check there is at least one entry  
