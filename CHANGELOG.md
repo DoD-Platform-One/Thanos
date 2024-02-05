@@ -1,6 +1,10 @@
 # Changelog
 
 ---
+## [12.23.0-bb.2] - 2024-02-02
+### Changed
+- Updated gluon 0.4.8 for consumers to use custom scripts
+
 ## [12.23.0-bb.1] - 2024-02-01
 ### Changed
 - Re-instated seLinuxOptions in SecurityContext fields
