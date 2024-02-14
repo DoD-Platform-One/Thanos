@@ -1,15 +1,42 @@
 # How to upgrade the Thanos Package chart
 
-This chart is reconciled against the [upstream chart](https://github.com/bitnami/charts/tree/main/bitnami/thanos) as declared in the [Kptfile](../chart/Kptfile).
+1. Navigate to the upstream [chart repo and folder](https://github.com/bitnami/charts/tree/main/bitnami/thanos) and find the tag/hash that corresponds with the new chart version for this update
+    - To find this hash, search the bitnami [commits](https://github.com/bitnami/charts/blame/main/bitnami/thanos/Chart.yaml#L38) till you find the chart version bump commit to master.  This is the hash you will want to use in your KPT pkg update.
+    - Check the [upstream release](https://thanos.io/tip/thanos/changelog.md/#changelog) notes for upgrade notices.
 
-When an upgrade is required, `kpt` can be ran to pull the updates with a targeted tag.  In thanos's case we will need the commit hash instead due to the lack of tags on the upstream repo.
+2. Checkout the `renovate/ironbank` branch
 
-To find this hash, find the [Bitnami-Minio](https://github.com/bitnami/charts/tree/main/bitnami/thanos) version that corresponds to the actual [Minio](https://github.com/minio/minio) version.  Then search the bitnami [commits](https://github.com/bitnami/charts/blame/main/bitnami/thanos/Chart.yaml#L38) till you find the version bump commit to master.  This is the hash you will want to use in your KPT pkg update.
+3. From the root of the repo run `kpt pkg update chart@<tag / hash> --strategy alpha-git-patch`, where the tag/hash is found in step 1
 
-(from the repository root)
-`kpt pkg update chart@<new tag / hash> --strategy alpha-git-patch`
+    - `kpt` can be ran to pull the updates with a targeted tag.  In thanos's case we will need the commit hash instead due to the lack of tags on the upstream repo.
+    - Run a KPT package update
+    ```shell
+    kpt pkg update chart@<tag / hash> --strategy alpha-git-patch
+    ```
+    - Reconcile the modifications by following the `Modifications Made to the upstream chart` section of this document for a list of changes per file to be aware of, for how Big Bang differs from upstream.
 
-Once completed, you will need to reconcile the modifications that Big Bang makes and potentially do a `helm dependency update chart` to regenerate the chart.lock with new downloaded dependencies.
+4. Modify the version in `Chart.yaml` and append `-bb.0` to the chart version from upstream. See `Update main chart` section of this document.
+
+5. Update dependencies and binaries using `helm dependency update ./chart`
+
+    - Pull assets and commit the binaries as well as the Chart.lock file that was generated.
+      ```shell
+      helm dependency update ./chart
+      ```
+
+6. Update `CHANGELOG.md` adding an entry for the new version and noting all changes in a list (at minimum should include `- Updated <chart or dependency> to x.x.x`).
+
+7. Generate the `README.md` updates by following the [guide in gluon](https://repo1.dso.mil/big-bang/product/packages/gluon/-/blob/master/docs/bb-package-readme.md).
+
+8. Push up your changes, add upgrade notices if applicable, validate that CI passes. 
+
+    - If there are any failures, follow the information in the pipeline to make the necessary updates. 
+
+    - Add the `debug` label to the MR for more detailed information. 
+    
+    - Reach out to the CODEOWNERS if needed.
+
+9. Follow the `Testing a new Thanos version` section of this document for manual testing.
 
 # Modifications Made to the upstream chart
 
@@ -36,15 +63,55 @@ This policy revokes access to the K8s API for Pods utilizing said ServiceAccount
 
 # Testing a new Thanos version
 
-Because Thanos aggregates data, it makes sense to integrate Thanos with Prometheus, MiniIO, and Grafana.
+> NOTE: For these testing steps it is good to do them on both a clean install and an upgrade. For clean install, point Thanos to your branch. For an upgrade do an install with Thanos pointing to the latest tag, then perform a helm upgrade with Thanos pointing to your branch.
+
+> Because Thanos aggregates data, it makes sense to integrate Thanos with Prometheus, MiniIO, and Grafana.
 The cypress tests will verify datasources are enabled for the monitoring.prometheus-sidecar and an s3 objectstore datasource is registered.  See the values.yaml and bigbang test-values.yaml for configuration settings.  
 
-When using the bigbang install (monitoring/grafana/thanos/and passing in test-values.yaml, you should be able to:
+You will want to install with:
 
-1. Go to [https://thanos.bigbang.dev](https://thanos.bigbang.dev)
-2. Select "Stores" and verify you see the `Sidecar` and `Store` stores.  These should both be `UP`.
-3. Verify that [https://thanos.bigbang.dev/status](https://thanos.bigbang.dev/status) shows the correct thanos version.
-4. You will need to get the admin login for grafana for the next step.  This can be found in the `monitoring-grafana` secret.
-5. Go to [https://grafana.bigbang.dev/connections/datasources/edit/prometheus](https://grafana.bigbang.dev/connections/datasources/edit/prometheus) and verify the grafana datasource 
-   by clicking `Save & test`
+   - Thanos, Monitoring, Grafana and Istio packages and passing in test-values.yaml
 
+`overrides/thanos.yaml`
+```yaml
+domain: bigbang.dev
+
+flux:
+  interval: 1m
+  rollback:
+    cleanupOnFail: false
+
+clusterAuditor:
+  enabled: false
+
+gatekeeper:
+  enabled: true
+
+istioOperator:
+  enabled: true
+
+istio:
+  enabled: true
+
+monitoring:
+  enabled: true
+  values:
+    prometheus:
+      prometheusSpec:
+        replicas: 3
+
+addons:
+  thanos:
+    enabled: true
+    git:
+      tag: null
+      branch: "renovate/ironbank"
+```
+
+- Go to [https://thanos.bigbang.dev](https://thanos.bigbang.dev)
+   - Select "Stores" and verify you see the `Sidecar` and `Store` stores.  These should both be `UP`.
+- Verify that [https://thanos.bigbang.dev/status](https://thanos.bigbang.dev/status) shows the correct thanos version.
+- Go to [https://grafana.bigbang.dev/connections/datasources/edit/prometheus](https://grafana.bigbang.dev/connections/datasources/edit/prometheus) and login with [default credentials](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/guides/using-bigbang/default-credentials.md) 
+   - Verify the grafana datasource by clicking `Save & test`
+
+> When in doubt with any testing or upgrade steps, reach out to the CODEOWNERS for assistance.
