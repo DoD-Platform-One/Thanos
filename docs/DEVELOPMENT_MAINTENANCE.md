@@ -87,6 +87,9 @@ clusterAuditor:
 gatekeeper:
   enabled: true
 
+grafana:
+  enabled: true
+
 istioOperator:
   enabled: true
 
@@ -112,6 +115,6 @@ addons:
    - Select "Stores" and verify you see the `Sidecar` and `Store` stores.  These should both be `UP`.
 - Verify that [https://thanos.bigbang.dev/status](https://thanos.bigbang.dev/status) shows the correct thanos version.
 - Go to [https://grafana.bigbang.dev/connections/datasources/edit/prometheus](https://grafana.bigbang.dev/connections/datasources/edit/prometheus) and login with [default credentials](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/guides/using-bigbang/default-credentials.md) 
-   - Verify the grafana datasource by clicking `Save & test`
+   - Verify the `Thanos` grafana datasource by clicking `Save & test`
 
 > When in doubt with any testing or upgrade steps, reach out to the CODEOWNERS for assistance.
