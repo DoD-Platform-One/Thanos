@@ -1,6 +1,11 @@
 # Changelog
 
 ---
+## [13.2.2-bb.0] - 2024-02-22
+### Upgraded
+- Updated image `thanos` 0.34.0 -> 0.34.1 13.2.2-bb.0 for new chart version
+- Updated chart `minio-instance` 5.0.10-bb.4 -> 5.0.11-bb.4 for new chart version
+
 ## [12.23.0-bb.2] - 2024-02-02
 ### Changed
 - Updated gluon 0.4.8 for consumers to use custom scripts
