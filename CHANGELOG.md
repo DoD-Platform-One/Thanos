@@ -1,6 +1,10 @@
 # Changelog
 
 ---
+## [13.2.2-bb.1] - 2024-03-13
+### Added
+- Added Istio sidecar and serviceEntry resources for use with Istio whitelisting
+
 ## [13.2.2-bb.0] - 2024-02-22
 ### Upgraded
 - Updated image `thanos` 0.34.0 -> 0.34.1 13.2.2-bb.0 for new chart version
