@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 13.2.2-bb.0](https://img.shields.io/badge/Version-13.2.2--bb.0-informational?style=flat-square) ![AppVersion: v0.34.1](https://img.shields.io/badge/AppVersion-v0.34.1-informational?style=flat-square)
+![Version: 13.2.2-bb.1](https://img.shields.io/badge/Version-13.2.2--bb.1-informational?style=flat-square) ![AppVersion: v0.34.1](https://img.shields.io/badge/AppVersion-v0.34.1-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -1134,6 +1134,9 @@ helm install thanos chart/
 | networkPolicy.explicitNamespacesSelector | object | `{}` |  |
 | domain | string | `"bigbang.dev"` | Domain to service Thanos virtualService |
 | istio.enabled | bool | `false` |  |
+| istio.hardened.enabled | bool | `false` |  |
+| istio.hardened.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
+| istio.hardened.customServiceEntries | list | `[]` |  |
 | istio.mtls.mode | string | `"STRICT"` |  |
 | istio.thanos.enabled | bool | `true` |  |
 | istio.thanos.labels | object | `{}` |  |
