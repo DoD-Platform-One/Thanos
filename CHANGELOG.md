@@ -1,6 +1,10 @@
 # Changelog
 
 ---
+## [13.2.2-bb.2] - 2024-04-02
+### Added
+- Create `NetworkPolicy` for egress to external object stores
+
 ## [13.2.2-bb.1] - 2024-03-13
 ### Added
 - Added Istio sidecar and serviceEntry resources for use with Istio whitelisting

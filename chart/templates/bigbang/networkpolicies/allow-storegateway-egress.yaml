@@ -1,0 +1,20 @@
+{{- if and .Values.networkPolicies.enabled .Values.storegateway.enabled (not .Values.minio.enabled)}}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-storegateway-egress
+  namespace: {{ .Release.Namespace }}
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/component: storegateway
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+        # ONLY Block requests to cloud metadata IP
+        except:
+        - 169.254.169.254/32
+{{- end }}
