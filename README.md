@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 13.2.2-bb.2](https://img.shields.io/badge/Version-13.2.2--bb.2-informational?style=flat-square) ![AppVersion: v0.34.1](https://img.shields.io/badge/AppVersion-v0.34.1-informational?style=flat-square)
+![Version: 13.2.2-bb.3](https://img.shields.io/badge/Version-13.2.2--bb.3-informational?style=flat-square) ![AppVersion: v0.34.1](https://img.shields.io/badge/AppVersion-v0.34.1-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -1126,6 +1126,11 @@ helm install thanos chart/
 | minio.tenant.pools[0].securityContext.runAsUser | int | `1001` |  |
 | minio.tenant.pools[0].securityContext.runAsGroup | int | `1001` |  |
 | minio.tenant.pools[0].securityContext.fsGroup | int | `1001` |  |
+| minio.tenant.pools[0].securityContext.runAsNonRoot | bool | `true` |  |
+| minio.tenant.pools[0].containerSecurityContext.runAsUser | int | `1001` |  |
+| minio.tenant.pools[0].containerSecurityContext.runAsGroup | int | `1001` |  |
+| minio.tenant.pools[0].containerSecurityContext.runAsNonRoot | bool | `true` |  |
+| minio.tenant.pools[0].containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | minio.tenant.metrics.enabled | bool | `false` |  |
 | minio.tenant.metrics.port | int | `9000` |  |
 | minio.tenant.metrics.memory | string | `"128M"` |  |
