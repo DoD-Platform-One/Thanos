@@ -4516,6 +4516,14 @@ minio:
           runAsUser: 1001
           runAsGroup: 1001
           fsGroup: 1001
+          runAsNonRoot: true
+        containerSecurityContext:
+          runAsUser: 1001
+          runAsGroup: 1001
+          runAsNonRoot: true
+          capabilities:
+            drop:
+              - ALL
     metrics:
       enabled: false
       port: 9000

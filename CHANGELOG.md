@@ -1,6 +1,10 @@
 # Changelog
 
 ---
+## [13.2.2-bb.3] - 2024-04-04
+### Added
+- Update minio securityContext
+
 ## [13.2.2-bb.2] - 2024-04-02
 ### Added
 - Create `NetworkPolicy` for egress to external object stores
