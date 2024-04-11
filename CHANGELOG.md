@@ -1,6 +1,10 @@
 # Changelog
 
 ---
+## [13.2.2-bb.4] - 2024-04-04
+### Added
+- Added additional network policies via values yaml
+
 ## [13.2.2-bb.3] - 2024-04-04
 ### Added
 - Update minio securityContext
