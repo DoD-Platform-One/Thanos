@@ -45,6 +45,9 @@ extraDeploy: []
 
 ## @section Thanos common parameters
 
+sso:
+  enabled: false
+
 ## Bitnami Thanos image
 ## ref: https://hub.docker.com/r/bitnami/thanos/tags/
 ## @param image.registry [default: REGISTRY_NAME] Thanos image registry

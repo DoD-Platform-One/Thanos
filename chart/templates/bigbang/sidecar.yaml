@@ -6,7 +6,7 @@ metadata:
   name: {{ .Release.Name }}-sidecar
   namespace: {{.Release.Namespace}}
   labels:
-    name: thanos
+    name: authservice
 spec:
   outboundTrafficPolicy:
     mode: {{ .Values.istio.hardened.outboundTrafficPolicyMode }}
