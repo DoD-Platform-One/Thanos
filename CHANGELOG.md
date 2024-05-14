@@ -1,6 +1,10 @@
 # Changelog
 
 ---
+## [13.2.2-bb.5] - 2024-05-14
+### Added
+- Added SSO/authservice integration
+
 ## [13.2.2-bb.4] - 2024-04-04
 ### Added
 - Added additional network policies via values yaml
