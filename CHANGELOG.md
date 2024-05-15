@@ -1,6 +1,10 @@
 # Changelog
 
 ---
+## [13.2.2-bb.6] - 2024-05-14
+### Fixed
+- Fixed broken minIO subchart
+
 ## [13.2.2-bb.5] - 2024-05-14
 ### Added
 - Added SSO/authservice integration
