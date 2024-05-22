@@ -11,6 +11,7 @@ annotations:
       image: registry1.dso.mil/ironbank/thanos/thanos:v0.34.1
   bigbang.dev/applicationVersions: |
     - Thanos: v0.34.1
+version: 13.2.2-bb.7
 apiVersion: v2
 appVersion: v0.34.1
 dependencies:
@@ -41,4 +42,3 @@ maintainers:
 name: thanos
 sources:
 - https://github.com/bitnami/charts/tree/main/bitnami/thanos
-version: 13.2.2-bb.6

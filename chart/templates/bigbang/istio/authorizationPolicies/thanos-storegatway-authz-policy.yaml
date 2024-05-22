@@ -1,0 +1,19 @@
+{{- if and .Values.istio.enabled .Values.istio.hardened.enabled .Values.storegateway.enabled -}}
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: thanos-storegateway-authz-policy
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    matchLabels:
+        app.kubernetes.io/component: storegateway
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        namespaces: 
+          - {{ .Release.Namespace }}
+        principals:
+        - "cluster.local/ns/{{ .Release.Namespace }}/sa/thanos-query"
+{{- end }}

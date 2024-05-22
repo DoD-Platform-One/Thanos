@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 13.2.2-bb.6](https://img.shields.io/badge/Version-13.2.2--bb.6-informational?style=flat-square) ![AppVersion: v0.34.1](https://img.shields.io/badge/AppVersion-v0.34.1-informational?style=flat-square)
+![Version: 13.2.2-bb.7](https://img.shields.io/badge/Version-13.2.2--bb.7-informational?style=flat-square) ![AppVersion: v0.34.1](https://img.shields.io/badge/AppVersion-v0.34.1-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -1143,6 +1143,13 @@ helm install thanos chart/
 | istio.hardened.enabled | bool | `false` |  |
 | istio.hardened.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
 | istio.hardened.customServiceEntries | list | `[]` |  |
+| istio.hardened.customAuthorizationPolicies | list | `[]` |  |
+| istio.hardened.minioOperator.enabled | bool | `true` |  |
+| istio.hardened.minioOperator.namespaces[0] | string | `"minio-operator"` |  |
+| istio.hardened.minioOperator.principals[0] | string | `"cluster.local/ns/minio-operator/sa/minio-operator"` |  |
+| istio.hardened.prometheus.enabled | bool | `true` |  |
+| istio.hardened.prometheus.namespaces[0] | string | `"monitoring"` |  |
+| istio.hardened.prometheus.principals[0] | string | `"cluster.local/ns/monitoring/sa/monitoring-grafana"` |  |
 | istio.mtls.mode | string | `"STRICT"` |  |
 | istio.thanos.enabled | bool | `true` |  |
 | istio.thanos.labels | object | `{}` |  |

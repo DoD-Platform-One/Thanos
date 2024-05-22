@@ -1,6 +1,10 @@
 # Changelog
 
 ---
+## [13.2.2-bb.7] - 2024-05-15
+### Added
+- Added support for Istio Authorization Policies
+
 ## [13.2.2-bb.6] - 2024-05-14
 ### Fixed
 - Fixed broken minIO subchart
