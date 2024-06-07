@@ -1,5 +1,5 @@
 {{/*
-Copyright VMware, Inc.
+Copyright Broadcom, Inc. All Rights Reserved.
 SPDX-License-Identifier: APACHE-2.0
 */}}
 
@@ -9,15 +9,7 @@ SPDX-License-Identifier: APACHE-2.0
 Return the target Kubernetes version
 */}}
 {{- define "common.capabilities.kubeVersion" -}}
-{{- if .Values.global }}
-    {{- if .Values.global.kubeVersion }}
-    {{- .Values.global.kubeVersion -}}
-    {{- else }}
-    {{- default .Capabilities.KubeVersion.Version .Values.kubeVersion -}}
-    {{- end -}}
-{{- else }}
-{{- default .Capabilities.KubeVersion.Version .Values.kubeVersion -}}
-{{- end -}}
+{{- default (default .Capabilities.KubeVersion.Version .Values.kubeVersion) ((.Values.global).kubeVersion) -}}
 {{- end -}}
 
 {{/*
@@ -184,7 +176,7 @@ Returns true if PodSecurityPolicy is supported
 {{/*
 Returns true if AdmissionConfiguration is supported
 */}}
-{{- define "common.capabilities.admisionConfiguration.supported" -}}
+{{- define "common.capabilities.admissionConfiguration.supported" -}}
 {{- if semverCompare ">=1.23-0" (include "common.capabilities.kubeVersion" .) -}}
   {{- true -}}
 {{- end -}}
@@ -193,7 +185,7 @@ Returns true if AdmissionConfiguration is supported
 {{/*
 Return the appropriate apiVersion for AdmissionConfiguration.
 */}}
-{{- define "common.capabilities.admisionConfiguration.apiVersion" -}}
+{{- define "common.capabilities.admissionConfiguration.apiVersion" -}}
 {{- if semverCompare "<1.23-0" (include "common.capabilities.kubeVersion" .) -}}
 {{- print "apiserver.config.k8s.io/v1alpha1" -}}
 {{- else if semverCompare "<1.25-0" (include "common.capabilities.kubeVersion" .) -}}

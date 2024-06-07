@@ -6,14 +6,15 @@
 
 2. Checkout the `renovate/ironbank` branch
 
-3. From the root of the repo run `kpt pkg update chart@<tag / hash> --strategy alpha-git-patch`, where the tag/hash is found in step 1
-
-    - `kpt` can be ran to pull the updates with a targeted tag.  In thanos's case we will need the commit hash instead due to the lack of tags on the upstream repo.
-    - Run a KPT package update
-    ```shell
-    kpt pkg update chart@<tag / hash> --strategy alpha-git-patch
-    ```
-    - Reconcile the modifications by following the `Modifications Made to the upstream chart` section of this document for a list of changes per file to be aware of, for how Big Bang differs from upstream.
+3. kpt
+    - From the root of the repo run `kpt pkg update chart@<tag / hash> --strategy alpha-git-patch`, where the tag/hash is found in step 1
+        - `kpt` can be ran to pull the updates with a targeted tag.  In thanos's case we will need the commit hash instead due to the lack of tags on the upstream repo.
+        - Run a KPT package update
+        ```shell
+        kpt pkg update chart@<tag / hash> --strategy alpha-git-patch
+        ```
+        - Reconcile the modifications by following the `Modifications Made to the upstream chart` section of this document for a list of changes per file to be aware of, for how Big Bang differs from upstream.
+    - From the root of the repo once again, run `kpt pkg update chart/templates@<hash> --strategy alpha-git-patch`.
 
 4. Modify the version in `Chart.yaml` and append `-bb.0` to the chart version from upstream. See `Update main chart` section of this document.
 
@@ -74,8 +75,6 @@ You will want to install with:
 
 `overrides/thanos.yaml`
 ```yaml
-domain: bigbang.dev
-
 flux:
   interval: 1m
   rollback:
@@ -83,9 +82,6 @@ flux:
 
 clusterAuditor:
   enabled: false
-
-gatekeeper:
-  enabled: true
 
 grafana:
   enabled: true
@@ -102,6 +98,10 @@ monitoring:
     prometheus:
       prometheusSpec:
         replicas: 3
+    istio:
+      enabled: true
+      hardened:
+        enabled: true
 
 addons:
   thanos:
@@ -109,12 +109,33 @@ addons:
     git:
       tag: null
       branch: "renovate/ironbank"
+    values:
+      istio:
+        enabled: true
+        hardened:
+          enabled: true
+      minio:
+        enabled: true
+      storegateway:
+        enabled: true
+      objstoreConfig: |-
+        type: s3
+        config:
+          bucket: "thanos"
+          endpoint: minio.thanos.svc.cluster.local:80
+          access_key: "minio"
+          secret_key: "minio123"
+          insecure: true
+          trace:
+            enable: true
+  minioOperator:
+    enabled: true
 ```
 
-- Go to [https://thanos.bigbang.dev](https://thanos.bigbang.dev)
+- Go to [https://thanos.dev.bigbang.mil](https://thanos.dev.bigbang.mil)
    - Select "Stores" and verify you see the `Sidecar` and `Store` stores.  These should both be `UP`.
 - Verify that [https://thanos.bigbang.dev/status](https://thanos.bigbang.dev/status) shows the correct thanos version.
-- Go to [https://grafana.bigbang.dev/connections/datasources/edit/prometheus](https://grafana.bigbang.dev/connections/datasources/edit/prometheus) and login with [default credentials](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/guides/using-bigbang/default-credentials.md) 
-   - Verify the `Thanos` grafana datasource by clicking `Save & test`
+- Go to [https://grafana.dev.bigbang.mil/d/alertmanager-overview/alertmanager-overview](https://grafana.dev.bigbang.mil/d/alertmanager-overview/alertmanager-overview) and login with [default credentials](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/guides/using-bigbang/default-credentials.md) or SSO
+   - Verify the `Thanos` grafana datasource by changing the dashboard's datasource to `Thanos`, data should be displaying properly.
 
 > When in doubt with any testing or upgrade steps, reach out to the CODEOWNERS for assistance.

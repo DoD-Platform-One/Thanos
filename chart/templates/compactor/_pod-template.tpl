@@ -1,5 +1,5 @@
 {{/*
-Copyright VMware, Inc.
+Copyright Broadcom, Inc. All Rights Reserved.
 SPDX-License-Identifier: APACHE-2.0
 */}}
 
@@ -13,14 +13,18 @@ metadata:
   {{- $podLabels := include "common.tplvalues.merge" ( dict "values" ( list .Values.compactor.podLabels .Values.commonLabels ) "context" . ) }}
   labels: {{- include "common.labels.standard" ( dict "customLabels" $podLabels "context" $ ) | nindent 4 }}
     app.kubernetes.io/component: compactor
+  {{- if or .Values.compactor.podAnnotations (include "thanos.createObjstoreSecret" .) }}
   annotations:
-    checksum/objstore-configuration: {{ include (print $.Template.BasePath "/objstore-secret.yaml") . | sha256sum }}
+    {{- if (include "thanos.createObjstoreSecret" .) }}
+    checksum/objstore-configuration: {{ include "thanos.objstoreConfig" . | sha256sum }}
+    {{- end }}
     {{- if .Values.compactor.podAnnotations }}
     {{- include "common.tplvalues.render" (dict "value" .Values.compactor.podAnnotations "context" $) | nindent 4 }}
     {{- end }}
+  {{- end }}
 spec:
   {{- include "thanos.imagePullSecrets" . | nindent 2 }}
-  serviceAccountName: {{ include "thanos.serviceAccountName" (dict "component" "compactor" "context" $) }}
+  serviceAccountName: {{ include "thanos.compactor.serviceAccountName" . }}
   automountServiceAccountToken: {{ .Values.compactor.automountServiceAccountToken }}
   {{- if .Values.compactor.hostAliases }}
   hostAliases: {{- include "common.tplvalues.render" (dict "value" .Values.compactor.hostAliases "context" $) | nindent 4 }}
@@ -52,7 +56,7 @@ spec:
   schedulerName: {{ .Values.compactor.schedulerName }}
   {{- end }}
   {{- if .Values.compactor.podSecurityContext.enabled }}
-  securityContext: {{- omit .Values.compactor.podSecurityContext "enabled" | toYaml | nindent 4 }}
+  securityContext: {{- include "common.compatibility.renderSecurityContext" (dict "secContext" .Values.compactor.podSecurityContext "context" $) | nindent 4 }}
   {{- end }}
   {{- if .Values.compactor.topologySpreadConstraints }}
   topologySpreadConstraints: {{- include "common.tplvalues.render" (dict "value" .Values.compactor.topologySpreadConstraints "context" $) | nindent 4 }}
@@ -92,7 +96,7 @@ spec:
       image: {{ include "thanos.image" . }}
       imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
       {{- if .Values.compactor.containerSecurityContext.enabled }}
-      securityContext: {{- omit .Values.compactor.containerSecurityContext "enabled" | toYaml | nindent 8 }}
+      securityContext: {{- include "common.compatibility.renderSecurityContext" (dict "secContext" .Values.compactor.containerSecurityContext "context" $) | nindent 8 }}
       {{- end }}
       {{- if .Values.compactor.command }}
       command: {{- include "common.tplvalues.render" (dict "value" .Values.compactor.command "context" $) | nindent 8 }}
@@ -104,7 +108,7 @@ spec:
         - compact
         - --log.level={{ .Values.compactor.logLevel }}
         - --log.format={{ .Values.compactor.logFormat }}
-        - --http-address=0.0.0.0:10902
+        - --http-address=0.0.0.0:{{ .Values.compactor.containerPorts.http }}
         - --data-dir=/data
         - --retention.resolution-raw={{ .Values.compactor.retentionResolutionRaw }}
         - --retention.resolution-5m={{ .Values.compactor.retentionResolution5m }}
@@ -137,7 +141,7 @@ spec:
       {{- end }}
       ports:
         - name: http
-          containerPort: 10902
+          containerPort: {{ .Values.compactor.containerPorts.http }}
           protocol: TCP
       {{- if .Values.compactor.customLivenessProbe }}
       livenessProbe: {{- include "common.tplvalues.render" (dict "value" .Values.compactor.customLivenessProbe "context" $) | nindent 8 }}
@@ -186,6 +190,8 @@ spec:
       {{- end }}
       {{- if .Values.compactor.resources }}
       resources: {{- toYaml .Values.compactor.resources | nindent 8 }}
+      {{- else if ne .Values.compactor.resourcesPreset "none" }}
+      resources: {{- include "common.resources.preset" (dict "type" .Values.compactor.resourcesPreset) | nindent 8 }}
       {{- end }}
       volumeMounts:
         - name: objstore-config

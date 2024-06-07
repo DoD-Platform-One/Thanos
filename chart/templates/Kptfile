@@ -1,0 +1,11 @@
+apiVersion: kpt.dev/v1alpha1
+kind: Kptfile
+metadata:
+  name: templates
+upstream:
+  type: git
+  git:
+    commit: e48df8d031e61181866217b8f1b59c2921fd7eed
+    repo: https://github.com/bitnami/charts
+    directory: /bitnami/common/templates
+    ref: e48df8d031e61181866217b8f1b59c2921fd7eed
