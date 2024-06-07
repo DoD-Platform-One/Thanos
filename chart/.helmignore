@@ -21,3 +21,5 @@
 *.tmproj
 # img folder
 img/
+
+templates/Kptfile

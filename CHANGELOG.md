@@ -1,6 +1,13 @@
 # Changelog
 
 ---
+## [15.4.3-bb.0] - 2024-05-16
+### Upgraded
+- Updated image `thanos` 0.34.1 -> 0.35.0 15.4.3-bb.0 for new chart version
+- Updated chart `minio-instance` 5.0.11-bb.4 -> 5.0.12-bb.4 for new chart version
+- Update gluon from 0.4.8 -> 0.5.0
+
+
 ## [13.2.2-bb.7] - 2024-05-15
 ### Added
 - Added support for Istio Authorization Policies

@@ -1,0 +1,19 @@
+{{- if and .Values.istio.enabled .Values.istio.hardened.enabled .Values.istio.hardened.minioOperator.enabled -}}
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: thanos-internal-minio-authz-policy
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: minio
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        namespaces: 
+          - {{ .Release.Namespace }}
+        principals:
+        - "cluster.local/ns/{{ .Release.Namespace }}/sa/thanos-minio-instance-sa"
+{{- end }}
