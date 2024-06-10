@@ -7,7 +7,7 @@
     "draftPR": true,
     "enabledManagers": ["helm-values","regex","helmv3"],
     "ignorePaths": ["chart/charts/**"],
-    "labels": ["thanos","renovate"],
+    "labels": ["thanos","renovate", "kind::maintenance"],
     "packageRules": [
         {
             "matchDatasources": ["docker"],
@@ -16,13 +16,6 @@
         }
     ],
     "regexManagers": [
-        {
-            "fileMatch": ["^chart/values\\.yaml$"],
-            "matchStrings": [
-                "repository\\S*:\\s*(?<depName>\\S+).*\n\\s+tag:\\s*(?<currentValue>.+)"
-            ],
-            "datasourceTemplate": "docker"
-        },
         {
           "fileMatch": ["^chart/Chart\\.yaml$"],
           "matchStrings": [
