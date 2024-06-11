@@ -31,6 +31,8 @@
             "matchStrings": [
               "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
              ],
+             "registryUrlTemplate": "https://registry1.dso.mil",
+             "depNameTemplate": "ironbank/opensource/thanos/thanos",
              "datasourceTemplate": "docker"
         }
     ],
