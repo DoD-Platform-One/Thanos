@@ -54,6 +54,404 @@
 - Add image pull secret for `private-registry`
 - Set resource requests/limits
 
+### Check for Big Bang specific are included in Thanos/values.yaml
+-  Please check and update the following line references if any upstream modify the line numbers
+
+Line 56/57 ensure sso.enabled to false
+```
+sso:
+  enabled: false
+```
+
+Line 69-71 ensure registry/repository points to ironbank
+```
+  registry: registry1.dso.mil
+  repository: ironbank/opensource/thanos/thanos 
+  tag: vx.xx.x
+```
+
+Line 84/85 set pullSecrets to `private-registry`
+```
+  pullSecrets:  
+    - private-registry
+```
+
+Line 161 Ensure serviceAccount values has been set
+```
+serviceAccount:
+  create: true
+  name: ""
+  automountServiceAccountToken: false
+  annotations: {}
+```
+
+Line 289-295 Ensure query.resources has been set
+```
+  resources:
+      limits:
+        cpu: 300m
+        memory: 5Gi
+      requests:
+        cpu: 300m
+        memory: 5Gi
+```
+
+Line 706/713 Comment out existingServiceAccount: "" and add DEPRECATED comment about query.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+```
+  ## DEPRECATED query.serviceAccount.existingServiceAccount - This value has been deprecated and will be removed in a future release, please use `serviceAccount.name` in combination with `serviceAccount.create=false` instead
+  ##
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+    automountServiceAccountToken: false
+    ## existingServiceAccount: ""
+```
+
+Line 1057-1063 set the queryFrontend.resources
+```
+  resources:
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
+```
+
+Line 1342/1349 Comment out existingServiceAccount: "" and add DEPRECATED comment about queryFrontend.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+```
+Comment out existingServiceAccount: "" and add DEPRECATED comment about queryFrontend.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+  ##
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+    automountServiceAccountToken: false
+    ## existingServiceAccount: ""
+```
+
+Line 1589-1598 set the bucketweb.resources like below
+```
+  ## @param bucketweb.resources.limits The resources limits for the Thanos Bucket Web container
+  ## @param bucketweb.resources.requests The requested resources for the Thanos Bucket Web container
+  ##
+  resources:
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
+```
+
+Line 1875/1882 Comment out existingServiceAccount: "" and add DEPRECATED comment about bucketweb.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+```
+Comment out existingServiceAccount: "" and add DEPRECATED comment about bucketweb.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+  ##
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+    automountServiceAccountToken: false
+    ## existingServiceAccount: ""
+```
+
+Line 2126-2135 set the compactor.resources like below
+```
+  ## @param compactor.resources.limits The resources limits for the Thanos Compactor container
+  ## @param compactor.resources.requests The requested resources for the Thanos Compactor container
+  ##
+  resources:
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
+```
+
+Line 2414/2421 Comment out existingServiceAccount: "" and add DEPRECATED comment about compactor.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+```
+Comment out existingServiceAccount: "" and add DEPRECATED comment about compactor.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+  ##
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+    automountServiceAccountToken: false
+    ## existingServiceAccount: ""
+```
+
+Line 2691-2700 set the storegateway.resources like below
+```
+  ## @param storegateway.resources.limits The resources limits for the Thanos Store Gateway container
+  ## @param storegateway.resources.requests The requested resources for the Thanos Store Gateway container
+  ##
+  resources:
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
+```
+
+Line 3022/3029 Comment out existingServiceAccount: "" and add DEPRECATED comment about storegateway.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+```
+Comment out existingServiceAccount: "" and add DEPRECATED comment about storegateway.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+  ##
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+    automountServiceAccountToken: false
+    ## existingServiceAccount: ""
+```
+
+Line 3424-3433 set the storegateway.resources like below
+```
+  ## @param ruler.resources.limits The resources limits for the Thanos Ruler container
+  ## @param ruler.resources.requests The requested resources for the Thanos Ruler container
+  ##
+  resources:
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
+```
+
+Line 3752/3759 Comment out existingServiceAccount: "" and add DEPRECATED comment about ruler.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+```
+## DEPRECATED ruler.serviceAccount.existingServiceAccount - This value has been deprecated and will be removed in a future release, please use `serviceAccount.name` in combination with `serviceAccount.create=false` instead
+  ##
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+    automountServiceAccountToken: false
+    ## existingServiceAccount: ""
+```
+
+Line 4029-4038 set the receive.resources like below
+```
+  ## @param receive.resources.limits The resources limits for the Thanos Receive container
+  ## @param receive.resources.requests The requested resources for the Thanos Receive container
+  ##
+  resources:
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
+```
+
+Line 4341/4348 Comment out existingServiceAccount: "" and add DEPRECATED comment about receive.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+```
+  ## DEPRECATED receive.serviceAccount.existingServiceAccount - This value has been deprecated and will be removed in a future release, please use `serviceAccount.name` in combination with `serviceAccount.create=false` instead
+  ##
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+    automountServiceAccountToken: false
+    ## existingServiceAccount: ""
+```
+
+Line 4029-4038 set the receiveDistributor.resources like below
+```
+  ## @param receiveDistributor.resources.limits The resources limits for the Thanos Receive container
+  ## @param receiveDistributor.resources.requests The requested resources for the Thanos Receive container
+  ##
+  resources:
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
+```
+
+Line 4775/4782 Comment out existingServiceAccount: "" and add DEPRECATED comment about storegateway.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+```
+  ## DEPRECATED receive.serviceAccount.existingServiceAccount - This value has been deprecated and will be removed in a future release, please use `serviceAccount.name` in combination with `serviceAccount.create=false` instead
+  ##
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+    automountServiceAccountToken: false
+    ## existingServiceAccount: ""
+```
+
+Line 4972-4974 update image to point to registry/repository ironbank/big-bang/base
+```
+    registry: registry1.dso.mil
+    repository: ironbank/big-bang/base
+    tag: 2.1.0
+```
+
+Line 4994-5038 ensure the minio is set as follows below
+```
+  ## to be used as an objstore for Thanos, must have minio-operator installed
+  enabled: false
+  # -- Minio root credentials
+  secrets:
+    name: "thanos-objstore-creds"
+    accessKey: "minio"
+    secretKey: "minio123" # default key, change this!
+  tenant:
+    # -- Buckets to be provisioned to for tenant
+    buckets:
+      - name: thanos
+    # -- Users to to be provisioned to for tenant
+    users:
+      - name: minio-user
+    # -- User credentials to create for above user. Otherwise password is randomly generated.
+    # This auth is not required to be set or reclaimed for minio use with Loki
+    defaultUserCredentials:
+      username: "minio-user"
+      password: ""
+    ## Specification for MinIO Pool(s) in this Tenant.
+    pools:
+      - servers: 1
+        volumesPerServer: 4
+        size: 750Mi
+        securityContext:
+          runAsUser: 1001
+          runAsGroup: 1001
+          fsGroup: 1001
+          runAsNonRoot: true
+        containerSecurityContext:
+          runAsUser: 1001
+          runAsGroup: 1001
+          runAsNonRoot: true
+          capabilities:
+            drop:
+              - ALL
+    metrics:
+      enabled: false
+      port: 9000
+      memory: 128M
+
+## @section NetWorkPolicy parameters
+
+networkPolicy:
+  ## @param networkPolicy.enabled Enable creation of NetworkPolicy resources. Only Ingress traffic is filtered for now.
+```
+
+Line 5041-5145
+```
+  ## @param networkPolicy.allowExternal Don't require client label for connections
+  ## The Policy model to apply. When set to false, only pods with the correct
+  ## client label will have network access to http and grpc thanos port.
+  ## When true, thanos will accept connections from any source
+  ## (with the correct destination port).
+  ##
+  allowExternal: true
+  ## @param networkPolicy.explicitNamespacesSelector A Kubernetes LabelSelector to explicitly select namespaces from which traffic could be allowed
+  ## If explicitNamespacesSelector is missing or set to {}, only client Pods that are in the networkPolicy's namespace
+  ## and that match other criteria, the ones that have the good label, can reach thanos.
+  ## But sometimes, we want thanos to be accessible to clients from other namespaces, in this case, we can use this
+  ## LabelSelector to select these namespaces, note that the networkPolicy's namespace should also be explicitly added.
+  ##
+  ## Example:
+  ## explicitNamespacesSelector:
+  ##   matchLabels:
+  ##     role: frontend
+  ##   matchExpressions:
+  ##    - {key: role, operator: In, values: [frontend]}
+  ##
+  explicitNamespacesSelector: {}
+
+# -- Domain to service Thanos virtualService
+domain: bigbang.dev
+
+istio:
+  enabled: false
+  hardened:
+    enabled: false
+    outboundTrafficPolicyMode: "REGISTRY_ONLY"
+    customServiceEntries: []
+    #   - name: "allow-google"
+    #     enabled: true
+    #     spec:
+    #       hosts:
+    #         - google.com
+    #       location: MESH_EXTERNAL
+    #       ports:
+    #         - number: 443
+    #           protocol: TLS
+    #           name: https
+    #       resolution: DNS  
+    customAuthorizationPolicies: []
+    # - name: "allow-nothing"
+    #   enabled: true
+    #   spec: {}
+    minioOperator:
+      enabled: true
+      namespaces:
+        - minio-operator
+      principals:
+        - cluster.local/ns/minio-operator/sa/minio-operator
+    prometheus:
+      enabled: true
+      namespaces:
+        - monitoring
+      principals:
+        - cluster.local/ns/monitoring/sa/monitoring-grafana
+  mtls:
+    # STRICT = Allow only mutual TLS traffic
+    # PERMISSIVE = Allow both plain text and mutual TLS traffic
+    mode: STRICT
+  thanos:
+    enabled: true
+    labels: {}
+    annotations: {}
+    gateways:
+      - istio-system/main
+    hosts:
+      - thanos.{{ .Values.domain }}
+
+networkPolicies:
+  enabled: false
+  ingressLabels:
+    app: istio-ingressgateway
+    istio: ingressgateway  
+  additionalPolicies: []
+  # expected use case is to open egress for runner jobs
+  # This is a dev example policy spec and CIDR 0.0.0.0/0 is unsafe for operational environments
+  # requests to controlPlane should also be blocked in an operational policy
+  # - name: egress-runner-jobs
+  #   spec:
+  #     podSelector: {}
+  #     policyTypes:
+  #     - Egress
+  #     egress:
+  #     - to:
+  #       - ipBlock:
+  #           cidr: 0.0.0.0/0
+  #           except:
+  #           # Block requests to AWS cloud metadata IP
+  #           - 169.254.169.254/32
+  #           # Block requests to controlPlane if CIDR not 0.0.0.0/0
+  #           # - "{{ $.Values.networkPolicies.controlPlaneCidr }}"
+
+
+bbtests:
+  enabled: false
+  cypress:
+    artifacts: true
+    envs:
+      cypress_thanos_url: 'http://thanos-query:9090'
+      cypress_minio_url: 'http://thanos-minio-console:9090'
+      prometheus_integration_enabled: "false"
+      objstorage_integration_enabled: "false"
+```
+
 ## chart/Kptfile
 - Tracks current upstream chart
 
