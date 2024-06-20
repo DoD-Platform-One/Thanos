@@ -1,4 +1,4 @@
-# Copyright VMware, Inc.
+# Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
 annotations:
@@ -8,11 +8,11 @@ annotations:
     - name: os-shell
       image: registry1.dso.mil/ironbank/big-bang/base:2.1.0
     - name: thanos
-      image: registry1.dso.mil/ironbank/thanos/thanos:v0.34.1
+      image: registry1.dso.mil/ironbank/thanos/thanos:v0.35.1
   bigbang.dev/applicationVersions: |
-    - Thanos: v0.35.0
+    - Thanos: v0.35.1
 apiVersion: v2
-appVersion: v0.35.0
+appVersion: v0.35.1
 dependencies:
   - name: minio-instance
     alias: minio
@@ -36,9 +36,9 @@ keywords:
 - prometheus
 - thanos
 maintainers:
-- name: VMware, Inc.
+- name: Broadcom, Inc. All Rights Reserved.
   url: https://github.com/bitnami/charts
 name: thanos
 sources:
 - https://github.com/bitnami/charts/tree/main/bitnami/thanos
-version: 15.4.3-bb.1
+version: 15.7.9-bb.0

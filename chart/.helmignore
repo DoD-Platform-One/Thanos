@@ -22,4 +22,7 @@
 # img folder
 img/
 
+# Changelog
+CHANGELOG.md
+
 templates/Kptfile

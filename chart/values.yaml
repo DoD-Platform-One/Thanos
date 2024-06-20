@@ -68,7 +68,7 @@ sso:
 image:
   registry: registry1.dso.mil
   repository: ironbank/opensource/thanos/thanos 
-  tag: v0.35.0
+  tag: v0.35.1
   digest: ""
   ## Specify a imagePullPolicy. Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
@@ -756,7 +756,7 @@ query:
   pdb:
     create: false
     minAvailable: 1
-    maxUnavailable: ""
+    maxUnavailable: 1
   ## Configure the ingress resource that allows you to access Thanos Query
   ## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
   ##
@@ -1392,7 +1392,7 @@ queryFrontend:
   pdb:
     create: false
     minAvailable: 1
-    maxUnavailable: ""
+    maxUnavailable: 1
   ## Configure the ingress resource that allows you to access Thanos Query Frontend
   ## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
   ##
@@ -1903,7 +1903,7 @@ bucketweb:
   pdb:
     create: false
     minAvailable: 1
-    maxUnavailable: ""
+    maxUnavailable: 1
   ## Configure the ingress resource that allows you to access Thanos Bucketweb
   ## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
   ##
@@ -3011,6 +3011,19 @@ storegateway:
     ## If defined, PVC must be created manually before volume will be bound
     ##
     existingClaim: ""
+  ## Persistent Volume Claim Retention Policy
+  ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention
+  ##
+  persistentVolumeClaimRetentionPolicy:
+    ## @param storegateway.persistentVolumeClaimRetentionPolicy.enabled Enable Persistent volume retention policy for Thanos Store Gateway Statefulset
+    ##
+    enabled: false
+    ## @param storegateway.persistentVolumeClaimRetentionPolicy.whenScaled Volume retention behavior when the replica count of the StatefulSet is reduced
+    ##
+    whenScaled: Retain
+    ## @param storegateway.persistentVolumeClaimRetentionPolicy.whenDeleted Volume retention behavior that applies when the StatefulSet is deleted
+    ##
+    whenDeleted: Retain
   ## @param storegateway.automountServiceAccountToken Enable/disable auto mounting of the service account token only for the sts
   ##
   automountServiceAccountToken: true
@@ -3050,7 +3063,7 @@ storegateway:
   pdb:
     create: false
     minAvailable: 1
-    maxUnavailable: ""
+    maxUnavailable: 1
   ## Configure the ingress resource that allows you to access Thanos Query Frontend
   ## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
   ##
@@ -3741,6 +3754,19 @@ ruler:
     ## If defined, PVC must be created manually before volume will be bound
     ##
     existingClaim: ""
+  ## Persistent Volume Claim Retention Policy
+  ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention
+  ##
+  persistentVolumeClaimRetentionPolicy:
+    ## @param ruler.persistentVolumeClaimRetentionPolicy.enabled Enable Persistent volume retention policy for Thanos Ruler Statefulset
+    ##
+    enabled: false
+    ## @param ruler.persistentVolumeClaimRetentionPolicy.whenScaled Volume retention behavior when the replica count of the StatefulSet is reduced
+    ##
+    whenScaled: Retain
+    ## @param ruler.persistentVolumeClaimRetentionPolicy.whenDeleted Volume retention behavior that applies when the StatefulSet is deleted
+    ##
+    whenDeleted: Retain
   ## @param ruler.automountServiceAccountToken Enable/disable auto mounting of the service account token only for the sts
   ##
   automountServiceAccountToken: true
@@ -3780,7 +3806,7 @@ ruler:
   pdb:
     create: false
     minAvailable: 1
-    maxUnavailable: ""
+    maxUnavailable: 1
   ## Configure the ingress resource that allows you to access Thanos Ruler
   ## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
   ##
@@ -4369,7 +4395,7 @@ receive:
   pdb:
     create: false
     minAvailable: 1
-    maxUnavailable: ""
+    maxUnavailable: 1
   ## Persistence parameters
   ##
   persistence:
@@ -4400,6 +4426,19 @@ receive:
     ## If defined, PVC must be created manually before volume will be bound
     ##
     existingClaim: ""
+  ## Persistent Volume Claim Retention Policy
+  ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention
+  ##
+  persistentVolumeClaimRetentionPolicy:
+    ## @param receive.persistentVolumeClaimRetentionPolicy.enabled Enable Persistent volume retention policy for Thanos Receive Statefulset
+    ##
+    enabled: false
+    ## @param receive.persistentVolumeClaimRetentionPolicy.whenScaled Volume retention behavior when the replica count of the StatefulSet is reduced
+    ##
+    whenScaled: Retain
+    ## @param receive.persistentVolumeClaimRetentionPolicy.whenDeleted Volume retention behavior that applies when the StatefulSet is deleted
+    ##
+    whenDeleted: Retain
   ## Configure the ingress resource that allows you to access Thanos Receive
   ## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
   ##
@@ -4803,7 +4842,7 @@ receiveDistributor:
   pdb:
     create: false
     minAvailable: 1
-    maxUnavailable: ""
+    maxUnavailable: 1
 
 ## @section Metrics parameters
 

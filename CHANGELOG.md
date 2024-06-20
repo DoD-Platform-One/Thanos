@@ -1,6 +1,10 @@
 # Changelog
 
 ---
+## [15.7.9-bb.0] - 2024-06-18
+### Upgraded
+- Upgrade Thanos from `v0.34.1` -> `v0.35.1`
+
 ## [15.4.3-bb.1] - 2024-06-14
 ### Upgraded
 - Checked for upstream diff and updated the DEVELOPMENT_MAINTENANCE.md to log the big bang-specific changes
