@@ -533,11 +533,32 @@ addons:
             enable: true
   minioOperator:
     enabled: true
+
+kyverno:
+  enabled: true
+
+kyvernoPolicies:
+  enabled: true
+kyvernoPolicies:
+  values:
+    exclude:
+      any:
+      # Allows k3d load balancer to bypass policies.
+      - resources:
+          namespaces:
+          - istio-system
+          names:
+          - svclb-*
+    policies:
+      restrict-host-path-mount-pv:
+        parameters:
+          allow:
+          - /var/lib/rancher/k3s/storage/pvc-*
 ```
 
 - Go to [https://thanos.dev.bigbang.mil](https://thanos.dev.bigbang.mil)
    - Select "Stores" and verify you see the `Sidecar` and `Store` stores.  These should both be `UP`.
-- Verify that [https://thanos.bigbang.dev/status](https://thanos.bigbang.dev/status) shows the correct thanos version.
+- Verify that [https://thanos.dev.bigbang.mil/status](https://thanos.dev.bigbang.mil/status) shows the correct thanos version.
 - Go to [https://grafana.dev.bigbang.mil/d/alertmanager-overview/alertmanager-overview](https://grafana.dev.bigbang.mil/d/alertmanager-overview/alertmanager-overview) and login with [default credentials](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/guides/using-bigbang/default-credentials.md) or SSO
    - Verify the `Thanos` grafana datasource by changing the dashboard's datasource to `Thanos`, data should be displaying properly.
 
