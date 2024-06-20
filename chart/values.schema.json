@@ -991,9 +991,9 @@
                             "default": 1
                         },
                         "maxUnavailable": {
-                            "type": "string",
+                            "type": "number",
                             "description": "Maximum number/percentage of pods that may be made unavailable",
-                            "default": ""
+                            "default": 1
                         }
                     }
                 },
@@ -1699,9 +1699,9 @@
                             "default": 1
                         },
                         "maxUnavailable": {
-                            "type": "string",
+                            "type": "number",
                             "description": "Maximum number/percentage of pods that may be made unavailable",
-                            "default": ""
+                            "default": 1
                         }
                     }
                 },
@@ -2302,9 +2302,9 @@
                             "default": 1
                         },
                         "maxUnavailable": {
-                            "type": "string",
+                            "type": "number",
                             "description": "Maximum number/percentage of pods that may be made unavailable",
-                            "default": ""
+                            "default": 1
                         }
                     }
                 },
@@ -3683,9 +3683,9 @@
                             "default": 1
                         },
                         "maxUnavailable": {
-                            "type": "string",
+                            "type": "number",
                             "description": "Maximum number/percentage of pods that may be made unavailable",
-                            "default": ""
+                            "default": 1
                         }
                     }
                 },
@@ -4547,9 +4547,9 @@
                             "default": 1
                         },
                         "maxUnavailable": {
-                            "type": "string",
+                            "type": "number",
                             "description": "Maximum number/percentage of pods that may be made unavailable",
-                            "default": ""
+                            "default": 1
                         }
                     }
                 },
@@ -5251,9 +5251,9 @@
                             "default": 1
                         },
                         "maxUnavailable": {
-                            "type": "string",
+                            "type": "number",
                             "description": "Maximum number/percentage of pods that may be made unavailable",
-                            "default": ""
+                            "default": 1
                         }
                     }
                 },
@@ -5822,9 +5822,9 @@
                             "default": 1
                         },
                         "maxUnavailable": {
-                            "type": "string",
+                            "type": "number",
                             "description": "Maximum number/percentage of pods that may be made unavailable",
-                            "default": ""
+                            "default": 1
                         }
                     }
                 }

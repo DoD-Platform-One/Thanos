@@ -53,6 +53,7 @@
 - Update image registry/repository/tag as required by update
 - Add image pull secret for `private-registry`
 - Set resource requests/limits
+- Disable Pod Disruption Budgets
 
 ### Check for Big Bang specific are included in Thanos/values.yaml
 -  Please check and update the following line references if any upstream modify the line numbers
@@ -489,6 +490,10 @@ istioOperator:
 
 istio:
   enabled: true
+  values:
+    hardened:
+      enabled: true
+
 
 monitoring:
   enabled: true
