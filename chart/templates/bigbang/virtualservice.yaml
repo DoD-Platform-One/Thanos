@@ -33,5 +33,5 @@ spec:
     - destination:
         port:
           number: {{ .Values.query.service.ports.http }}
-        host: {{ include "common.names.fullname" . }}-query.{{ .Release.Namespace }}.svc.cluster.local
+        host: {{ include "thanos.query-frontend.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local
 {{- end }}

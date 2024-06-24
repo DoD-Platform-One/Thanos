@@ -11,7 +11,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/instance: thanos
+      app.kubernetes.io/component: query-frontend
   action: ALLOW
   rules:
   - from:

@@ -1,6 +1,11 @@
 # Changelog
 
 ---
+## [15.7.9-bb.1] - 2024-06-24
+### Fixed
+- Point Istio Virtual Service to `query-frontend` pod
+- Add additional authPols for virtual service change
+
 ## [15.7.9-bb.0] - 2024-06-18
 ### Upgraded
 - Upgrade Thanos from `v0.34.1` -> `v0.35.1`
