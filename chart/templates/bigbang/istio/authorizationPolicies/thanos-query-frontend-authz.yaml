@@ -2,12 +2,12 @@
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
 metadata:
-  name: thanos-query-authz-policy
+  name: thanos-query-frontend-authz-policy
   namespace: {{ .Release.Namespace }}
 spec:
   selector:
     matchLabels:
-        app.kubernetes.io/component: query
+        app.kubernetes.io/component: query-frontend
   action: ALLOW
   rules:
   - from:
