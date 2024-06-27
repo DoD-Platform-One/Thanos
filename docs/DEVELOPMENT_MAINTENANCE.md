@@ -39,6 +39,24 @@
 
 9. Follow the `Testing a new Thanos version` section of this document for manual testing.
 
+10. As part of your MR that modifies bigbang packages, you should modify the bigbang  [bigbang/tests/test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads) against your branch for the CI/CD MR testing by enabling your packages. 
+
+    - To do this, at a minimum, you will need to follow the instructions at [bigbang/docs/developer/test-package-against-bb.md](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md?ref_type=heads) with changes for Thanos enabled (the below is a reference, actual changes could be more depending on what changes where made to Thanos in the pakcage MR).
+
+### [test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads)
+    ```yaml
+    thanos:
+      enabled: true
+      git:
+        tag: null
+        branch: <my-package-branch-that-needs-testing>
+      values:
+        istio:
+          hardened:
+            enabled: true
+      ### Additional compononents of Thanos should be changed to reflect testing changes introduced in the package MR
+    ```
+
 # Modifications Made to the upstream chart
 
 ## /chart/Chart.yaml
