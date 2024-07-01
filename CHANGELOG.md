@@ -2,6 +2,12 @@
 
 ---
 
+## [15.7.9-bb.2] - 2024-07-01
+
+### Fixed
+
+- Add istio AuthorizationPolicy for compactor component to minio
+
 ## [15.7.9-bb.1] - 2024-06-24
 
 ### Fixed
