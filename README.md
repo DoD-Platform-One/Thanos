@@ -1,17 +1,15 @@
 # thanos
 
-![Version: 15.7.9-bb.1](https://img.shields.io/badge/Version-15.7.9--bb.1-informational?style=flat-square) ![AppVersion: v0.35.1](https://img.shields.io/badge/AppVersion-v0.35.1-informational?style=flat-square)
+![Version: 15.7.9-bb.2](https://img.shields.io/badge/Version-15.7.9--bb.2-informational?style=flat-square) ![AppVersion: v0.35.1](https://img.shields.io/badge/AppVersion-v0.35.1-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
 ## Upstream References
-
 * <https://bitnami.com>
 
 * <https://github.com/bitnami/charts/tree/main/bitnami/thanos>
 
 ## Learn More
-
 * [Application Overview](docs/overview.md)
 * [Other Documentation](docs/)
 
@@ -23,13 +21,12 @@ Thanos is a highly available metrics system that can be added on top of existing
 
 Install Helm
 
-<https://helm.sh/docs/intro/install/>
+https://helm.sh/docs/intro/install/
 
 ## Deployment
 
 * Clone down the repository
 * cd into directory
-
 ```bash
 helm install thanos chart/
 ```
