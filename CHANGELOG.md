@@ -1,6 +1,11 @@
 # Changelog
 
 ---
+## [15.7.9-bb.3] - 2024-07-01
+
+### Fixed
+
+- Remove references to deprecated common service account in values.yaml and README
 
 ## [15.7.9-bb.2] - 2024-07-01
 

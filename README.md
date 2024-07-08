@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 15.7.9-bb.2](https://img.shields.io/badge/Version-15.7.9--bb.2-informational?style=flat-square) ![AppVersion: v0.35.1](https://img.shields.io/badge/AppVersion-v0.35.1-informational?style=flat-square)
+![Version: 15.7.9-bb.3](https://img.shields.io/badge/Version-15.7.9--bb.3-informational?style=flat-square) ![AppVersion: v0.35.1](https://img.shields.io/badge/AppVersion-v0.35.1-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -72,10 +72,6 @@ helm install thanos chart/
 | https.clientAuthType | string | `""` |  |
 | https.extraTlsServerConfig | object | `{}` |  |
 | auth.basicAuthUsers | object | `{}` |  |
-| serviceAccount.create | bool | `true` |  |
-| serviceAccount.name | string | `""` |  |
-| serviceAccount.automountServiceAccountToken | bool | `false` |  |
-| serviceAccount.annotations | object | `{}` |  |
 | query.enabled | bool | `true` |  |
 | query.logLevel | string | `"info"` |  |
 | query.logFormat | string | `"logfmt"` |  |
