@@ -95,15 +95,6 @@ Line 84/85 set pullSecrets to `private-registry`
     - private-registry
 ```
 
-Line 161 Ensure serviceAccount values has been set
-```
-serviceAccount:
-  create: true
-  name: ""
-  automountServiceAccountToken: false
-  annotations: {}
-```
-
 Line 289-295 Ensure query.resources has been set
 ```
   resources:
