@@ -1,6 +1,13 @@
 # Changelog
 
 ---
+
+## [15.7.9-bb.4] - 2024-07-05
+
+### Removed
+
+- Removed shared authPolicies set at the Istio level
+
 ## [15.7.9-bb.3] - 2024-07-01
 
 ### Fixed

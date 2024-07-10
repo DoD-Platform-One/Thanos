@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 15.7.9-bb.3](https://img.shields.io/badge/Version-15.7.9--bb.3-informational?style=flat-square) ![AppVersion: v0.35.1](https://img.shields.io/badge/AppVersion-v0.35.1-informational?style=flat-square)
+![Version: 15.7.9-bb.4](https://img.shields.io/badge/Version-15.7.9--bb.4-informational?style=flat-square) ![AppVersion: v0.35.1](https://img.shields.io/badge/AppVersion-v0.35.1-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -1209,6 +1209,7 @@ helm install thanos chart/
 | minio.tenant.buckets | list | `[{"name":"thanos"}]` | Buckets to be provisioned to for tenant |
 | minio.tenant.users | list | `[{"name":"minio-user"}]` | Users to to be provisioned to for tenant |
 | minio.tenant.defaultUserCredentials | object | `{"password":"","username":"minio-user"}` | User credentials to create for above user. Otherwise password is randomly generated. This auth is not required to be set or reclaimed for minio use with Loki |
+| minio.tenant.pools[0].name | string | `"pool-0"` |  |
 | minio.tenant.pools[0].servers | int | `1` |  |
 | minio.tenant.pools[0].volumesPerServer | int | `4` |  |
 | minio.tenant.pools[0].size | string | `"750Mi"` |  |
