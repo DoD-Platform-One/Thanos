@@ -2,6 +2,12 @@
 
 ---
 
+## [15.7.9-bb.5] - 2024-07-19
+
+### Changed
+
+- Set retention to forever with values to set to 0s,
+
 ## [15.7.9-bb.4] - 2024-07-05
 
 ### Removed
