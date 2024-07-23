@@ -1,6 +1,6 @@
 # thanos
 
-![Version: 15.7.9-bb.4](https://img.shields.io/badge/Version-15.7.9--bb.4-informational?style=flat-square) ![AppVersion: v0.35.1](https://img.shields.io/badge/AppVersion-v0.35.1-informational?style=flat-square)
+![Version: 15.7.9-bb.5](https://img.shields.io/badge/Version-15.7.9--bb.5-informational?style=flat-square) ![AppVersion: v0.35.1](https://img.shields.io/badge/AppVersion-v0.35.1-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -496,9 +496,9 @@ helm install thanos chart/
 | compactor.enabled | bool | `false` |  |
 | compactor.logLevel | string | `"info"` |  |
 | compactor.logFormat | string | `"logfmt"` |  |
-| compactor.retentionResolutionRaw | string | `"30d"` |  |
-| compactor.retentionResolution5m | string | `"30d"` |  |
-| compactor.retentionResolution1h | string | `"10y"` |  |
+| compactor.retentionResolutionRaw | string | `"0s"` |  |
+| compactor.retentionResolution5m | string | `"0s"` |  |
+| compactor.retentionResolution1h | string | `"0s"` |  |
 | compactor.consistencyDelay | string | `"30m"` |  |
 | compactor.extraEnvVars | list | `[]` |  |
 | compactor.extraEnvVarsCM | string | `""` |  |
