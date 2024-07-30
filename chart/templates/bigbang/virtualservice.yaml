@@ -28,8 +28,7 @@ spec:
     - {{ tpl . $}}
   {{- end }}
   http:
-  - match:
-    route:
+  - route:
     - destination:
         port:
           number: {{ .Values.query.service.ports.http }}
