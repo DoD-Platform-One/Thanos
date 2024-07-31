@@ -14,7 +14,7 @@
 
 ## <small>15.7.6 (2024-06-12)</small>
 
-*  [bitnami/thanos] Fix sharded storegateway cache configs (again) (#27101) ([e6d16b4](https://github.com/bitnami/charts/commit/e6d16b4256f027adbb3610b4e66ee2c05039618f)), closes [#27101](https://github.com/bitnami/charts/issues/27101)
+* [bitnami/thanos] Fix sharded storegateway cache configs (again) (#27101) ([e6d16b4](https://github.com/bitnami/charts/commit/e6d16b4256f027adbb3610b4e66ee2c05039618f)), closes [#27101](https://github.com/bitnami/charts/issues/27101)
 
 ## <small>15.7.5 (2024-06-11)</small>
 
@@ -700,7 +700,7 @@
 
 ## 11.0.0 (2022-07-12)
 
-*  [bitnami/thanos]: Allow receiver to run without object store config (#11030) ([24fab8a](https://github.com/bitnami/charts/commit/24fab8ab5a9055b44fc9c157288f8bb40c97a4a7)), closes [#11030](https://github.com/bitnami/charts/issues/11030)
+* [bitnami/thanos]: Allow receiver to run without object store config (#11030) ([24fab8a](https://github.com/bitnami/charts/commit/24fab8ab5a9055b44fc9c157288f8bb40c97a4a7)), closes [#11030](https://github.com/bitnami/charts/issues/11030)
 * [bitnami/thanos] Creates separate service for grpc port of query module (#11051) ([dab4304](https://github.com/bitnami/charts/commit/dab43043381903de24308c701dc6248d1e66ad79)), closes [#11051](https://github.com/bitnami/charts/issues/11051)
 
 ## <small>10.5.5 (2022-07-06)</small>
@@ -1242,7 +1242,7 @@
 
 ## <small>3.8.3 (2021-02-08)</small>
 
-*  Update MinIO references, titles, descriptions and disclaimer (#5419) ([99fb55a](https://github.com/bitnami/charts/commit/99fb55a65204405943730cae845d755836a7026c)), closes [#5419](https://github.com/bitnami/charts/issues/5419)
+* Update MinIO references, titles, descriptions and disclaimer (#5419) ([99fb55a](https://github.com/bitnami/charts/commit/99fb55a65204405943730cae845d755836a7026c)), closes [#5419](https://github.com/bitnami/charts/issues/5419)
 
 ## <small>3.8.2 (2021-02-08)</small>
 

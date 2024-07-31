@@ -10,9 +10,11 @@
     - From the root of the repo run `kpt pkg update chart@<tag / hash> --strategy alpha-git-patch`, where the tag/hash is found in step 1
         - `kpt` can be ran to pull the updates with a targeted tag.  In thanos's case we will need the commit hash instead due to the lack of tags on the upstream repo.
         - Run a KPT package update
+
         ```shell
         kpt pkg update chart@<tag / hash> --strategy alpha-git-patch
         ```
+
         - Reconcile the modifications by following the `Modifications Made to the upstream chart` section of this document for a list of changes per file to be aware of, for how Big Bang differs from upstream.
     - From the root of the repo once again, run `kpt pkg update chart/templates@<hash> --strategy alpha-git-patch`.
 
@@ -21,6 +23,7 @@
 5. Update dependencies and binaries using `helm dependency update ./chart`
 
     - Pull assets and commit the binaries as well as the Chart.lock file that was generated.
+
       ```shell
       helm dependency update ./chart
       ```
@@ -29,21 +32,22 @@
 
 7. Generate the `README.md` updates by following the [guide in gluon](https://repo1.dso.mil/big-bang/product/packages/gluon/-/blob/master/docs/bb-package-readme.md).
 
-8. Push up your changes, add upgrade notices if applicable, validate that CI passes. 
+8. Push up your changes, add upgrade notices if applicable, validate that CI passes.
 
-    - If there are any failures, follow the information in the pipeline to make the necessary updates. 
+    - If there are any failures, follow the information in the pipeline to make the necessary updates.
 
-    - Add the `debug` label to the MR for more detailed information. 
-    
+    - Add the `debug` label to the MR for more detailed information.
+
     - Reach out to the CODEOWNERS if needed.
 
 9. Follow the `Testing a new Thanos version` section of this document for manual testing.
 
-10. As part of your MR that modifies bigbang packages, you should modify the bigbang  [bigbang/tests/test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads) against your branch for the CI/CD MR testing by enabling your packages. 
+10. As part of your MR that modifies bigbang packages, you should modify the bigbang  [bigbang/tests/test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads) against your branch for the CI/CD MR testing by enabling your packages.
 
     - To do this, at a minimum, you will need to follow the instructions at [bigbang/docs/developer/test-package-against-bb.md](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md?ref_type=heads) with changes for Thanos enabled (the below is a reference, actual changes could be more depending on what changes where made to Thanos in the pakcage MR).
 
 ### [test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads)
+
     ```yaml
     thanos:
       enabled: true
@@ -60,13 +64,16 @@
 # Modifications Made to the upstream chart
 
 ## /chart/Chart.yaml
+
 - Modified Version to include `-bb.x` suffix
 - Modified to use registry1 minio package dependency
 
 ## /chart/bigbang/*
+
 - Network Policies and other common BigBang charts added
 
 ## chart/values.yaml
+
 - Add common values for Big Bang packages for domain, networkpolicies, tests, and Istio
 - Update image registry/repository/tag as required by update
 - Add image pull secret for `private-registry`
@@ -74,15 +81,18 @@
 - Disable Pod Disruption Budgets
 
 ### Check for Big Bang specific are included in Thanos/values.yaml
--  Please check and update the following line references if any upstream modify the line numbers
+
+- Please check and update the following line references if any upstream modify the line numbers
 
 Line 56/57 ensure sso.enabled to false
+
 ```
 sso:
   enabled: false
 ```
 
 Line 69-71 ensure registry/repository points to ironbank
+
 ```
   registry: registry1.dso.mil
   repository: ironbank/opensource/thanos/thanos 
@@ -90,12 +100,14 @@ Line 69-71 ensure registry/repository points to ironbank
 ```
 
 Line 84/85 set pullSecrets to `private-registry`
+
 ```
   pullSecrets:  
     - private-registry
 ```
 
 Line 289-295 Ensure query.resources has been set
+
 ```
   resources:
       limits:
@@ -107,6 +119,7 @@ Line 289-295 Ensure query.resources has been set
 ```
 
 Line 706/713 Comment out existingServiceAccount: "" and add DEPRECATED comment about query.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+
 ```
   ## DEPRECATED query.serviceAccount.existingServiceAccount - This value has been deprecated and will be removed in a future release, please use `serviceAccount.name` in combination with `serviceAccount.create=false` instead
   ##
@@ -119,6 +132,7 @@ Line 706/713 Comment out existingServiceAccount: "" and add DEPRECATED comment a
 ```
 
 Line 1057-1063 set the queryFrontend.resources
+
 ```
   resources:
       limits:
@@ -130,6 +144,7 @@ Line 1057-1063 set the queryFrontend.resources
 ```
 
 Line 1342/1349 Comment out existingServiceAccount: "" and add DEPRECATED comment about queryFrontend.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+
 ```
 Comment out existingServiceAccount: "" and add DEPRECATED comment about queryFrontend.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
   ##
@@ -142,6 +157,7 @@ Comment out existingServiceAccount: "" and add DEPRECATED comment about queryFro
 ```
 
 Line 1589-1598 set the bucketweb.resources like below
+
 ```
   ## @param bucketweb.resources.limits The resources limits for the Thanos Bucket Web container
   ## @param bucketweb.resources.requests The requested resources for the Thanos Bucket Web container
@@ -156,6 +172,7 @@ Line 1589-1598 set the bucketweb.resources like below
 ```
 
 Line 1875/1882 Comment out existingServiceAccount: "" and add DEPRECATED comment about bucketweb.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+
 ```
 Comment out existingServiceAccount: "" and add DEPRECATED comment about bucketweb.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
   ##
@@ -168,6 +185,7 @@ Comment out existingServiceAccount: "" and add DEPRECATED comment about bucketwe
 ```
 
 Line 2126-2135 set the compactor.resources like below
+
 ```
   ## @param compactor.resources.limits The resources limits for the Thanos Compactor container
   ## @param compactor.resources.requests The requested resources for the Thanos Compactor container
@@ -182,6 +200,7 @@ Line 2126-2135 set the compactor.resources like below
 ```
 
 Line 2414/2421 Comment out existingServiceAccount: "" and add DEPRECATED comment about compactor.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+
 ```
 Comment out existingServiceAccount: "" and add DEPRECATED comment about compactor.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
   ##
@@ -194,6 +213,7 @@ Comment out existingServiceAccount: "" and add DEPRECATED comment about compacto
 ```
 
 Line 2691-2700 set the storegateway.resources like below
+
 ```
   ## @param storegateway.resources.limits The resources limits for the Thanos Store Gateway container
   ## @param storegateway.resources.requests The requested resources for the Thanos Store Gateway container
@@ -208,6 +228,7 @@ Line 2691-2700 set the storegateway.resources like below
 ```
 
 Line 3022/3029 Comment out existingServiceAccount: "" and add DEPRECATED comment about storegateway.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+
 ```
 Comment out existingServiceAccount: "" and add DEPRECATED comment about storegateway.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
   ##
@@ -220,6 +241,7 @@ Comment out existingServiceAccount: "" and add DEPRECATED comment about storegat
 ```
 
 Line 3424-3433 set the storegateway.resources like below
+
 ```
   ## @param ruler.resources.limits The resources limits for the Thanos Ruler container
   ## @param ruler.resources.requests The requested resources for the Thanos Ruler container
@@ -234,6 +256,7 @@ Line 3424-3433 set the storegateway.resources like below
 ```
 
 Line 3752/3759 Comment out existingServiceAccount: "" and add DEPRECATED comment about ruler.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+
 ```
 ## DEPRECATED ruler.serviceAccount.existingServiceAccount - This value has been deprecated and will be removed in a future release, please use `serviceAccount.name` in combination with `serviceAccount.create=false` instead
   ##
@@ -246,6 +269,7 @@ Line 3752/3759 Comment out existingServiceAccount: "" and add DEPRECATED comment
 ```
 
 Line 4029-4038 set the receive.resources like below
+
 ```
   ## @param receive.resources.limits The resources limits for the Thanos Receive container
   ## @param receive.resources.requests The requested resources for the Thanos Receive container
@@ -260,6 +284,7 @@ Line 4029-4038 set the receive.resources like below
 ```
 
 Line 4341/4348 Comment out existingServiceAccount: "" and add DEPRECATED comment about receive.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+
 ```
   ## DEPRECATED receive.serviceAccount.existingServiceAccount - This value has been deprecated and will be removed in a future release, please use `serviceAccount.name` in combination with `serviceAccount.create=false` instead
   ##
@@ -272,6 +297,7 @@ Line 4341/4348 Comment out existingServiceAccount: "" and add DEPRECATED comment
 ```
 
 Line 4029-4038 set the receiveDistributor.resources like below
+
 ```
   ## @param receiveDistributor.resources.limits The resources limits for the Thanos Receive container
   ## @param receiveDistributor.resources.requests The requested resources for the Thanos Receive container
@@ -286,6 +312,7 @@ Line 4029-4038 set the receiveDistributor.resources like below
 ```
 
 Line 4775/4782 Comment out existingServiceAccount: "" and add DEPRECATED comment about storegateway.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+
 ```
   ## DEPRECATED receive.serviceAccount.existingServiceAccount - This value has been deprecated and will be removed in a future release, please use `serviceAccount.name` in combination with `serviceAccount.create=false` instead
   ##
@@ -298,6 +325,7 @@ Line 4775/4782 Comment out existingServiceAccount: "" and add DEPRECATED comment
 ```
 
 Line 4972-4974 update image to point to registry/repository ironbank/big-bang/base
+
 ```
     registry: registry1.dso.mil
     repository: ironbank/big-bang/base
@@ -305,6 +333,7 @@ Line 4972-4974 update image to point to registry/repository ironbank/big-bang/ba
 ```
 
 Line 4994-5038 ensure the minio is set as follows below
+
 ```
   ## to be used as an objstore for Thanos, must have minio-operator installed
   enabled: false
@@ -354,6 +383,7 @@ networkPolicy:
 ```
 
 Line 5041-5145
+
 ```
   ## @param networkPolicy.allowExternal Don't require client label for connections
   ## The Policy model to apply. When set to false, only pods with the correct
@@ -463,10 +493,12 @@ bbtests:
 ```
 
 ## chart/Kptfile
+
 - Tracks current upstream chart
 
 ### automountServiceAccountToken
-The mutating Kyverno policy named `update-automountserviceaccounttokens` is leveraged to harden all ServiceAccounts in this package with `automountServiceAccountToken: false`. This policy is configured by namespace in the Big Bang umbrella chart repository at [chart/templates/kyverno-policies/values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/chart/templates/kyverno-policies/values.yaml?ref_type=heads). 
+
+The mutating Kyverno policy named `update-automountserviceaccounttokens` is leveraged to harden all ServiceAccounts in this package with `automountServiceAccountToken: false`. This policy is configured by namespace in the Big Bang umbrella chart repository at [chart/templates/kyverno-policies/values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/chart/templates/kyverno-policies/values.yaml?ref_type=heads).
 
 This policy revokes access to the K8s API for Pods utilizing said ServiceAccounts. If a Pod truly requires access to the K8s API (for app functionality), the Pod is added to the `pods:` array of the same mutating policy. This grants the Pod access to the API, and creates a Kyverno PolicyException to prevent an alert.
 
@@ -479,9 +511,10 @@ The cypress tests will verify datasources are enabled for the monitoring.prometh
 
 You will want to install with:
 
-   - Thanos, Monitoring, Grafana and Istio packages and passing in test-values.yaml
+- Thanos, Monitoring, Grafana and Istio packages and passing in test-values.yaml
 
 `overrides/thanos.yaml`
+
 ```yaml
 flux:
   interval: 1m
@@ -566,9 +599,9 @@ kyvernoPolicies:
 ```
 
 - Go to [https://thanos.dev.bigbang.mil](https://thanos.dev.bigbang.mil)
-   - Select "Stores" and verify you see the `Sidecar` and `Store` stores.  These should both be `UP`.
+  - Select "Stores" and verify you see the `Sidecar` and `Store` stores.  These should both be `UP`.
 - Verify that [https://thanos.dev.bigbang.mil/status](https://thanos.dev.bigbang.mil/status) shows the correct thanos version.
 - Go to [https://grafana.dev.bigbang.mil/d/alertmanager-overview/alertmanager-overview](https://grafana.dev.bigbang.mil/d/alertmanager-overview/alertmanager-overview) and login with [default credentials](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/guides/using-bigbang/default-credentials.md) or SSO
-   - Verify the `Thanos` grafana datasource by changing the dashboard's datasource to `Thanos`, data should be displaying properly.
+  - Verify the `Thanos` grafana datasource by changing the dashboard's datasource to `Thanos`, data should be displaying properly.
 
 > When in doubt with any testing or upgrade steps, reach out to the CODEOWNERS for assistance.
