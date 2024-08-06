@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # thanos
 
-![Version: 15.7.9-bb.6](https://img.shields.io/badge/Version-15.7.9--bb.6-informational?style=flat-square) ![AppVersion: v0.35.1](https://img.shields.io/badge/AppVersion-v0.35.1-informational?style=flat-square)
+![Version: 15.7.17-bb.0](https://img.shields.io/badge/Version-15.7.17--bb.0-informational?style=flat-square) ![AppVersion: v0.36.0](https://img.shields.io/badge/AppVersion-v0.36.0-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -53,6 +53,7 @@ helm install thanos chart/
 |-----|------|---------|-------------|
 | global.imageRegistry | string | `""` |  |
 | global.imagePullSecrets | list | `[]` |  |
+| global.defaultStorageClass | string | `""` |  |
 | global.storageClass | string | `""` |  |
 | global.compatibility.openshift.adaptSecurityContext | string | `"auto"` |  |
 | kubeVersion | string | `""` |  |
@@ -65,7 +66,7 @@ helm install thanos chart/
 | sso.enabled | bool | `false` |  |
 | image.registry | string | `"registry1.dso.mil"` |  |
 | image.repository | string | `"ironbank/opensource/thanos/thanos"` |  |
-| image.tag | string | `"v0.35.1"` |  |
+| image.tag | string | `"v0.36.0"` |  |
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
@@ -820,6 +821,7 @@ helm install thanos chart/
 | ruler.evalInterval | string | `"1m"` |  |
 | ruler.clusterName | string | `""` |  |
 | ruler.config | string | `""` |  |
+| ruler.dataPath | string | `""` |  |
 | ruler.existingConfigmap | string | `""` |  |
 | ruler.extraEnvVars | list | `[]` |  |
 | ruler.extraEnvVarsCM | string | `""` |  |
