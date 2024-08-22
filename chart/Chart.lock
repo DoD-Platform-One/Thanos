@@ -4,9 +4,9 @@ dependencies:
   version: 5.0.15-bb.2
 - name: common
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 2.21.0
+  version: 2.22.0
 - name: gluon
   repository: oci://registry1.dso.mil/bigbang
-  version: 0.5.2
-digest: sha256:6c3413a791787b465a2aea512bb7087f0757eb87c2676aefc029749412d845b8
-generated: "2024-08-05T14:36:43.654463-04:00"
+  version: 0.5.3
+digest: sha256:115c6615c98651e0341c5a26b4df49822ace402357841055403073bbe322c43e
+generated: "2024-08-15T06:15:55.060790998Z"
