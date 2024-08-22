@@ -1,8 +1,20 @@
 # Changelog
 
-## 15.7.17 (2024-08-01)
+## 15.7.20 (2024-08-13)
 
-* [bitnami/thanos] add ruler custom data path ([#28606](https://github.com/bitnami/charts/pull/28606))
+* [bitnami/thanos] Release 15.7.20 ([#28859](https://github.com/bitnami/charts/pull/28859))
+
+## <small>15.7.19 (2024-08-09)</small>
+
+* [bitnami/thanos] add receive distributor termination grace period (#28793) ([6838ae1](https://github.com/bitnami/charts/commit/6838ae1092db9c66327d03f1955c6b0cc3afa0ad)), closes [#28793](https://github.com/bitnami/charts/issues/28793)
+
+## <small>15.7.18 (2024-08-07)</small>
+
+* [bitnami/thanos] Release 15.7.18 (#28752) ([8994d7b](https://github.com/bitnami/charts/commit/8994d7b7c5d751a90b2a65cd970cc4bed56471be)), closes [#28752](https://github.com/bitnami/charts/issues/28752)
+
+## <small>15.7.17 (2024-08-02)</small>
+
+* [bitnami/thanos] add ruler custom data path (#28606) ([125fb1b](https://github.com/bitnami/charts/commit/125fb1b454c3395444609a43dc4686cba2148fa2)), closes [#28606](https://github.com/bitnami/charts/issues/28606)
 
 ## <small>15.7.16 (2024-07-31)</small>
 
