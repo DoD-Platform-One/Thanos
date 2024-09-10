@@ -2,6 +2,12 @@
 
 ---
 
+## [15.7.20-bb.1] - 2024-09-9
+
+### Added
+
+- Added Virtual Service for accessing Thanos MinIO Tenant
+
 ## [15.7.20-bb.0] - 2024-08-21
 
 ### Upgraded

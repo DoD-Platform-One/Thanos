@@ -15,5 +15,5 @@ spec:
         namespaces: 
           - {{ .Release.Namespace }}
         principals:
-        - "cluster.local/ns/{{ .Release.Namespace }}/sa/thanos-minio-instance-sa"
+        - "cluster.local/ns/{{ .Release.Namespace }}/sa/thanos-minio-sa"
 {{- end }}
