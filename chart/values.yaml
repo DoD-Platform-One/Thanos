@@ -3253,6 +3253,12 @@ storegateway:
   ## Sharded parameters
   ## @param storegateway.sharded.enabled Enable sharding for Thanos Store Gateway
   ## @param storegateway.sharded.hashPartitioning.shards Setting hashPartitioning will create multiple store statefulsets based on the number of shards specified using the hashmod of the blocks
+  ## @param storegateway.sharded.hashPartitioning.extraRelabelingConfigs Setting extra relabel config
+  ## e,g:
+  ## extraRelabelingConfigs: 
+  ##   - action: keep
+  ##     source_labels: ["region"]
+  ##     regex: cn-zhangjiakou
   ## @param storegateway.sharded.timePartitioning [array] Setting time timePartitioning will create multiple store deployments based on the number of partitions
   ## @param storegateway.sharded.service.clusterIPs Array of cluster IPs for each Store Gateway service. Length must be the same as the number of shards
   ## e.g:
@@ -3279,6 +3285,7 @@ storegateway:
     enabled: false
     hashPartitioning:
       shards: ""
+      extraRelabelingConfigs: []
     timePartitioning:
       - min: ""
         max: ""
@@ -5036,12 +5043,12 @@ minio:
   ## @param minio.enabled Enable/disable MinIO&reg; chart installation
   ## to be used as an objstore for Thanos, must have minio-operator installed
   enabled: false
-  # -- Minio root credentials
-  secrets:
-    name: "thanos-objstore-creds"
-    accessKey: "minio"
-    secretKey: "minio123" # default key, change this!
   tenant:
+    # -- Minio root credentials
+    configSecret:
+      name: "thanos-objstore-creds"
+      accessKey: "minio"
+      secretKey: "minio123" # default key, change this!
     # -- Buckets to be provisioned to for tenant
     buckets:
       - name: thanos

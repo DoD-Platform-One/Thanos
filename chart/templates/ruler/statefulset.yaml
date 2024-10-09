@@ -20,7 +20,9 @@ spec:
   {{- end }}
   revisionHistoryLimit: {{ .Values.ruler.revisionHistoryLimit }}
   podManagementPolicy: {{ .Values.ruler.podManagementPolicy }}
+  {{- if .Values.ruler.service.additionalHeadless }}
   serviceName: {{ include "thanos.ruler.fullname" . }}-headless
+  {{- end }}
   {{- if .Values.ruler.updateStrategy }}
   updateStrategy: {{- toYaml .Values.ruler.updateStrategy | nindent 4 }}
   {{- end }}
@@ -300,7 +302,9 @@ spec:
   {{- end }}
   {{- end }}
   volumeClaimTemplates:
-    - metadata:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
         name: data
         {{- if .Values.ruler.persistence.annotations }}
         annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.ruler.persistence.annotations "context" $) | nindent 10 }}

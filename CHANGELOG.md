@@ -2,6 +2,13 @@
 
 ---
 
+## [15.7.27-bb.0] - 2024-10-03
+
+### Upgraded
+
+- Upgraded gluon from `0.5.3` -> `0.5.4`
+- Upgraded minio-instance from `5.0.15-bb.2` -> `6.0.3-bb.2`
+
 ## [15.7.20-bb.1] - 2024-09-9
 
 ### Added

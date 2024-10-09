@@ -8,7 +8,7 @@
 
 3. kpt
     - From the root of the repo run `kpt pkg update chart@<tag / hash> --strategy alpha-git-patch`, where the tag/hash is found in step 1
-        - `kpt` can be ran to pull the updates with a targeted tag.  In thanos's case we will need the commit hash instead due to the lack of tags on the upstream repo.
+        - `kpt` can be ran to pull the updates with a targeted tag.  In Thanos's case we will need the commit hash instead due to the lack of tags on the upstream repo.
         - Run a KPT package update
 
         ```shell
@@ -42,24 +42,24 @@
 
 9. Follow the `Testing a new Thanos version` section of this document for manual testing.
 
-10. As part of your MR that modifies bigbang packages, you should modify the bigbang  [bigbang/tests/test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads) against your branch for the CI/CD MR testing by enabling your packages.
+10. As part of your MR that modifies bigbang packages, you should modify the bigbang [bigbang/tests/test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads) against your branch for the CI/CD MR testing by enabling your packages.
 
-    - To do this, at a minimum, you will need to follow the instructions at [bigbang/docs/developer/test-package-against-bb.md](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md?ref_type=heads) with changes for Thanos enabled (the below is a reference, actual changes could be more depending on what changes where made to Thanos in the pakcage MR).
+    - To do this, at a minimum, you will need to follow the instructions at [bigbang/docs/developer/test-package-against-bb.md](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md?ref_type=heads) with changes for Thanos enabled (the below is a reference, actual changes could be more depending on what changes were made to Thanos in the package MR).
 
 ### [test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads)
 
-    ```yaml
-    thanos:
-      enabled: true
-      git:
-        tag: null
-        branch: <my-package-branch-that-needs-testing>
-      values:
-        istio:
-          hardened:
-            enabled: true
-      ### Additional compononents of Thanos should be changed to reflect testing changes introduced in the package MR
-    ```
+```yaml
+thanos:
+  enabled: true
+  git:
+    tag: null
+    branch: <my-package-branch-that-needs-testing>
+  values:
+    istio:
+      hardened:
+        enabled: true
+  ### Additional components of Thanos should be changed to reflect testing changes introduced in the package MR
+```
 
 # Modifications Made to the upstream chart
 
@@ -80,18 +80,18 @@
 - Set resource requests/limits
 - Disable Pod Disruption Budgets
 
-### Check for Big Bang specific are included in Thanos/values.yaml
+### Check for Big Bang specifics included in Thanos chart/values.yaml
 
 - Please check and update the following line references if any upstream modify the line numbers
 
-Line 56/57 ensure sso.enabled to false
+Line 58-59 ensure sso.enabled to false
 
 ```
 sso:
   enabled: false
 ```
 
-Line 69-71 ensure registry/repository points to ironbank
+Line 71-73 ensure registry/repository points to ironbank
 
 ```
   registry: registry1.dso.mil
@@ -99,14 +99,14 @@ Line 69-71 ensure registry/repository points to ironbank
   tag: vx.xx.x
 ```
 
-Line 84/85 set pullSecrets to `private-registry`
+Line 86-87 set pullSecrets to `private-registry`
 
 ```
   pullSecrets:  
     - private-registry
 ```
 
-Line 289-295 Ensure query.resources has been set
+Line 278-284 Ensure query.resources has been set
 
 ```
   resources:
@@ -118,7 +118,7 @@ Line 289-295 Ensure query.resources has been set
         memory: 5Gi
 ```
 
-Line 706/713 Comment out existingServiceAccount: "" and add DEPRECATED comment about query.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+Line 695-702 Comment out existingServiceAccount: "" and add DEPRECATED comment about query.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
 
 ```
   ## DEPRECATED query.serviceAccount.existingServiceAccount - This value has been deprecated and will be removed in a future release, please use `serviceAccount.name` in combination with `serviceAccount.create=false` instead
@@ -131,7 +131,7 @@ Line 706/713 Comment out existingServiceAccount: "" and add DEPRECATED comment a
     ## existingServiceAccount: ""
 ```
 
-Line 1057-1063 set the queryFrontend.resources
+Line 1046-1052 set the queryFrontend.resources
 
 ```
   resources:
@@ -143,7 +143,7 @@ Line 1057-1063 set the queryFrontend.resources
         memory: 100Mi
 ```
 
-Line 1342/1349 Comment out existingServiceAccount: "" and add DEPRECATED comment about queryFrontend.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+Line 1331-1338 Comment out existingServiceAccount: "" and add DEPRECATED comment about queryFrontend.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
 
 ```
 Comment out existingServiceAccount: "" and add DEPRECATED comment about queryFrontend.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
@@ -156,7 +156,7 @@ Comment out existingServiceAccount: "" and add DEPRECATED comment about queryFro
     ## existingServiceAccount: ""
 ```
 
-Line 1589-1598 set the bucketweb.resources like below
+Line 1578-1587 set the bucketweb.resources like below
 
 ```
   ## @param bucketweb.resources.limits The resources limits for the Thanos Bucket Web container
@@ -171,7 +171,7 @@ Line 1589-1598 set the bucketweb.resources like below
         memory: 100Mi
 ```
 
-Line 1875/1882 Comment out existingServiceAccount: "" and add DEPRECATED comment about bucketweb.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+Line 1864-1871 Comment out existingServiceAccount: "" and add DEPRECATED comment about bucketweb.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
 
 ```
 Comment out existingServiceAccount: "" and add DEPRECATED comment about bucketweb.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
@@ -184,7 +184,7 @@ Comment out existingServiceAccount: "" and add DEPRECATED comment about bucketwe
     ## existingServiceAccount: ""
 ```
 
-Line 2126-2135 set the compactor.resources like below
+Line 2123-2132 set the compactor.resources like below
 
 ```
   ## @param compactor.resources.limits The resources limits for the Thanos Compactor container
@@ -199,7 +199,7 @@ Line 2126-2135 set the compactor.resources like below
         memory: 100Mi
 ```
 
-Line 2414/2421 Comment out existingServiceAccount: "" and add DEPRECATED comment about compactor.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+Line 2411-2418 Comment out existingServiceAccount: "" and add DEPRECATED comment about compactor.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
 
 ```
 Comment out existingServiceAccount: "" and add DEPRECATED comment about compactor.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
@@ -212,7 +212,7 @@ Comment out existingServiceAccount: "" and add DEPRECATED comment about compacto
     ## existingServiceAccount: ""
 ```
 
-Line 2691-2700 set the storegateway.resources like below
+Line 2688-2697 set the storegateway.resources like below
 
 ```
   ## @param storegateway.resources.limits The resources limits for the Thanos Store Gateway container
@@ -227,7 +227,7 @@ Line 2691-2700 set the storegateway.resources like below
         memory: 100Mi
 ```
 
-Line 3022/3029 Comment out existingServiceAccount: "" and add DEPRECATED comment about storegateway.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+Line 3032-3039 Comment out existingServiceAccount: "" and add DEPRECATED comment about storegateway.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
 
 ```
 Comment out existingServiceAccount: "" and add DEPRECATED comment about storegateway.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
@@ -240,7 +240,7 @@ Comment out existingServiceAccount: "" and add DEPRECATED comment about storegat
     ## existingServiceAccount: ""
 ```
 
-Line 3424-3433 set the storegateway.resources like below
+Line 3445-3454 set the storegateway.resources like below
 
 ```
   ## @param ruler.resources.limits The resources limits for the Thanos Ruler container
@@ -255,7 +255,7 @@ Line 3424-3433 set the storegateway.resources like below
         memory: 100Mi
 ```
 
-Line 3752/3759 Comment out existingServiceAccount: "" and add DEPRECATED comment about ruler.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+Line 3786-3793 Comment out existingServiceAccount: "" and add DEPRECATED comment about ruler.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
 
 ```
 ## DEPRECATED ruler.serviceAccount.existingServiceAccount - This value has been deprecated and will be removed in a future release, please use `serviceAccount.name` in combination with `serviceAccount.create=false` instead
@@ -268,7 +268,7 @@ Line 3752/3759 Comment out existingServiceAccount: "" and add DEPRECATED comment
     ## existingServiceAccount: ""
 ```
 
-Line 4029-4038 set the receive.resources like below
+Line 4063-4072 set the receive.resources like below
 
 ```
   ## @param receive.resources.limits The resources limits for the Thanos Receive container
@@ -283,7 +283,7 @@ Line 4029-4038 set the receive.resources like below
         memory: 100Mi
 ```
 
-Line 4341/4348 Comment out existingServiceAccount: "" and add DEPRECATED comment about receive.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+Line 4375-4382 Comment out existingServiceAccount: "" and add DEPRECATED comment about receive.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
 
 ```
   ## DEPRECATED receive.serviceAccount.existingServiceAccount - This value has been deprecated and will be removed in a future release, please use `serviceAccount.name` in combination with `serviceAccount.create=false` instead
@@ -296,7 +296,7 @@ Line 4341/4348 Comment out existingServiceAccount: "" and add DEPRECATED comment
     ## existingServiceAccount: ""
 ```
 
-Line 4029-4038 set the receiveDistributor.resources like below
+Line 4636-4645 set the receiveDistributor.resources like below
 
 ```
   ## @param receiveDistributor.resources.limits The resources limits for the Thanos Receive container
@@ -311,7 +311,7 @@ Line 4029-4038 set the receiveDistributor.resources like below
         memory: 100Mi
 ```
 
-Line 4775/4782 Comment out existingServiceAccount: "" and add DEPRECATED comment about storegateway.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
+Line 4825-4832 Comment out existingServiceAccount: "" and add DEPRECATED comment about storegateway.serviceAccount.existingServiceAccount while leaving the rest of serviceAccount as is, uncommented
 
 ```
   ## DEPRECATED receive.serviceAccount.existingServiceAccount - This value has been deprecated and will be removed in a future release, please use `serviceAccount.name` in combination with `serviceAccount.create=false` instead
@@ -324,7 +324,7 @@ Line 4775/4782 Comment out existingServiceAccount: "" and add DEPRECATED comment
     ## existingServiceAccount: ""
 ```
 
-Line 4972-4974 update image to point to registry/repository ironbank/big-bang/base
+Line 5022-5024 update image to point to registry/repository ironbank/big-bang/base
 
 ```
     registry: registry1.dso.mil
@@ -332,7 +332,7 @@ Line 4972-4974 update image to point to registry/repository ironbank/big-bang/ba
     tag: 2.1.0
 ```
 
-Line 4994-5038 ensure the minio is set as follows below
+Line 5044-5089 ensure the minio is set as follows below
 
 ```
   ## to be used as an objstore for Thanos, must have minio-operator installed
@@ -382,7 +382,7 @@ networkPolicy:
   ## @param networkPolicy.enabled Enable creation of NetworkPolicy resources. Only Ingress traffic is filtered for now.
 ```
 
-Line 5041-5145
+Line 5092-5196
 
 ```
   ## @param networkPolicy.allowExternal Don't require client label for connections
@@ -581,7 +581,6 @@ kyverno:
 
 kyvernoPolicies:
   enabled: true
-kyvernoPolicies:
   values:
     exclude:
       any:

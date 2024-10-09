@@ -23,7 +23,9 @@ spec:
   {{- end }}
   revisionHistoryLimit: {{ .Values.receive.revisionHistoryLimit }}
   podManagementPolicy: {{ .Values.receive.podManagementPolicy }}
+  {{- if .Values.receive.service.additionalHeadless }}
   serviceName: {{ include "thanos.receive.fullname" . }}-headless
+  {{- end }}
   {{- if .Values.receive.updateStrategy }}
   updateStrategy: {{- toYaml .Values.receive.updateStrategy | nindent 4 }}
   {{- end }}
@@ -317,7 +319,9 @@ spec:
   {{- end }}
   {{- end }}
   volumeClaimTemplates:
-    - metadata:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
         name: data
         {{- if .Values.receive.persistence.annotations }}
         annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.receive.persistence.annotations "context" $) | nindent 10 }}
