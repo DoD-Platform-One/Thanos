@@ -11,6 +11,9 @@ annotations:
       image: registry1.dso.mil/ironbank/thanos/thanos:v0.36.1
   bigbang.dev/applicationVersions: |
     - Thanos: v0.36.1
+  bigbang.dev/upstreamReleaseNotesMarkdown: |
+    - [Find upstream chart's release notes and CHANGELOG here](https://github.com/bitnami/charts/blob/main/bitnami/thanos/CHANGELOG.md)
+    - [Find upstream applications's release notes and CHANGELOG here](https://github.com/thanos-io/thanos/releases)
 apiVersion: v2
 appVersion: v0.36.1
 dependencies:

@@ -6,30 +6,25 @@
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
 ## Upstream References
-* <https://bitnami.com>
+- <https://bitnami.com>
 
 * <https://github.com/bitnami/charts/tree/main/bitnami/thanos>
 
-### Upstream Release Notes
+## Upstream Release Notes
 
-This package has no upstream release note links on file. Please add some to [chart/Chart.yaml](chart/Chart.yaml) under `annotations.bigbang.dev/upstreamReleaseNotesMarkdown`.
-Example:
-```yaml
-annotations:
-  bigbang.dev/upstreamReleaseNotesMarkdown: |
-    - [Find our upstream chart's CHANGELOG here](https://link-goes-here/CHANGELOG.md)
-    - [and our upstream application release notes here](https://another-link-here/RELEASE_NOTES.md)
-```
+- [Find upstream chart's release notes and CHANGELOG here](https://github.com/bitnami/charts/blob/main/bitnami/thanos/CHANGELOG.md)
+- [Find upstream applications's release notes and CHANGELOG here](https://github.com/thanos-io/thanos/releases)
 
 ## Learn More
-* [Application Overview](docs/overview.md)
-* [Other Documentation](docs/)
+
+- [Application Overview](docs/overview.md)
+- [Other Documentation](docs/)
 
 ## Pre-Requisites
 
-* Kubernetes Cluster deployed
-* Kubernetes config installed in `~/.kube/config`
-* Helm installed
+- Kubernetes Cluster deployed
+- Kubernetes config installed in `~/.kube/config`
+- Helm installed
 
 Install Helm
 
@@ -37,8 +32,9 @@ https://helm.sh/docs/intro/install/
 
 ## Deployment
 
-* Clone down the repository
-* cd into directory
+- Clone down the repository
+- cd into directory
+
 ```bash
 helm install thanos chart/
 ```
@@ -1221,7 +1217,7 @@ helm install thanos chart/
 | volumePermissions.image.pullPolicy | string | `"IfNotPresent"` |  |
 | volumePermissions.image.pullSecrets | list | `[]` |  |
 | minio.enabled | bool | `false` |  |
-| minio.secrets | object | `{"accessKey":"minio","name":"thanos-objstore-creds","secretKey":"minio123"}` | Minio root credentials |
+| minio.tenant.configSecret | object | `{"accessKey":"minio","name":"thanos-objstore-creds","secretKey":"minio123"}` | Minio root credentials |
 | minio.tenant.buckets | list | `[{"name":"thanos"}]` | Buckets to be provisioned to for tenant |
 | minio.tenant.users | list | `[{"name":"minio-user"}]` | Users to to be provisioned to for tenant |
 | minio.tenant.defaultUserCredentials | object | `{"password":"","username":"minio-user"}` | User credentials to create for above user. Otherwise password is randomly generated. This auth is not required to be set or reclaimed for minio use with Loki |
