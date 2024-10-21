@@ -2,6 +2,12 @@
 
 ---
 
+## [15.7.27-bb.1] - 2024-10-10
+
+### Upgraded
+
+- Removed hardcoded minio matchLabels
+
 ## [15.7.27-bb.0] - 2024-10-03
 
 ### Upgraded

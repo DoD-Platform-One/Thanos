@@ -22,6 +22,13 @@ Fully qualified app name for PostgreSQL
 {{- end -}}
 
 {{/*
+Minio Labels
+*/}}
+{{- define "minio.labels" -}}
+app: minio
+{{- end }}
+
+{{/*
 Return the proper Thanos bucketweb fullname
 */}}
 {{- define "thanos.bucketweb.fullname" -}}
