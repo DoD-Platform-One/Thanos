@@ -5184,6 +5184,16 @@ networkPolicies:
   #           # Block requests to controlPlane if CIDR not 0.0.0.0/0
   #           # - "{{ $.Values.networkPolicies.controlPlaneCidr }}"
 
+upgradeJob:
+  name: thanos-upgrade-job
+  image:
+    repository: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl
+    tag: v1.29.8
+    imagePullPolicy: IfNotPresent
+    pullSecrets: private-registry
+  serviceAccount: upgrade-job-svc-account
+  role: upgrade-role
+  roleBinding: upgrade-rolebinding
 
 bbtests:
   enabled: false

@@ -2,6 +2,12 @@
 
 ---
 
+## [15.7.27-bb.2] - 2024-10-21
+
+### Added
+
+- Added pre-upgrade hook to automate upgrade process
+
 ## [15.7.27-bb.1] - 2024-10-10
 
 ### Upgraded

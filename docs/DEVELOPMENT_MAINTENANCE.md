@@ -74,7 +74,7 @@ thanos:
 
 ## chart/values.yaml
 
-- Add common values for Big Bang packages for domain, networkpolicies, tests, and Istio
+- Add common values for Big Bang packages for domain, networkpolicies, upgradejob, tests, and Istio
 - Update image registry/repository/tag as required by update
 - Add image pull secret for `private-registry`
 - Set resource requests/limits
@@ -382,7 +382,7 @@ networkPolicy:
   ## @param networkPolicy.enabled Enable creation of NetworkPolicy resources. Only Ingress traffic is filtered for now.
 ```
 
-Line 5092-5196
+Line 5092-5207
 
 ```
   ## @param networkPolicy.allowExternal Don't require client label for connections
@@ -480,6 +480,17 @@ networkPolicies:
   #           # Block requests to controlPlane if CIDR not 0.0.0.0/0
   #           # - "{{ $.Values.networkPolicies.controlPlaneCidr }}"
 
+upgradeJob:
+  name: thanos-upgrade-job
+  image:
+    repository: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl
+    tag: v1.29.8
+    imagePullPolicy: IfNotPresent
+    pullSecrets: private-registry
+  checkVersion: 15.7.27-bb.1
+  serviceAccount: upgrade-job-svc-account
+  role: upgrade-role
+  roleBinding: upgrade-rolebinding
 
 bbtests:
   enabled: false
