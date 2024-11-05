@@ -2,6 +2,12 @@
 
 ---
 
+## [15.7.27-bb.3] - 2024-10-25
+
+### Changed
+
+- Moved pre-upgrade hook resources to separate charts
+
 ## [15.7.27-bb.2] - 2024-10-21
 
 ### Added

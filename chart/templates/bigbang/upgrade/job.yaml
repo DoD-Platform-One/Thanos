@@ -1,0 +1,49 @@
+{{- if eq (include "thanos.shouldDeployUpgradeResources" .) "true" }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.upgradeJob.name }}
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": pre-upgrade
+    "helm.sh/hook-weight": "0"
+    "helm.sh/hook-delete-policy": hook-succeeded,hook-failed,before-hook-creation
+spec:
+  template:
+    metadata:
+    spec:
+      automountServiceAccountToken: true
+      imagePullSecrets:
+        - name: {{ .Values.upgradeJob.image.pullSecrets }}
+      serviceAccountName: {{ .Values.upgradeJob.serviceAccount }}
+      containers:
+      - name: {{ .Values.upgradeJob.name }}
+        image: {{ .Values.upgradeJob.image.repository }}:{{ .Values.upgradeJob.image.tag }}
+        imagePullPolicy: {{ .Values.upgradeJob.image.imagePullPolicy }}
+        command:
+        - "/bin/bash"
+        - "-c"
+        - |
+          # Delete the existing statefulset and check if successful
+          if kubectl delete statefulset thanos-storegateway -n {{ .Release.Namespace }}; then
+            echo "StatefulSet deleted successfully."
+          else
+            echo "[ERROR] Failed to delete StatefulSet." >&2
+            exit 1
+          fi
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 100m
+            memory: 256Mi
+        securityContext:
+          capabilities:
+            drop: ["ALL"]
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+      restartPolicy: Never
+{{- end }}
