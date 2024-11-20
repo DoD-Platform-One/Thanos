@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # thanos
 
-![Version: 15.7.27-bb.3](https://img.shields.io/badge/Version-15.7.27--bb.3-informational?style=flat-square) ![AppVersion: v0.36.1](https://img.shields.io/badge/AppVersion-v0.36.1-informational?style=flat-square)
+![Version: 15.8.1-bb.0](https://img.shields.io/badge/Version-15.8.1--bb.0-informational?style=flat-square) ![AppVersion: v0.36.1](https://img.shields.io/badge/AppVersion-v0.36.1-informational?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -225,6 +225,7 @@ helm install thanos chart/
 | query.autoscaling.maxReplicas | string | `""` |  |
 | query.autoscaling.targetCPU | string | `""` |  |
 | query.autoscaling.targetMemory | string | `""` |  |
+| query.autoscaling.targetPodMetrics | list | `[]` |  |
 | query.pdb.create | bool | `false` |  |
 | query.pdb.minAvailable | int | `1` |  |
 | query.pdb.maxUnavailable | int | `1` |  |
@@ -505,6 +506,7 @@ helm install thanos chart/
 | compactor.enabled | bool | `false` |  |
 | compactor.logLevel | string | `"info"` |  |
 | compactor.logFormat | string | `"logfmt"` |  |
+| compactor.dataDir | string | `"/data"` |  |
 | compactor.retentionResolutionRaw | string | `"0s"` |  |
 | compactor.retentionResolution5m | string | `"0s"` |  |
 | compactor.retentionResolution1h | string | `"0s"` |  |
@@ -1236,6 +1238,7 @@ helm install thanos chart/
 | minio.tenant.metrics.enabled | bool | `false` |  |
 | minio.tenant.metrics.port | int | `9000` |  |
 | minio.tenant.metrics.memory | string | `"128M"` |  |
+| minio.waitJob.enabled | bool | `false` |  |
 | networkPolicy.enabled | bool | `false` |  |
 | networkPolicy.allowExternal | bool | `true` |  |
 | networkPolicy.explicitNamespacesSelector | object | `{}` |  |
@@ -1263,7 +1266,7 @@ helm install thanos chart/
 | networkPolicies.additionalPolicies | list | `[]` |  |
 | upgradeJob.name | string | `"thanos-upgrade-job"` |  |
 | upgradeJob.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
-| upgradeJob.image.tag | string | `"v1.29.8"` |  |
+| upgradeJob.image.tag | string | `"v1.30.6"` |  |
 | upgradeJob.image.imagePullPolicy | string | `"IfNotPresent"` |  |
 | upgradeJob.image.pullSecrets | string | `"private-registry"` |  |
 | upgradeJob.serviceAccount | string | `"upgrade-job-svc-account"` |  |
