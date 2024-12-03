@@ -9,6 +9,7 @@
 - Upgraded gluon from `0.5.4` -> `0.5.10`
 - Upgraded minio-instance from `6.0.3-bb.2` -> `6.0.4-bb.2`
 - Upgraded kubectl image from `v1.29.8` -> `v1.30.6`
+- Added the maintenance track annotation and badge
 
 ## [15.7.27-bb.3] - 2024-10-25
 
