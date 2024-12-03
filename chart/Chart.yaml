@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: APACHE-2.0
 
 annotations:
+  bigbang.dev/maintenanceTrack: bb_integrated
   category: Analytics
   licenses: Apache-2.0
   images: |
