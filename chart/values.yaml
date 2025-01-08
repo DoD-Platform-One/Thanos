@@ -20,6 +20,11 @@ global:
   imagePullSecrets: []
   defaultStorageClass: ""
   storageClass: ""
+  ## Security parameters
+  ##
+  security:
+    ## @param global.security.allowInsecureImages Allows skipping image verification
+    allowInsecureImages: false
   ## Compatibility adaptations for Kubernetes platforms
   ##
   compatibility:
@@ -70,7 +75,7 @@ sso:
 image:
   registry: registry1.dso.mil
   repository: ironbank/opensource/thanos/thanos 
-  tag: v0.36.1
+  tag: v0.37.2
   digest: ""
   ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
   ##
@@ -3265,7 +3270,7 @@ storegateway:
   ## @param storegateway.sharded.hashPartitioning.shards Setting hashPartitioning will create multiple store statefulsets based on the number of shards specified using the hashmod of the blocks
   ## @param storegateway.sharded.hashPartitioning.extraRelabelingConfigs Setting extra relabel config
   ## e,g:
-  ## extraRelabelingConfigs: 
+  ## extraRelabelingConfigs:
   ##   - action: keep
   ##     source_labels: ["region"]
   ##     regex: cn-zhangjiakou
@@ -5046,8 +5051,7 @@ volumePermissions:
     pullSecrets: []
 
 ## @section MinIO&reg; chart parameters
-## @extra minio For full list of MinIO&reg; values configurations please refere [here](https://github.com/bitnami/charts/tree/main/bitnami/minio)
-
+## @extra minio For full list of MinIO&reg; values configurations please refer [here](https://github.com/bitnami/charts/tree/main/bitnami/minio)
 minio:
   ## @param minio.enabled Enable/disable MinIO&reg; chart installation
   ## to be used as an objstore for Thanos, must have minio-operator installed
@@ -5199,7 +5203,7 @@ upgradeJob:
   name: thanos-upgrade-job
   image:
     repository: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl
-    tag: v1.30.6
+    tag: v1.30.8
     imagePullPolicy: IfNotPresent
     pullSecrets: private-registry
   serviceAccount: upgrade-job-svc-account

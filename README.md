@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # thanos
 
-![Version: 15.8.1-bb.0](https://img.shields.io/badge/Version-15.8.1--bb.0-informational?style=flat-square) ![AppVersion: v0.36.1](https://img.shields.io/badge/AppVersion-v0.36.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 15.9.1-bb.0](https://img.shields.io/badge/Version-15.9.1--bb.0-informational?style=flat-square) ![AppVersion: v0.37.2](https://img.shields.io/badge/AppVersion-v0.37.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -47,6 +47,7 @@ helm install thanos chart/
 | global.imagePullSecrets | list | `[]` |  |
 | global.defaultStorageClass | string | `""` |  |
 | global.storageClass | string | `""` |  |
+| global.security.allowInsecureImages | bool | `false` |  |
 | global.compatibility.openshift.adaptSecurityContext | string | `"auto"` |  |
 | kubeVersion | string | `""` |  |
 | nameOverride | string | `""` |  |
@@ -58,7 +59,7 @@ helm install thanos chart/
 | sso.enabled | bool | `false` |  |
 | image.registry | string | `"registry1.dso.mil"` |  |
 | image.repository | string | `"ironbank/opensource/thanos/thanos"` |  |
-| image.tag | string | `"v0.36.1"` |  |
+| image.tag | string | `"v0.37.2"` |  |
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
@@ -1266,7 +1267,7 @@ helm install thanos chart/
 | networkPolicies.additionalPolicies | list | `[]` |  |
 | upgradeJob.name | string | `"thanos-upgrade-job"` |  |
 | upgradeJob.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
-| upgradeJob.image.tag | string | `"v1.30.6"` |  |
+| upgradeJob.image.tag | string | `"v1.30.8"` |  |
 | upgradeJob.image.imagePullPolicy | string | `"IfNotPresent"` |  |
 | upgradeJob.image.pullSecrets | string | `"private-registry"` |  |
 | upgradeJob.serviceAccount | string | `"upgrade-job-svc-account"` |  |
