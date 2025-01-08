@@ -2,6 +2,15 @@
 
 ---
 
+## [15.9.1-bb.0] - 2025-01-03
+
+### Upgraded
+
+- Upgraded minio-instance from `6.0.4-bb.2` -> `6.0.4-bb.5`
+- Upgraded thanos image from `v0.36.1` -> `v0.37.2`
+- Upgraded gluon from `0.5.10` -> `0.5.12`
+
+
 ## [15.8.1-bb.0] - 2024-11-18
 
 ### Upgraded
