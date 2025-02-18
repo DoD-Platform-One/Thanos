@@ -2,6 +2,14 @@
 
 ---
 
+## [15.9.1-bb.1] - 2025-02-12
+
+### Upgraded
+
+- Upgraded gluon from `0.5.12` -> `0.5.14`
+- Upgraded minio-instance from `6.0.4-bb.5` -> `7.0.0-bb.1`
+- Upgraded common from `2.29.0` -> `2.29.1`
+
 ## [15.9.1-bb.0] - 2025-01-03
 
 ### Upgraded

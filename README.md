@@ -1,14 +1,14 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # thanos
 
-![Version: 15.9.1-bb.0](https://img.shields.io/badge/Version-15.9.1--bb.0-informational?style=flat-square) ![AppVersion: v0.37.2](https://img.shields.io/badge/AppVersion-v0.37.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 15.9.1-bb.1](https://img.shields.io/badge/Version-15.9.1--bb.1-informational?style=flat-square) ![AppVersion: v0.37.2](https://img.shields.io/badge/AppVersion-v0.37.2-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
 ## Upstream References
-- <https://bitnami.com>
 
-* <https://github.com/bitnami/charts/tree/main/bitnami/thanos>
+- <https://bitnami.com>
+- <https://github.com/bitnami/charts/tree/main/bitnami/thanos>
 
 ## Upstream Release Notes
 
@@ -1225,6 +1225,7 @@ helm install thanos chart/
 | minio.tenant.users | list | `[{"name":"minio-user"}]` | Users to to be provisioned to for tenant |
 | minio.tenant.defaultUserCredentials | object | `{"password":"","username":"minio-user"}` | User credentials to create for above user. Otherwise password is randomly generated. This auth is not required to be set or reclaimed for minio use with Loki |
 | minio.tenant.pools[0].name | string | `"pool-0"` |  |
+| minio.tenant.pools[0].labels.app | string | `"minio"` |  |
 | minio.tenant.pools[0].servers | int | `1` |  |
 | minio.tenant.pools[0].volumesPerServer | int | `4` |  |
 | minio.tenant.pools[0].size | string | `"750Mi"` |  |
@@ -1267,7 +1268,7 @@ helm install thanos chart/
 | networkPolicies.additionalPolicies | list | `[]` |  |
 | upgradeJob.name | string | `"thanos-upgrade-job"` |  |
 | upgradeJob.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
-| upgradeJob.image.tag | string | `"v1.30.8"` |  |
+| upgradeJob.image.tag | string | `"v1.30.9"` |  |
 | upgradeJob.image.imagePullPolicy | string | `"IfNotPresent"` |  |
 | upgradeJob.image.pullSecrets | string | `"private-registry"` |  |
 | upgradeJob.serviceAccount | string | `"upgrade-job-svc-account"` |  |

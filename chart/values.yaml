@@ -5074,8 +5074,11 @@ minio:
       username: "minio-user"
       password: ""
     ## Specification for MinIO Pool(s) in this Tenant.
+    #  Labels should match with minio.labels in _helpers.tpl
     pools:
       - name: pool-0
+        labels: 
+          app: minio
         servers: 1
         volumesPerServer: 4
         size: 750Mi
@@ -5203,7 +5206,7 @@ upgradeJob:
   name: thanos-upgrade-job
   image:
     repository: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl
-    tag: v1.30.8
+    tag: v1.30.9
     imagePullPolicy: IfNotPresent
     pullSecrets: private-registry
   serviceAccount: upgrade-job-svc-account
