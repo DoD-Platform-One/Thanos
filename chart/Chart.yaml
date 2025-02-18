@@ -20,7 +20,7 @@ appVersion: v0.37.2
 dependencies:
   - name: minio-instance
     alias: minio
-    version: 6.0.4-bb.2
+    version: 7.0.0-bb.1
     repository: oci://registry1.dso.mil/bigbang
     condition: minio.enabled
   - name: common
@@ -29,7 +29,7 @@ dependencies:
       - bitnami-common
     version: 2.x.x
   - name: gluon
-    version: 0.5.12
+    version: 0.5.14
     repository: oci://registry1.dso.mil/bigbang    
 description: Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 home: https://bitnami.com
@@ -45,4 +45,4 @@ maintainers:
 name: thanos
 sources:
 - https://github.com/bitnami/charts/tree/main/bitnami/thanos
-version: 15.9.1-bb.0
+version: 15.9.1-bb.1

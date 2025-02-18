@@ -1,12 +1,12 @@
 dependencies:
 - name: minio-instance
   repository: oci://registry1.dso.mil/bigbang
-  version: 6.0.4-bb.5
+  version: 7.0.0-bb.1
 - name: common
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 2.29.0
+  version: 2.29.1
 - name: gluon
   repository: oci://registry1.dso.mil/bigbang
-  version: 0.5.12
-digest: sha256:7ae3443edc2e56568b003f4136bdc562c0f9f8bcd3157e06704d2f939d137dac
-generated: "2025-01-03T15:07:07.779967-07:00"
+  version: 0.5.14
+digest: sha256:f582e36579accecd8fa965ac03d3112849d744f8bac208119d8d1918b220c412
+generated: "2025-02-13T13:23:44.837387-07:00"
