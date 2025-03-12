@@ -5206,7 +5206,7 @@ upgradeJob:
   name: thanos-upgrade-job
   image:
     repository: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl
-    tag: v1.30.9
+    tag: v1.30.10
     imagePullPolicy: IfNotPresent
     pullSecrets: private-registry
   serviceAccount: upgrade-job-svc-account

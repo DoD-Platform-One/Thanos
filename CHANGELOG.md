@@ -2,6 +2,13 @@
 
 ---
 
+## [15.9.1-bb.2] - 2025-03-07
+
+### Upgraded
+
+- Upgraded kutectl from `1.30.9` to `1.30.10`
+- Upgraded bitnami-common `2.29.1` to `2.30.0`
+
 ## [15.9.1-bb.1] - 2025-02-12
 
 ### Upgraded
