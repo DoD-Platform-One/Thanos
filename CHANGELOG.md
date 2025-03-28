@@ -1,6 +1,11 @@
 # Changelog
 
 ---
+## [15.9.1-bb.2] - 2025-03-28
+
+### Added
+
+- Added dynamic NetworkPolicy support for Istio operatorless
 
 ## [15.9.1-bb.2] - 2025-03-07
 
