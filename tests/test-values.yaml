@@ -1,13 +1,38 @@
-query:
-  resources:
-      limits:
-        memory: 1Gi
-      requests:
-        memory: 1Gi
-
-networkPolicies:
+#########################
+# Disable Core Packages #
+#########################
+neuvector:
+  enabled: false
+promtail:
+  enabled: false
+tempo:
+  enabled: false
+kyvernoReporter:
+  enabled: false
+kiali:
+  enabled: false
+loki:
+  enabled: false
+addons:
+########################
+# Required for package #
+########################
+  minioOperator:
+    enabled: true
+  thanos:
+    enabled: true
+    values:
+      bbtests:
+        enabled: true
+kyvernoPolicies:
+  values:
+    bbtests:
+      enabled: false
+kyverno:
+  values:
+    bbtests:
+      enabled: false
+monitoring:
   enabled: true
-  controlPlaneCidr: 172.16.0.0/12
-
-bbtests:
+grafana:
   enabled: true
