@@ -75,7 +75,7 @@ sso:
 image:
   registry: registry1.dso.mil
   repository: ironbank/opensource/thanos/thanos 
-  tag: v0.37.2
+  tag: v0.38.0
   digest: ""
   ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
   ##
@@ -776,6 +776,13 @@ query:
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
     ingressClassName: ""
+    ## @param query.ingress.labels Additional label for the Ingress resource.
+    ## Use this parameter to set the required labels for your needs
+    ## e.g:
+    ## labels:
+    ##   dns-managed-by-external-dns: 'true'
+    ##
+    labels: {}
     ## @param query.ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
     ## For a full list of possible ingress annotations, please see
     ## ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md
@@ -1413,6 +1420,13 @@ queryFrontend:
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
     ingressClassName: ""
+    ## @param queryFrontend.ingress.labels Additional label for the Ingress resource.
+    ## Use this parameter to set the required labels for your needs
+    ## e.g:
+    ## labels:
+    ##   dns-managed-by-external-dns: 'true'
+    ##
+    labels: {}
     ## @param queryFrontend.ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
     ## For a full list of possible ingress annotations, please see
     ## ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md
@@ -1920,6 +1934,13 @@ bucketweb:
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
     ingressClassName: ""
+    ## @param bucketweb.ingress.labels Additional label for the Ingress resource.
+    ## Use this parameter to set the required labels for your needs
+    ## e.g:
+    ## labels:
+    ##   dns-managed-by-external-dns: 'true'
+    ##
+    labels: {}
     ## @param bucketweb.ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
     ## For a full list of possible ingress annotations, please see
     ## ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md
@@ -2017,7 +2038,7 @@ compactor:
   ## @param compactor.retentionResolutionRaw Resolution and Retention flag
   ## @param compactor.retentionResolution5m Resolution and Retention flag
   ## @param compactor.retentionResolution1h Resolution and Retention flag
-  ## Example
+  ##
   ## retentionResolutionRaw: 30d
   ## retentionResolution5m: 30d
   ## retentionResolution1h: 10y
@@ -2028,7 +2049,8 @@ compactor:
   retentionResolutionRaw: 0s
   retentionResolution5m: 0s
   retentionResolution1h: 0s
-
+  ## @param compactor.concurrency Number of goroutines to use when compacting groups.
+  concurrency: 1
   ## @param compactor.consistencyDelay Minimum age of fresh (non-compacted) blocks before they are being processed
   ##
   consistencyDelay: 30m
@@ -2446,6 +2468,13 @@ compactor:
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
     ingressClassName: ""
+    ## @param compactor.ingress.labels Additional label for the Ingress resource.
+    ## Use this parameter to set the required labels for your needs
+    ## e.g:
+    ## labels:
+    ##   dns-managed-by-external-dns: 'true'
+    ##
+    labels: {}
     ## @param compactor.ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
     ## For a full list of possible ingress annotations, please see
     ## ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md
@@ -3091,6 +3120,13 @@ storegateway:
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
     ingressClassName: ""
+    ## @param storegateway.ingress.labels Additional label for the Ingress resource.
+    ## Use this parameter to set the required labels for your needs
+    ## e.g:
+    ## labels:
+    ##   dns-managed-by-external-dns: 'true'
+    ##
+    labels: {}
     ## @param storegateway.ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
     ## For a full list of possible ingress annotations, please see
     ## ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md
@@ -3361,6 +3397,9 @@ ruler:
   ## @param ruler.clusterName Used to set the 'ruler_cluster' label
   ##
   clusterName: ""
+  ## @param ruler.ruleFile Change the location Thanos checks for rule files
+  ##
+  ruleFile: "/conf/rules/*.yml"
   ## @param ruler.config Ruler configuration
   ## Specify content for ruler.yml
   ##
@@ -3845,6 +3884,13 @@ ruler:
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
     ingressClassName: ""
+    ## @param ruler.ingress.labels Additional label for the Ingress resource.
+    ## Use this parameter to set the required labels for your needs
+    ## e.g:
+    ## labels:
+    ##   dns-managed-by-external-dns: 'true'
+    ##
+    labels: {}
     ## @param ruler.ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
     ## For a full list of possible ingress annotations, please see
     ## ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md
@@ -3932,6 +3978,10 @@ receive:
   ## @param receive.tsdbRetention Thanos Receive TSDB retention period
   ##
   tsdbRetention: 15d
+  ## @param receive.replicationProtocol Thanos Receive replication-protocol
+  ## ref: https://thanos.io/tip/components/receive.md/#replication-protocols
+  ##
+  replicationProtocol: capnproto
   ## @param receive.replicationFactor Thanos Receive replication-factor
   ##
   replicationFactor: 1
@@ -4027,12 +4077,14 @@ receive:
   minReadySeconds: 0
   ## @param receive.containerPorts.http HTTP container port
   ## @param receive.containerPorts.grpc GRPC container port
-  ## @param receive.containerPorts.remote remote-write container port
+  ## @param receive.containerPorts.remote Remote-write container port
+  ## @param receive.containerPorts.capnproto Cap'n'Proto container port
   ##
   containerPorts:
     http: 10902
     grpc: 10901
     remote: 19291
+    capnproto: 19391
   ## K8s Pod Security Context for Thanos Receive pods
   ## https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
   ## @param receive.podSecurityContext.enabled Enable security context for the Thanos Receive pods
@@ -4321,24 +4373,28 @@ receive:
     ## @param receive.service.type Kubernetes service type
     ##
     type: ClusterIP
-    ## @param receive.service.ports.http Thanos Ruler service HTTP port
-    ## @param receive.service.ports.grpc Thanos Ruler service GRPC port
-    ## @param receive.service.ports.remote Thanos Ruler service remote port
+    ## @param receive.service.ports.http Thanos Receive service HTTP port
+    ## @param receive.service.ports.grpc Thanos Receive service GRPC port
+    ## @param receive.service.ports.remote Thanos Receive service Remote-write port
+    ## @param receive.service.ports.capnproto Thanos Receive service Cap'n'Proto port
     ##
     ports:
       http: 10902
       grpc: 10901
       remote: 19291
-    ## @param receive.service.nodePorts.http Specify the Thanos Ruler HTTP nodePort value for the LoadBalancer and NodePort service types
-    ## @param receive.service.nodePorts.grpc Specify the Thanos Ruler GRPC nodePort value for the LoadBalancer and NodePort service types
-    ## @param receive.service.nodePorts.remote Specify the Thanos Ruler remote nodePort value for the LoadBalancer and NodePort service types
+      capnproto: 19391
+    ## @param receive.service.nodePorts.http Specify the Thanos Receive HTTP nodePort value for the LoadBalancer and NodePort service types
+    ## @param receive.service.nodePorts.grpc Specify the Thanos Receive GRPC nodePort value for the LoadBalancer and NodePort service types
+    ## @param receive.service.nodePorts.remote Specify the Thanos Receive Remote-write nodePort value for the LoadBalancer and NodePort service types
+    ## @param receive.service.nodePorts.capnproto Specify the Thanos Receive Cap'n'Proto nodePort value for the LoadBalancer and NodePort service types
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
     ##
     nodePorts:
       http: ""
       grpc: ""
       remote: ""
-    ## @param receive.service.clusterIP Thanos Ruler service clusterIP IP
+      capnproto: ""
+    ## @param receive.service.clusterIP Thanos Receive service clusterIP IP
     ## e.g:
     ## clusterIP: None
     ##
@@ -4354,7 +4410,7 @@ receive:
     ## - 10.10.10.0/24
     ##
     loadBalancerSourceRanges: []
-    ## @param receive.service.externalTrafficPolicy Thanos Ruler service externalTrafficPolicy
+    ## @param receive.service.externalTrafficPolicy Thanos Receive service externalTrafficPolicy
     ## Denotes if this Service desires to route external traffic to node-local or cluster-wide endpoints
     ##
     externalTrafficPolicy: Cluster
@@ -4477,6 +4533,13 @@ receive:
     ## ref: https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/
     ##
     ingressClassName: ""
+    ## @param receive.ingress.labels Additional label for the Ingress resource.
+    ## Use this parameter to set the required labels for your needs
+    ## e.g:
+    ## labels:
+    ##   dns-managed-by-external-dns: 'true'
+    ##
+    labels: {}
     ## @param receive.ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
     ## For a full list of possible ingress annotations, please see
     ## ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md
@@ -4571,6 +4634,10 @@ receiveDistributor:
   ## @param receiveDistributor.replicaLabel Label to treat as a replica indicator along which data is de-duplicated
   ##
   replicaLabel: replica
+  ## @param receiveDistributor.replicationProtocol Thanos Receive Distributor replication-protocol
+  ## ref: https://thanos.io/tip/components/receive.md/#replication-protocols
+  ##
+  replicationProtocol: capnproto
   ## @param receiveDistributor.replicationFactor Thanos Receive Distributor replication-factor
   ##
   replicationFactor: 1
@@ -5206,7 +5273,7 @@ upgradeJob:
   name: thanos-upgrade-job
   image:
     repository: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl
-    tag: v1.30.10
+    tag: v1.32.3
     imagePullPolicy: IfNotPresent
     pullSecrets: private-registry
   serviceAccount: upgrade-job-svc-account

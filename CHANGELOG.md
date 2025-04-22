@@ -1,6 +1,15 @@
 # Changelog
 
 ---
+## [16.0.2-bb.0] - 2025-04-21
+
+### Changed
+- gluon updated from 0.5.14 to 0.5.15
+- ironbank/opensource/thanos/thanos from v0.37.2 -> v0.38.0
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl from v1.30.10 -> v1.32.3
+- registry1.dso.mil/ironbank/opensource/thanos/thanos from v0.37.2 -> v0.38.0
+- thanos chart updated from 15.9.1 to 16.0.2
+
 ## [15.9.1-bb.2] - 2025-03-28
 
 ### Added
