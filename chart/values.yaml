@@ -2597,6 +2597,10 @@ storegateway:
   enabled: false
   ## @param storegateway.logLevel Thanos Store Gateway log level
   ##
+  ## Egress for the storegateway network policy
+  egress:
+    ## CIDR for egress, please change for hardened/security to store gateway cidr
+    cidr: "0.0.0.0/0"
   logLevel: info
   ## @param storegateway.logFormat Thanos Store Gateway log format
   ##
@@ -5287,8 +5291,6 @@ bbtests:
     envs:
       cypress_thanos_url: 'http://thanos-query:9090'
       cypress_minio_url: 'http://thanos-minio-console:9090'
-      prometheus_integration_enabled: "false"
-      objstorage_integration_enabled: "false"
   defaultBuckets: "thanos"
   ## MinIO&reg; containers' resource requests and limits
   ## ref: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/

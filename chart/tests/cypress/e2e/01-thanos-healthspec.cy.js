@@ -52,17 +52,24 @@ describe('Basic thanos', function() {
         },
       },
       () => {
-        // visit minio
+        // visit minio and login
         cy.session('minioSession', () => {
           cy.visit(`${Cypress.env('minio_url')}`)
           cy.performMinioLogin('minio', 'minio123')
         })
 
-        // Check there is at least one entry  
-        cy.visit(`${Cypress.env('minio_url')}/browser/thanos`)
+        // visit the thanos bucket in minio
+        cy.visit(`${Cypress.env('minio_url')}/browser/thanos`, {
+          failOnStatusCode: true,
+        })
+
+        // Optionally capture visual confirmation (can help with video trace)
+        cy.wait(6000) // allow UI to visually render for video
+
         cy.get('div[class="ReactVirtualized__Table__row rowLine canClick  "]').first().click()
+
       })
   }
 
-
 })
+

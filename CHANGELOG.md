@@ -1,6 +1,13 @@
 # Changelog
 
 ---
+## [16.0.2-bb.1] - 2025-07-02
+
+### Added
+- Store gateway networkpolicy egress CIDR to values.yaml
+- Updated gluon to 0.6.3
+- Kyverno Policy for cypress test
+
 ## [16.0.2-bb.0] - 2025-04-21
 
 ### Changed
