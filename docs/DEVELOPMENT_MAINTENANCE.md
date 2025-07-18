@@ -532,21 +532,20 @@ flux:
   rollback:
     cleanupOnFail: false
 
-clusterAuditor:
-  enabled: false
+networkPolicies:
+  enabled: true
 
 grafana:
   enabled: true
 
-istioOperator:
+istioCRDs:
   enabled: true
 
-istio:
+istiod:
   enabled: true
   values:
     hardened:
       enabled: true
-
 
 monitoring:
   enabled: true
@@ -571,7 +570,7 @@ addons:
         hardened:
           enabled: true
       minio:
-        enabled: true
+        enabled: false
       storegateway:
         enabled: true
       objstoreConfig: |-

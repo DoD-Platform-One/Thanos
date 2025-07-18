@@ -24,10 +24,10 @@ addons:
     values:
       bbtests:
         enabled: true
+
 kyvernoPolicies:
-  values:
-    bbtests:
-      enabled: false
+  enabled: false
+
 kyverno:
   values:
     bbtests:

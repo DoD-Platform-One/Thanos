@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # thanos
 
-![Version: 16.0.2-bb.0](https://img.shields.io/badge/Version-16.0.2--bb.0-informational?style=flat-square) ![AppVersion: v0.38.0](https://img.shields.io/badge/AppVersion-v0.38.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 16.0.2-bb.1](https://img.shields.io/badge/Version-16.0.2--bb.1-informational?style=flat-square) ![AppVersion: v0.38.0](https://img.shields.io/badge/AppVersion-v0.38.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -645,6 +645,7 @@ helm install thanos chart/
 | compactor.persistence.annotations | object | `{}` |  |
 | compactor.persistence.existingClaim | string | `""` |  |
 | storegateway.enabled | bool | `false` |  |
+| storegateway.egress.cidr | string | `"0.0.0.0/0"` |  |
 | storegateway.logLevel | string | `"info"` |  |
 | storegateway.logFormat | string | `"logfmt"` |  |
 | storegateway.useEndpointGroup | bool | `false` |  |
@@ -819,7 +820,7 @@ helm install thanos chart/
 | ruler.dnsDiscovery.enabled | bool | `true` |  |
 | ruler.queryURL | string | `""` |  |
 | ruler.alertmanagers | list | `[]` |  |
-| ruler.alertmanagersConfig | object | `{}` |  |
+| ruler.alertmanagersConfig | string | `""` |  |
 | ruler.evalInterval | string | `"1m"` |  |
 | ruler.clusterName | string | `""` |  |
 | ruler.ruleFile | string | `"/conf/rules/*.yml"` |  |

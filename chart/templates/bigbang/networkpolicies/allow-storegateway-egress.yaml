@@ -1,4 +1,4 @@
-{{- if and .Values.networkPolicies.enabled .Values.storegateway.enabled (not .Values.minio.enabled)}}
+{{- if and .Values.networkPolicies.enabled .Values.storegateway.enabled (not .Values.minio.enabled) }}
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -13,7 +13,7 @@ spec:
   egress:
   - to:
     - ipBlock:
-        cidr: 0.0.0.0/0
+        cidr: {{ .Values.storegateway.egress.cidr }}
         # ONLY Block requests to cloud metadata IP
         except:
         - 169.254.169.254/32
