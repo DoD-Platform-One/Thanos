@@ -570,7 +570,7 @@ addons:
         hardened:
           enabled: true
       minio:
-        enabled: false
+        enabled: true
       storegateway:
         enabled: true
       objstoreConfig: |-

@@ -5,7 +5,7 @@ metadata:
 upstream:
   type: git
   git:
-    commit: d627749913f9adb01494f022206a357aafee7524
+    commit: efbbe03289f99a78de4ac4c8eeb66d64d4b79bcd
     repo: https://github.com/bitnami/charts
     directory: /bitnami/common/templates
-    ref: d627749913f9adb01494f022206a357aafee7524
+    ref: efbbe03289f99a78de4ac4c8eeb66d64d4b79bcd
