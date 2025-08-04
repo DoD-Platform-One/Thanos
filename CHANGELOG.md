@@ -1,6 +1,14 @@
 # Changelog
 
 ---
+## [17.2.2-bb.0] (2025-07-30)
+### Changed
+- gluon 0.6.3 -> 0.7.0
+- minio-instance 7.0.0-bb.1 -> 7.2.2-bb.0
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.32.3 -> v1.32.7
+- registry1.dso.mil/ironbank/opensource/thanos/thanos v0.38.0 -> v0.39.2
+- thanos chart updated from 16.0.2 -> 17.2.2
+
 ## [16.0.2-bb.1] - 2025-07-02
 
 ### Added
