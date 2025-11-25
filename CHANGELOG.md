@@ -1,6 +1,14 @@
 # Changelog
 
 ---
+## [17.3.3-bb.0] (2025-11-20)
+### Changed
+- gluon 0.7.0 -> 0.9.6
+- common-2.31.3 -> common-2.31.4
+- Thanos Helm 17.2.2 to 17.3.3
+- kubectl v1.32.7 -> v1.33.6
+- Thanos v0.39.2 -> v0.40.1
+
 ## [17.2.2-bb.0] (2025-07-30)
 ### Changed
 - gluon 0.6.3 -> 0.7.0
