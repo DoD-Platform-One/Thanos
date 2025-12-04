@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # thanos
 
-![Version: 17.3.3-bb.0](https://img.shields.io/badge/Version-17.3.3--bb.0-informational?style=flat-square) ![AppVersion: v0.40.1](https://img.shields.io/badge/AppVersion-v0.40.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 17.3.3-bb.1](https://img.shields.io/badge/Version-17.3.3--bb.1-informational?style=flat-square) ![AppVersion: v0.40.1](https://img.shields.io/badge/AppVersion-v0.40.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -1269,26 +1269,27 @@ helm install thanos chart/
 | volumePermissions.image.pullPolicy | string | `"IfNotPresent"` |  |
 | volumePermissions.image.pullSecrets | list | `[]` |  |
 | minio.enabled | bool | `false` |  |
-| minio.tenant.configSecret | object | `{"accessKey":"minio","name":"thanos-objstore-creds","secretKey":"minio123"}` | Minio root credentials |
-| minio.tenant.buckets | list | `[{"name":"thanos"}]` | Buckets to be provisioned to for tenant |
-| minio.tenant.users | list | `[{"name":"minio-user"}]` | Users to to be provisioned to for tenant |
-| minio.tenant.defaultUserCredentials | object | `{"password":"","username":"minio-user"}` | User credentials to create for above user. Otherwise password is randomly generated. This auth is not required to be set or reclaimed for minio use with Loki |
-| minio.tenant.pools[0].name | string | `"pool-0"` |  |
-| minio.tenant.pools[0].labels.app | string | `"minio"` |  |
-| minio.tenant.pools[0].servers | int | `1` |  |
-| minio.tenant.pools[0].volumesPerServer | int | `4` |  |
-| minio.tenant.pools[0].size | string | `"750Mi"` |  |
-| minio.tenant.pools[0].securityContext.runAsUser | int | `1001` |  |
-| minio.tenant.pools[0].securityContext.runAsGroup | int | `1001` |  |
-| minio.tenant.pools[0].securityContext.fsGroup | int | `1001` |  |
-| minio.tenant.pools[0].securityContext.runAsNonRoot | bool | `true` |  |
-| minio.tenant.pools[0].containerSecurityContext.runAsUser | int | `1001` |  |
-| minio.tenant.pools[0].containerSecurityContext.runAsGroup | int | `1001` |  |
-| minio.tenant.pools[0].containerSecurityContext.runAsNonRoot | bool | `true` |  |
-| minio.tenant.pools[0].containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
-| minio.tenant.metrics.enabled | bool | `false` |  |
-| minio.tenant.metrics.port | int | `9000` |  |
-| minio.tenant.metrics.memory | string | `"128M"` |  |
+| minio.upstream.tenant.name | string | `"thanos-minio"` |  |
+| minio.upstream.tenant.configSecret | object | `{"accessKey":"minio","name":"thanos-objstore-creds","secretKey":"minio123"}` | Minio root credentials |
+| minio.upstream.tenant.buckets | list | `[{"name":"thanos"}]` | Buckets to be provisioned to for tenant |
+| minio.upstream.tenant.users | list | `[{"name":"minio-user"}]` | Users to to be provisioned to for tenant |
+| minio.upstream.tenant.defaultUserCredentials | object | `{"password":"","username":"minio-user"}` | User credentials to create for above user. Otherwise password is randomly generated. This auth is not required to be set or reclaimed for minio use with Loki |
+| minio.upstream.tenant.pools[0].name | string | `"pool-0"` |  |
+| minio.upstream.tenant.pools[0].labels.app | string | `"minio"` |  |
+| minio.upstream.tenant.pools[0].servers | int | `1` |  |
+| minio.upstream.tenant.pools[0].volumesPerServer | int | `4` |  |
+| minio.upstream.tenant.pools[0].size | string | `"750Mi"` |  |
+| minio.upstream.tenant.pools[0].securityContext.runAsUser | int | `1001` |  |
+| minio.upstream.tenant.pools[0].securityContext.runAsGroup | int | `1001` |  |
+| minio.upstream.tenant.pools[0].securityContext.fsGroup | int | `1001` |  |
+| minio.upstream.tenant.pools[0].securityContext.runAsNonRoot | bool | `true` |  |
+| minio.upstream.tenant.pools[0].containerSecurityContext.runAsUser | int | `1001` |  |
+| minio.upstream.tenant.pools[0].containerSecurityContext.runAsGroup | int | `1001` |  |
+| minio.upstream.tenant.pools[0].containerSecurityContext.runAsNonRoot | bool | `true` |  |
+| minio.upstream.tenant.pools[0].containerSecurityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| minio.upstream.metrics.enabled | bool | `false` |  |
+| minio.upstream.metrics.port | int | `9000` |  |
+| minio.upstream.metrics.memory | string | `"128M"` |  |
 | minio.waitJob.enabled | bool | `false` |  |
 | networkPolicy.enabled | bool | `false` |  |
 | networkPolicy.allowExternal | bool | `true` |  |
@@ -1317,7 +1318,7 @@ helm install thanos chart/
 | networkPolicies.additionalPolicies | list | `[]` |  |
 | upgradeJob.name | string | `"thanos-upgrade-job"` |  |
 | upgradeJob.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
-| upgradeJob.image.tag | string | `"v1.33.6"` |  |
+| upgradeJob.image.tag | string | `"v1.34.2"` |  |
 | upgradeJob.image.imagePullPolicy | string | `"IfNotPresent"` |  |
 | upgradeJob.image.pullSecrets | string | `"private-registry"` |  |
 | upgradeJob.serviceAccount | string | `"upgrade-job-svc-account"` |  |

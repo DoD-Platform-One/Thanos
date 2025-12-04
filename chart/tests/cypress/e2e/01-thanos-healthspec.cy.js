@@ -2,7 +2,6 @@
 
 // ---- Global fail handler with logging ----
 let capturedError = null;
-
 Cypress.on('fail', (error) => {
   cy.log(`❌ Test step failed: ${error.message}`);
   capturedError = error;
@@ -17,11 +16,37 @@ afterEach(() => {
   }
 });
 
-describe('Basic thanos', function() {
+/**
+ * Checks for and clicks the license acknowledgment button using its text content.
+ * Uses cy.contains() for the most reliable text-based targeting.
+ */
+const acknowledgeLicense = () => {
+  const acknowledgeButtonText = 'Acknowledge';
 
+  cy.log('🔎 Checking for license banner...');
+  cy.get('body').then(($body) => {
+    // Check if the body text contains the button label.
+    if ($body.text().includes(acknowledgeButtonText)) {
+      cy.log('🚨 Acknowledge banner detected, clicking...');
+      
+      // Use cy.contains to find the element with the text and click it.
+      // We use { timeout: 500 } to prevent unnecessary waiting if it's not immediately ready.
+      // { force: true } is sometimes needed if a modal overlay temporarily blocks the button.
+      cy.contains(acknowledgeButtonText, { timeout: 500 }).click({ force: true });
+        
+      cy.log('✅ License acknowledged.');
+    } else {
+      cy.log('ℹ️ Acknowledge button not present (proceeding).');
+    }
+  });
+};
+
+describe('Basic thanos', function() {
   it('Visits the Thanos home page', () => {
     cy.log('🌐 Visiting Thanos home page...');
     cy.visit(Cypress.env('thanos_url'), { failOnStatusCode: false });
+    
+    acknowledgeLicense(); 
 
     cy.get('body').then(($body) => {
       if ($body.find('input[name="user"]').length !== 0) {
@@ -40,6 +65,8 @@ describe('Basic thanos', function() {
   it('Simple Query', () => {
     cy.log('🌐 Opening Thanos URL for Simple Query...');
     cy.visit(Cypress.env('thanos_url'), { failOnStatusCode: false });
+    
+    acknowledgeLicense(); 
 
     cy.log('⌨️ Typing query: kube_node_info{}');
     cy.get('div[class="cm-line"]').type('kube_node_info{}');
@@ -51,15 +78,20 @@ describe('Basic thanos', function() {
     it('Prometheus Integration',
       {
         retries: {
-          runMode: 10, // Reduced from 29 for faster pipeline
+          runMode: 10, 
         },
       },
       () => {
         cy.log('🌐 Opening Prometheus integration pages...');
         cy.visit(`${Cypress.env('thanos_url')}/stores`, { failOnStatusCode: false });
-        cy.wait(1000);
+        
+        acknowledgeLicense(); 
 
+        cy.wait(1000);
         cy.visit(`${Cypress.env('thanos_url')}/targets`, { failOnStatusCode: false });
+        
+        acknowledgeLicense(); 
+
         cy.get('button[class="all btn btn-primary active"]').click();
         cy.get('button[class="btn btn-primary btn-xs"]')
           .parent()
@@ -76,17 +108,17 @@ describe('Basic thanos', function() {
     it('Verify Thanos Bucket',
       {
         retries: {
-          runMode: 5, // Reduced retries for faster feedback
+          runMode: 5, 
         },
       },
       () => {
         cy.log('🔄 Starting Verify Thanos Bucket test...');
-
+        
         // Ensure MinIO session is valid
         cy.session('minioSession', () => {
           cy.log('🌐 Visiting MinIO login page...');
           cy.visit(`${Cypress.env('minio_url')}`, { failOnStatusCode: false });
-          cy.performMinioLogin('minio', 'minio123');
+          cy.performMinioLogin('minio', 'minio123'); 
           cy.log('🔍 Waiting for MinIO dashboard...');
           cy.contains('Buckets', { timeout: 10000 }).should('exist');
         }, {
@@ -107,8 +139,11 @@ describe('Basic thanos', function() {
         cy.log('⏳ Waiting for UI to render (12 seconds)...');
         cy.wait(12000);
 
-        cy.screenshot('before-bucket-click');
+        // --- CRITICAL FIX: Acknowledge License AFTER the UI load ---
+        acknowledgeLicense();
+        // ----------------------------------------------------------
 
+        cy.screenshot('before-bucket-click');
         cy.get('div[class="ReactVirtualized__Table__row rowLine canClick  "]', { timeout: 15000 })
           .should('exist')
           .first()
@@ -119,5 +154,4 @@ describe('Basic thanos', function() {
       }
     );
   }
-
 });

@@ -3,6 +3,11 @@
 ---
 ## [17.3.3-bb.0] (2025-11-20)
 ### Changed
+- MinIO Dependency Helm Chart bump from 7.1.1.-bb.1 -> 7.1.1-bb.15
+- kubernetes/kubectl upgrade from v1.33.6 -> v1.34.2
+
+## [17.3.3-bb.0] (2025-11-20)
+### Changed
 - gluon 0.7.0 -> 0.9.6
 - common-2.31.3 -> common-2.31.4
 - Thanos Helm 17.2.2 to 17.3.3
