@@ -5219,44 +5219,46 @@ minio:
   ## @param minio.enabled Enable/disable MinIO&reg; chart installation
   ## to be used as an objstore for Thanos, must have minio-operator installed
   enabled: false
-  tenant:
-    # -- Minio root credentials
-    configSecret:
-      name: "thanos-objstore-creds"
-      accessKey: "minio"
-      secretKey: "minio123" # default key, change this!
-    # -- Buckets to be provisioned to for tenant
-    buckets:
-      - name: thanos
-    # -- Users to to be provisioned to for tenant
-    users:
-      - name: minio-user
-    # -- User credentials to create for above user. Otherwise password is randomly generated.
-    # This auth is not required to be set or reclaimed for minio use with Loki
-    defaultUserCredentials:
-      username: "minio-user"
-      password: ""
-    ## Specification for MinIO Pool(s) in this Tenant.
-    #  Labels should match with minio.labels in _helpers.tpl
-    pools:
-      - name: pool-0
-        labels: 
-          app: minio
-        servers: 1
-        volumesPerServer: 4
-        size: 750Mi
-        securityContext:
-          runAsUser: 1001
-          runAsGroup: 1001
-          fsGroup: 1001
-          runAsNonRoot: true
-        containerSecurityContext:
-          runAsUser: 1001
-          runAsGroup: 1001
-          runAsNonRoot: true
-          capabilities:
-            drop:
-              - ALL
+  upstream:
+    tenant:
+      name: "thanos-minio"
+      # -- Minio root credentials
+      configSecret:
+        name: "thanos-objstore-creds"
+        accessKey: "minio"
+        secretKey: "minio123" # default key, change this!
+      # -- Buckets to be provisioned to for tenant
+      buckets:
+        - name: thanos
+      # -- Users to to be provisioned to for tenant
+      users:
+        - name: minio-user
+      # -- User credentials to create for above user. Otherwise password is randomly generated.
+      # This auth is not required to be set or reclaimed for minio use with Loki
+      defaultUserCredentials:
+        username: "minio-user"
+        password: ""
+      ## Specification for MinIO Pool(s) in this Tenant.
+      #  Labels should match with minio.labels in _helpers.tpl
+      pools:
+        - name: pool-0
+          labels: 
+            app: minio
+          servers: 1
+          volumesPerServer: 4
+          size: 750Mi
+          securityContext:
+            runAsUser: 1001
+            runAsGroup: 1001
+            fsGroup: 1001
+            runAsNonRoot: true
+          containerSecurityContext:
+            runAsUser: 1001
+            runAsGroup: 1001
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
     metrics:
       enabled: false
       port: 9000
@@ -5369,7 +5371,7 @@ upgradeJob:
   name: thanos-upgrade-job
   image:
     repository: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl
-    tag: v1.33.6
+    tag: v1.34.2
     imagePullPolicy: IfNotPresent
     pullSecrets: private-registry
   serviceAccount: upgrade-job-svc-account

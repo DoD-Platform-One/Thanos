@@ -19,7 +19,7 @@ appVersion: v0.40.1
 dependencies:
   - name: minio-instance
     alias: minio
-    version: 7.1.1-bb.1
+    version: 7.1.1-bb.15
     repository: oci://registry1.dso.mil/bigbang
     condition: minio.enabled
   - name: common
@@ -44,4 +44,4 @@ maintainers:
 name: thanos
 sources:
 - https://github.com/bitnami/charts/tree/main/bitnami/thanos
-version: 17.3.3-bb.0
+version: 17.3.3-bb.1
