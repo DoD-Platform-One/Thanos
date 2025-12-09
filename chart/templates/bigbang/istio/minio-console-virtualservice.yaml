@@ -34,7 +34,7 @@ spec:
         host: thanos-minio-console.{{ .Release.Namespace }}.svc.cluster.local
         port:
           number: 
-            {{- if or (dig "certificate" "requestAutoCert" false .Values.minio.tenant ) (dig "certificate" "externalCertSecret" false .Values.minio.tenant) }}
+            {{- if or (dig "certificate" "requestAutoCert" false .Values.minio.upstream.tenant ) (dig "certificate" "externalCertSecret" false .Values.minio.upstream.tenant) }}
             443
             {{- else }}
             9090
@@ -51,7 +51,7 @@ spec:
     - destination:
         port:
           number: 
-            {{- if or (dig "certificate" "requestAutoCert" false .Values.minio.tenant ) (dig "certificate" "externalCertSecret" false .Values.minio.tenant) }}
+            {{- if or (dig "certificate" "requestAutoCert" false .Values.minio.upstream.tenant ) (dig "certificate" "externalCertSecret" false .Values.minio.upstream.tenant) }}
             443
             {{- else }}
             9090
