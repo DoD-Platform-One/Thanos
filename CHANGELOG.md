@@ -1,7 +1,11 @@
 # Changelog
 
 ---
-## [17.3.3-bb.0] (2025-11-20)
+## [17.3.3-bb.2] (2026-01-30)
+### Changed
+- Updated the upgrade job to stip any special character that may break semver
+
+## [17.3.3-bb.1] (2025-11-20)
 ### Changed
 - MinIO Dependency Helm Chart bump from 7.1.1.-bb.1 -> 7.1.1-bb.15
 - kubernetes/kubectl upgrade from v1.33.6 -> v1.34.2
