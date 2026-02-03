@@ -1,3 +1,48 @@
+# -- Network Policy configuration; see bb-common network policy docs for details: https://repo1.dso.mil/big-bang/product/packages/bb-common/-/tree/main/docs/network-policies?ref_type=heads
+# @default -- basic configuration necessary for thanos to function
+networkPolicies:
+  enabled: false
+  egress:
+    from:
+      '*':
+        to:
+          definition:
+            kubeAPI: true
+      thanos-storegateway:
+        podSelector:
+          app.kubernetes.io/name: thanos
+          app.kubernetes.io/component: storegateway
+
+# -- Istio configuration; see bb-common istio docs for details: https://repo1.dso.mil/big-bang/product/packages/bb-common/-/tree/main/docs/istio?ref_type=heads
+# @default -- Istio disabled
+istio:
+  # Toggle istio integration
+  enabled: false
+
+# -- Routes configuration; see bb-common routes docs for details: https://repo1.dso.mil/big-bang/product/packages/bb-common/-/tree/main/docs/routes?ref_type=heads
+# @default -- Routes inbound to the minio console (disabled) and thanos query frontend
+routes:
+  inbound:
+    query-frontend:
+      enabled: false
+      service: thanos-query-frontend
+      gateways:
+      - istio-gateway/public-ingressgateway
+      hosts:
+      - thanos.{{ .Values.domain }}
+      port: 9090
+      selector:
+        app.kubernetes.io/component: query-frontend
+        app.kubernetes.io/name: thanos
+    minio:
+      enabled: false
+      service: thanos-minio-console
+      gateways:
+      - istio-gateway/public-ingressgateway
+      port: 9090
+      hosts:
+      - thanos-minio.{{ .Values.domain }}
+
 # Copyright Broadcom, Inc. All Rights Reserved.
 # SPDX-License-Identifier: APACHE-2.0
 
@@ -5296,76 +5341,6 @@ networkPolicy:
 
 # -- Domain to service Thanos virtualService
 domain: bigbang.dev
-
-istio:
-  enabled: false
-  hardened:
-    enabled: false
-    outboundTrafficPolicyMode: "REGISTRY_ONLY"
-    customServiceEntries: []
-    #   - name: "allow-google"
-    #     enabled: true
-    #     spec:
-    #       hosts:
-    #         - google.com
-    #       location: MESH_EXTERNAL
-    #       ports:
-    #         - number: 443
-    #           protocol: TLS
-    #           name: https
-    #       resolution: DNS  
-    customAuthorizationPolicies: []
-    # - name: "allow-nothing"
-    #   enabled: true
-    #   spec: {}
-    minioOperator:
-      enabled: true
-      namespaces:
-        - minio-operator
-      principals:
-        - cluster.local/ns/minio-operator/sa/minio-operator
-    prometheus:
-      enabled: true
-      namespaces:
-        - monitoring
-      principals:
-        - cluster.local/ns/monitoring/sa/monitoring-grafana
-  mtls:
-    # STRICT = Allow only mutual TLS traffic
-    # PERMISSIVE = Allow both plain text and mutual TLS traffic
-    mode: STRICT
-  thanos:
-    enabled: true
-    labels: {}
-    annotations: {}
-    gateways:
-      - istio-system/main
-    hosts:
-      - thanos.{{ .Values.domain }}
-
-networkPolicies:
-  enabled: false
-  ingressLabels:
-    app: istio-ingressgateway
-    istio: ingressgateway  
-  additionalPolicies: []
-  # expected use case is to open egress for runner jobs
-  # This is a dev example policy spec and CIDR 0.0.0.0/0 is unsafe for operational environments
-  # requests to controlPlane should also be blocked in an operational policy
-  # - name: egress-runner-jobs
-  #   spec:
-  #     podSelector: {}
-  #     policyTypes:
-  #     - Egress
-  #     egress:
-  #     - to:
-  #       - ipBlock:
-  #           cidr: 0.0.0.0/0
-  #           except:
-  #           # Block requests to AWS cloud metadata IP
-  #           - 169.254.169.254/32
-  #           # Block requests to controlPlane if CIDR not 0.0.0.0/0
-  #           # - "{{ $.Values.networkPolicies.controlPlaneCidr }}"
 
 upgradeJob:
   name: thanos-upgrade-job

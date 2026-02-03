@@ -1,6 +1,10 @@
 # Changelog
 
 ---
+## [17.3.3-bb.3] (2026-02-02)
+### Changed
+- Migrated to bb-common for istio and `NetworkPolicy` resources
+
 ## [17.3.3-bb.2] (2026-01-30)
 ### Changed
 - Updated the upgrade job to stip any special character that may break semver
