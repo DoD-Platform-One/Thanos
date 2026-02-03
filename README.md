@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # thanos
 
-![Version: 17.3.3-bb.2](https://img.shields.io/badge/Version-17.3.3--bb.2-informational?style=flat-square) ![AppVersion: v0.40.1](https://img.shields.io/badge/AppVersion-v0.40.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 17.3.3-bb.3](https://img.shields.io/badge/Version-17.3.3--bb.3-informational?style=flat-square) ![AppVersion: v0.40.1](https://img.shields.io/badge/AppVersion-v0.40.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -43,6 +43,9 @@ helm install thanos chart/
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| networkPolicies | object | basic configuration necessary for thanos to function | Network Policy configuration; see bb-common network policy docs for details: https://repo1.dso.mil/big-bang/product/packages/bb-common/-/tree/main/docs/network-policies?ref_type=heads |
+| istio | object | Istio disabled | Istio configuration; see bb-common istio docs for details: https://repo1.dso.mil/big-bang/product/packages/bb-common/-/tree/main/docs/istio?ref_type=heads |
+| routes | object | Routes inbound to the minio console (disabled) and thanos query frontend | Routes configuration; see bb-common routes docs for details: https://repo1.dso.mil/big-bang/product/packages/bb-common/-/tree/main/docs/routes?ref_type=heads |
 | global.imageRegistry | string | `""` |  |
 | global.imagePullSecrets | list | `[]` |  |
 | global.defaultStorageClass | string | `""` |  |
@@ -1295,27 +1298,6 @@ helm install thanos chart/
 | networkPolicy.allowExternal | bool | `true` |  |
 | networkPolicy.explicitNamespacesSelector | object | `{}` |  |
 | domain | string | `"bigbang.dev"` | Domain to service Thanos virtualService |
-| istio.enabled | bool | `false` |  |
-| istio.hardened.enabled | bool | `false` |  |
-| istio.hardened.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
-| istio.hardened.customServiceEntries | list | `[]` |  |
-| istio.hardened.customAuthorizationPolicies | list | `[]` |  |
-| istio.hardened.minioOperator.enabled | bool | `true` |  |
-| istio.hardened.minioOperator.namespaces[0] | string | `"minio-operator"` |  |
-| istio.hardened.minioOperator.principals[0] | string | `"cluster.local/ns/minio-operator/sa/minio-operator"` |  |
-| istio.hardened.prometheus.enabled | bool | `true` |  |
-| istio.hardened.prometheus.namespaces[0] | string | `"monitoring"` |  |
-| istio.hardened.prometheus.principals[0] | string | `"cluster.local/ns/monitoring/sa/monitoring-grafana"` |  |
-| istio.mtls.mode | string | `"STRICT"` |  |
-| istio.thanos.enabled | bool | `true` |  |
-| istio.thanos.labels | object | `{}` |  |
-| istio.thanos.annotations | object | `{}` |  |
-| istio.thanos.gateways[0] | string | `"istio-system/main"` |  |
-| istio.thanos.hosts[0] | string | `"thanos.{{ .Values.domain }}"` |  |
-| networkPolicies.enabled | bool | `false` |  |
-| networkPolicies.ingressLabels.app | string | `"istio-ingressgateway"` |  |
-| networkPolicies.ingressLabels.istio | string | `"ingressgateway"` |  |
-| networkPolicies.additionalPolicies | list | `[]` |  |
 | upgradeJob.name | string | `"thanos-upgrade-job"` |  |
 | upgradeJob.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
 | upgradeJob.image.tag | string | `"v1.34.2"` |  |
