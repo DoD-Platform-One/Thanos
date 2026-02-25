@@ -1,6 +1,6 @@
 # Istio Hardened
 
-Big Bang has added the `.Values.istio.hardened` map attibute to the values of applications that can be istio-injected (when `.Values.istio.enabled` is `true`).  This document walks through the impact of setting `.Values.istio.hardened: true` on how traffic is managed within a given istio-injected package.
+Big Bang has added the `.Values.istio.hardened` map attribute to the values of applications that can be istio-injected (when `.Values.istio.enabled` is `true`).  This document walks through the impact of setting `.Values.istio.hardened: true` on how traffic is managed within a given istio-injected package.
 
 ## Prerequisites
 
@@ -60,7 +60,7 @@ spec:
   resolution: DNS
 ```
 
-For more information on writting ServiceEntries, see [this documentation](https://istio.io/latest/docs/reference/config/networking/service-entry/)
+For more information on writing ServiceEntries, see [this documentation](https://istio.io/latest/docs/reference/config/networking/service-entry/)
 
 ## Authorization Policies
 
