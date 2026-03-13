@@ -8,14 +8,14 @@ annotations:
     - name: os-shell
       image: registry1.dso.mil/ironbank/big-bang/base:2.1.0
     - name: thanos
-      image: registry1.dso.mil/ironbank/thanos/thanos:v0.40.1
+      image: registry1.dso.mil/ironbank/thanos/thanos:v0.41.0
   bigbang.dev/applicationVersions: |
-    - Thanos: v0.40.1
+    - Thanos: v0.41.0
   bigbang.dev/upstreamReleaseNotesMarkdown: |
     - [Find upstream chart's release notes and CHANGELOG here](https://github.com/bitnami/charts/blob/main/bitnami/thanos/CHANGELOG.md)
     - [Find upstream applications's release notes and CHANGELOG here](https://github.com/thanos-io/thanos/releases)
 apiVersion: v2
-appVersion: v0.40.1
+appVersion: v0.41.0
 dependencies:
   - name: minio-instance
     alias: minio
@@ -26,12 +26,12 @@ dependencies:
     repository: oci://registry-1.docker.io/bitnamicharts
     tags:
       - bitnami-common
-    version: 2.x.x
+    version: 2.36.0
   - name: gluon
-    version: 0.9.6
+    version: 0.9.8
     repository: oci://registry1.dso.mil/bigbang    
   - name: bb-common
-    version: 0.12.3
+    version: 0.14.1
     repository: oci://registry1.dso.mil/bigbang
 description: Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 home: https://bitnami.com
@@ -47,4 +47,4 @@ maintainers:
 name: thanos
 sources:
 - https://github.com/bitnami/charts/tree/main/bitnami/thanos
-version: 17.3.3-bb.3
+version: 17.3.3-bb.4

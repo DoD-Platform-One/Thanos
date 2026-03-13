@@ -1,6 +1,18 @@
 # Changelog
 
 ---
+## [17.3.3-bb.4] (2026-03-10)
+### Changed
+- Migrated Cypress tests from `Cypress.env()` to `cy.env()` for gluon 0.9.8 compatibility
+- Removed the upgrade job using to automate upgrade to Thanos `15.8.1-bb.0`
+
+### Updated
+- ironbank/thanos/thanos v0.40.1 -> v0.41.0
+- ironbank/opensource/kubernetes/kubectl v1.34.2 -> v1.34.5
+- gluon 0.9.6 -> 0.9.8
+- bb-common 0.12.3 -> 0.14.1
+- common 2.31.4 -> 2.36.0
+
 ## [17.3.3-bb.3] (2026-02-02)
 ### Changed
 - Migrated to bb-common for istio and `NetworkPolicy` resources
