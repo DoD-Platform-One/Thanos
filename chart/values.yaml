@@ -118,7 +118,7 @@ sso:
 image:
   registry: registry1.dso.mil
   repository: ironbank/opensource/thanos/thanos 
-  tag: v0.40.1
+  tag: v0.41.0
   digest: ""
   ## ref: https://kubernetes.io/docs/concepts/containers/images/#pre-pulled-images
   ##
@@ -5341,17 +5341,6 @@ networkPolicy:
 
 # -- Domain to service Thanos virtualService
 domain: bigbang.dev
-
-upgradeJob:
-  name: thanos-upgrade-job
-  image:
-    repository: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl
-    tag: v1.34.2
-    imagePullPolicy: IfNotPresent
-    pullSecrets: private-registry
-  serviceAccount: upgrade-job-svc-account
-  role: upgrade-role
-  roleBinding: upgrade-rolebinding
 
 bbtests:
   enabled: false

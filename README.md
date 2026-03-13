@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # thanos
 
-![Version: 17.3.3-bb.3](https://img.shields.io/badge/Version-17.3.3--bb.3-informational?style=flat-square) ![AppVersion: v0.40.1](https://img.shields.io/badge/AppVersion-v0.40.1-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 17.3.3-bb.4](https://img.shields.io/badge/Version-17.3.3--bb.4-informational?style=flat-square) ![AppVersion: v0.41.0](https://img.shields.io/badge/AppVersion-v0.41.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
 
@@ -61,7 +61,7 @@ helm install thanos chart/
 | sso.enabled | bool | `false` |  |
 | image.registry | string | `"registry1.dso.mil"` |  |
 | image.repository | string | `"ironbank/opensource/thanos/thanos"` |  |
-| image.tag | string | `"v0.40.1"` |  |
+| image.tag | string | `"v0.41.0"` |  |
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
@@ -1298,14 +1298,6 @@ helm install thanos chart/
 | networkPolicy.allowExternal | bool | `true` |  |
 | networkPolicy.explicitNamespacesSelector | object | `{}` |  |
 | domain | string | `"bigbang.dev"` | Domain to service Thanos virtualService |
-| upgradeJob.name | string | `"thanos-upgrade-job"` |  |
-| upgradeJob.image.repository | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl"` |  |
-| upgradeJob.image.tag | string | `"v1.34.2"` |  |
-| upgradeJob.image.imagePullPolicy | string | `"IfNotPresent"` |  |
-| upgradeJob.image.pullSecrets | string | `"private-registry"` |  |
-| upgradeJob.serviceAccount | string | `"upgrade-job-svc-account"` |  |
-| upgradeJob.role | string | `"upgrade-role"` |  |
-| upgradeJob.roleBinding | string | `"upgrade-rolebinding"` |  |
 | bbtests.enabled | bool | `false` |  |
 | bbtests.cypress.artifacts | bool | `true` |  |
 | bbtests.cypress.envs.cypress_thanos_url | string | `"http://thanos-query:9090"` |  |
